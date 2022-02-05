@@ -1,10 +1,10 @@
 import React from 'react';
 
+import ApiTest from '../components/ApiTest.js';
+
 function Home() {
   return (
-    <div>
-      <p>FRONTEND FOR GIB2 PROSJEKT</p>
-    </div>
+    <ApiTest />
   );
 }
 
