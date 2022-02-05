@@ -17,11 +17,6 @@ function ApiTest() {
     return (
         <div>
             <div>
-                {process.env.REACT_APP_MY_API_KEY}
-                ####
-                {process.env.NODE_ENV}
-            </div>
-            <div>
                 {devInfo.map(dev => {
                     return (
                         <p>{dev.name}</p>

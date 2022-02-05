@@ -7,6 +7,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 console.log(baseURL);
+console.log(process.env.REACT_APP_BASE_URL);
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
