@@ -19,7 +19,7 @@ function ApiTest() {
             <div>
                 {devInfo.map(dev => {
                     return (
-                        <p>{dev.name}</p>
+                        <p key={dev.name +'_key'}>{dev.name}</p>
                     )
                 })}
             </div>
