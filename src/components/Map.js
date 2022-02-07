@@ -20,9 +20,11 @@ function MapComponent() {
 
     return (
         <Box sx={{
-            width: "100%",
+            width: "60%",
             height: 500,
             border: '1px dashed grey',
+            margin: 'auto',
+            display: 'block',
           }}>
             <Map
             initialViewState={initialViewState}
