@@ -1,10 +1,13 @@
 import React from 'react';
-
+import Map from '../components/Map.js'
 import ApiTest from '../components/ApiTest.js';
 
 function Home() {
   return (
-    <ApiTest />
+    <div>
+      <ApiTest />
+        <Map />
+    </div>
   );
 }
 
