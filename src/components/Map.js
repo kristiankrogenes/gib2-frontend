@@ -3,7 +3,7 @@ import Map, { Marker } from 'react-map-gl';
 import { Box } from '@material-ui/core';
 
  
-// const MAPBOX_TOKEN="pk.eyJ1Ijoic2lndXJkYmFra2VydWQiLCJhIjoiY2t6Y2ZpYjJtMGhxcDJ4cDh6NTdobXp0dyJ9.gxwAMoaOj91JvNVzVwl6Hg";
+const MAPBOX_TOKEN="pk.eyJ1Ijoic2lndXJkYmFra2VydWQiLCJhIjoiY2t6Y2ZpYjJtMGhxcDJ4cDh6NTdobXp0dyJ9.gxwAMoaOj91JvNVzVwl6Hg";
 
 function MapComponent() {
 
@@ -29,7 +29,7 @@ function MapComponent() {
             <Map
                 initialViewState={initialViewState}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
-                // mapboxAccessToken={MAPBOX_TOKEN}
+                mapboxAccessToken={MAPBOX_TOKEN}
             >
             <Marker longitude={lerka.longitude} latitude={lerka.latitude} color="red" />
             </Map>
