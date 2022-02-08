@@ -24,14 +24,14 @@ function MapComponent() {
             border: '1px dashed grey',
             margin: 'auto',
             display: 'block',
-        }}>
-            <Map
+        }}>TEST
+            {/* <Map
                 initialViewState={initialViewState}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 mapboxAccessToken={MAPBOX_TOKEN}
             >
             <Marker longitude={lerka.longitude} latitude={lerka.latitude} color="red" />
-            </Map>
+            </Map> */}
         </Box>
     )
 }
