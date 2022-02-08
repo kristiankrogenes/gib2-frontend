@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Map from '../components/Map.js'
+// import Map from '../components/Map.js'
 import ApiTest from '../components/ApiTest.js';
 
 
@@ -19,7 +19,7 @@ function Home() {
 
   return (
     <div className={classes.container}>
-      <Map />
+      {/* <Map /> */}
       <ApiTest />
     </div>
   );
