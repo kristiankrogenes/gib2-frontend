@@ -1,5 +1,5 @@
 import React from 'react';
-// import Map, { Marker } from 'react-map-gl';
+import Map, { Marker } from 'react-map-gl';
 import { Box } from '@material-ui/core';
  
 // const MAPBOX_TOKEN="pk.eyJ1Ijoic2lndXJkYmFra2VydWQiLCJhIjoiY2t6Y2ZpYjJtMGhxcDJ4cDh6NTdobXp0dyJ9.gxwAMoaOj91JvNVzVwl6Hg";
