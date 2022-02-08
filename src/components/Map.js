@@ -7,7 +7,8 @@ const layerStyle = {
     id: 'polygon',
     type: 'fill',
     paint: {
-      'fill-color': '#007cbf'
+      'fill-color': '#007cbf',
+      'fill-opacity': 0.5,
     }
   };
 const initialViewState = {
