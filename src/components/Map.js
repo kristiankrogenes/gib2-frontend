@@ -1,5 +1,5 @@
 import React from 'react';
-import Map, { Marker } from 'react-map-gl';
+// import Map, { Marker } from 'react-map-gl';
 import { Box } from '@material-ui/core';
 
  
