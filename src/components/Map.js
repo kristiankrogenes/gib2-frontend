@@ -1,23 +1,24 @@
 import React from 'react';
-import Map, { Marker } from 'react-map-gl';
+import Map, { Marker, Layer, Source } from 'react-map-gl';
 import { Box } from '@material-ui/core';
+import { lerka, geojson } from '../utils/testData';
 
- 
-const MAPBOX_TOKEN="pk.eyJ1Ijoic2lndXJkYmFra2VydWQiLCJhIjoiY2t6Y2ZpYjJtMGhxcDJ4cDh6NTdobXp0dyJ9.gxwAMoaOj91JvNVzVwl6Hg";
+const layerStyle = {
+    id: 'polygon',
+    type: 'fill',
+    paint: {
+      'fill-color': '#007cbf'
+    }
+  };
+const initialViewState = {
+    longitude: lerka.longitude,
+    latitude: lerka.latitude,
+    zoom: 14,
+    width: "100%",
+    height: "100%"
+    };
  
 function MapComponent() {
-
-    // coordinates for lerkendalsbygget
-    const lerka = {longitude: 10.406852960586548, latitude: 63.4147798358434}
-
-    const initialViewState = {
-        longitude: lerka.longitude,
-        latitude: lerka.latitude,
-        zoom: 14,
-        width: "100%",
-        height: "100%"
-        };
-
     return (
         <Box sx={{
             width: "100%",
@@ -27,8 +28,11 @@ function MapComponent() {
             <Map
             initialViewState={initialViewState}
             mapStyle="mapbox://styles/mapbox/streets-v11"
-            mapboxAccessToken={MAPBOX_TOKEN}
+            mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
             >
+            <Source id="my-data" type="geojson" data={geojson}>
+                <Layer {...layerStyle} />
+            </Source>
             <Marker longitude={lerka.longitude} latitude={lerka.latitude} color="red" />
             </Map>
         </Box>
