@@ -20,8 +20,6 @@ function Home() {
   return (
     <div className={classes.container}>
       <Map />
-      <br/>
-      <br/>
       <ApiTest />
     </div>
   );
