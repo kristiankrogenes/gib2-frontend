@@ -1,0 +1,16 @@
+{
+  "plugins": ["prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "react-app",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      { "endOfLine": "auto", "singleQuote": false }
+    ]
+  }
+}
