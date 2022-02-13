@@ -1,7 +1,8 @@
 import React from "react";
 import Map, { Marker, Layer, Source } from "react-map-gl";
-import { Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { lerka, geojson } from "../utils/testData";
+import useGeoLocation from "../hooks/useGeoLocation";
 
 const layerStyle = {
   id: "polygon",
@@ -19,6 +20,7 @@ const initialViewState = {
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 function MapComponent() {
+  const currentLocation = useGeoLocation();
   return (
     <Box
       sx={{
@@ -27,6 +29,11 @@ function MapComponent() {
         border: "1px dashed grey",
       }}
     >
+      <Typography>
+        {currentLocation.loaded
+          ? JSON.stringify(currentLocation)
+          : "Location data not available yet"}
+      </Typography>
       <Map
         initialViewState={initialViewState}
         mapStyle="mapbox://styles/mapbox/streets-v11"
