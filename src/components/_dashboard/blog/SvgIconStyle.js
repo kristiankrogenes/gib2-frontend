@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Box } from "@mui/material";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ SvgIconStyle.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function SvgIconStyle({ src, color = "inherit", sx }) {
+export default function SvgIconStyle({ src, color = 'inherit', sx }) {
   return (
     <Box
       component="span"
@@ -20,10 +20,10 @@ export default function SvgIconStyle({ src, color = "inherit", sx }) {
         mask: `url(${src}) no-repeat center / contain`,
         WebkitMask: `url(${src}) no-repeat center / contain`,
         bgcolor: `${color}.main`,
-        ...(color === "inherit" && { bgcolor: "currentColor" }),
-        ...(color === "action" && { bgcolor: "action.active" }),
-        ...(color === "disabled" && { bgcolor: "action.disabled" }),
-        ...(color === "paper" && { bgcolor: "background.paper" }),
+        ...(color === 'inherit' && { bgcolor: 'currentColor' }),
+        ...(color === 'action' && { bgcolor: 'action.active' }),
+        ...(color === 'disabled' && { bgcolor: 'action.disabled' }),
+        ...(color === 'paper' && { bgcolor: 'background.paper' }),
         ...sx,
       }}
     />

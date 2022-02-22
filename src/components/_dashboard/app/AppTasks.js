@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Form, FormikProvider, useFormik } from "formik";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Form, FormikProvider, useFormik } from 'formik';
 // material
 import {
   Box,
@@ -10,16 +10,16 @@ import {
   Typography,
   FormControlLabel,
   Stack,
-} from "@mui/material";
+} from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 const TASKS = [
-  "Create FireStone Logo",
-  "Add SCSS and JS files if required",
-  "Stakeholder Meeting",
-  "Scoping & Estimations",
-  "Sprint Showcase",
+  'Create FireStone Logo',
+  'Add SCSS and JS files if required',
+  'Stakeholder Meeting',
+  'Scoping & Estimations',
+  'Sprint Showcase',
 ];
 
 // ----------------------------------------------------------------------
@@ -38,7 +38,7 @@ function TaskItem({ task, checked, formik, ...other }) {
       <FormControlLabel
         control={
           <Checkbox
-            {...getFieldProps("checked")}
+            {...getFieldProps('checked')}
             value={task}
             checked={checked}
             {...other}
@@ -49,8 +49,8 @@ function TaskItem({ task, checked, formik, ...other }) {
             variant="body2"
             sx={{
               ...(checked && {
-                color: "text.disabled",
-                textDecoration: "line-through",
+                color: 'text.disabled',
+                textDecoration: 'line-through',
               }),
             }}
           >

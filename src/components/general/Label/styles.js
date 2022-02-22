@@ -1,6 +1,6 @@
-import { alpha, styled } from "@mui/material/styles";
+import { alpha, styled } from '@mui/material/styles';
 
-export const RootStyle = styled("span")(({ theme, ownerState }) => {
+export const RootStyle = styled('span')(({ theme, ownerState }) => {
   const { color, variant } = ownerState;
 
   const styleFilled = (color) => ({
@@ -10,7 +10,7 @@ export const RootStyle = styled("span")(({ theme, ownerState }) => {
 
   const styleOutlined = (color) => ({
     color: theme.palette[color].main,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     border: `1px solid ${theme.palette[color].main}`,
   });
 
@@ -24,11 +24,11 @@ export const RootStyle = styled("span")(({ theme, ownerState }) => {
     minWidth: 22,
     lineHeight: 0,
     borderRadius: 8,
-    cursor: "default",
-    alignItems: "center",
-    whiteSpace: "nowrap",
-    display: "inline-flex",
-    justifyContent: "center",
+    cursor: 'default',
+    alignItems: 'center',
+    whiteSpace: 'nowrap',
+    display: 'inline-flex',
+    justifyContent: 'center',
     padding: theme.spacing(0, 1),
     color: theme.palette.grey[800],
     fontSize: theme.typography.pxToRem(12),
@@ -36,19 +36,19 @@ export const RootStyle = styled("span")(({ theme, ownerState }) => {
     backgroundColor: theme.palette.grey[300],
     fontWeight: theme.typography.fontWeightBold,
 
-    ...(color !== "default"
+    ...(color !== 'default'
       ? {
-          ...(variant === "filled" && { ...styleFilled(color) }),
-          ...(variant === "outlined" && { ...styleOutlined(color) }),
-          ...(variant === "ghost" && { ...styleGhost(color) }),
+          ...(variant === 'filled' && { ...styleFilled(color) }),
+          ...(variant === 'outlined' && { ...styleOutlined(color) }),
+          ...(variant === 'ghost' && { ...styleGhost(color) }),
         }
       : {
-          ...(variant === "outlined" && {
-            backgroundColor: "transparent",
+          ...(variant === 'outlined' && {
+            backgroundColor: 'transparent',
             color: theme.palette.text.primary,
             border: `1px solid ${theme.palette.grey[500_32]}`,
           }),
-          ...(variant === "ghost" && {
+          ...(variant === 'ghost' && {
             color: theme.palette.text.secondary,
             backgroundColor: theme.palette.grey[500_16],
           }),

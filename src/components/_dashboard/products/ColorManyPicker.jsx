@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Icon } from "@iconify/react";
-import checkmarkFill from "@iconify/icons-eva/checkmark-fill";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Icon } from '@iconify/react';
+import checkmarkFill from '@iconify/icons-eva/checkmark-fill';
 // material
-import { Box, Checkbox } from "@mui/material";
+import { Box, Checkbox } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -17,14 +17,14 @@ function IconColor({ sx, ...other }) {
       sx={{
         width: 20,
         height: 20,
-        display: "flex",
-        borderRadius: "50%",
-        position: "relative",
-        alignItems: "center",
-        justifyContent: "center",
-        bgcolor: "currentColor",
+        display: 'flex',
+        borderRadius: '50%',
+        position: 'relative',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bgcolor: 'currentColor',
         transition: (theme) =>
-          theme.transitions.create("all", {
+          theme.transitions.create('all', {
             duration: theme.transitions.duration.shortest,
           }),
         ...sx,
@@ -46,7 +46,7 @@ export default function ColorManyPicker({ colors, onChecked, sx, ...other }) {
   return (
     <Box sx={sx}>
       {colors.map((color) => {
-        const isWhite = color === "#FFFFFF" || color === "white";
+        const isWhite = color === '#FFFFFF' || color === 'white';
 
         return (
           <Checkbox
@@ -67,29 +67,29 @@ export default function ColorManyPicker({ colors, onChecked, sx, ...other }) {
             checkedIcon={
               <IconColor
                 sx={{
-                  transform: "scale(1.4)",
-                  "&:before": {
+                  transform: 'scale(1.4)',
+                  '&:before': {
                     opacity: 0.48,
-                    width: "100%",
+                    width: '100%',
                     content: "''",
-                    height: "100%",
-                    borderRadius: "50%",
-                    position: "absolute",
-                    boxShadow: "4px 4px 8px 0 currentColor",
+                    height: '100%',
+                    borderRadius: '50%',
+                    position: 'absolute',
+                    boxShadow: '4px 4px 8px 0 currentColor',
                   },
-                  "& svg": { width: 12, height: 12, color: "common.white" },
+                  '& svg': { width: 12, height: 12, color: 'common.white' },
                   ...(isWhite && {
                     border: (theme) => `solid 1px ${theme.palette.divider}`,
                     boxShadow: (theme) =>
                       `4px 4px 8px 0 ${theme.palette.grey[500_24]}`,
-                    "& svg": { width: 12, height: 12, color: "common.black" },
+                    '& svg': { width: 12, height: 12, color: 'common.black' },
                   }),
                 }}
               />
             }
             sx={{
               color,
-              "&:hover": { opacity: 0.72 },
+              '&:hover': { opacity: 0.72 },
             }}
             {...other}
           />

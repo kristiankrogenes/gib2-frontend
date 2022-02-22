@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Icon } from "@iconify/react";
-import { Form, FormikProvider } from "formik";
-import closeFill from "@iconify/icons-eva/close-fill";
-import roundClearAll from "@iconify/icons-ic/round-clear-all";
-import roundFilterList from "@iconify/icons-ic/round-filter-list";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Icon } from '@iconify/react';
+import { Form, FormikProvider } from 'formik';
+import closeFill from '@iconify/icons-eva/close-fill';
+import roundClearAll from '@iconify/icons-ic/round-clear-all';
+import roundFilterList from '@iconify/icons-ic/round-filter-list';
 // material
 import {
   Box,
@@ -20,46 +20,46 @@ import {
   Typography,
   RadioGroup,
   FormControlLabel,
-} from "@mui/material";
+} from '@mui/material';
 //
-import Scrollbar from "../../general/Scrollbar";
-import ColorManyPicker from "./ColorManyPicker";
+import Scrollbar from '../../general/Scrollbar';
+import ColorManyPicker from './ColorManyPicker';
 
 // ----------------------------------------------------------------------
 
 export const SORT_BY_OPTIONS = [
-  { value: "featured", label: "Featured" },
-  { value: "newest", label: "Newest" },
-  { value: "priceDesc", label: "Price: High-Low" },
-  { value: "priceAsc", label: "Price: Low-High" },
+  { value: 'featured', label: 'Featured' },
+  { value: 'newest', label: 'Newest' },
+  { value: 'priceDesc', label: 'Price: High-Low' },
+  { value: 'priceAsc', label: 'Price: Low-High' },
 ];
-export const FILTER_GENDER_OPTIONS = ["Men", "Women", "Kids"];
+export const FILTER_GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
 export const FILTER_CATEGORY_OPTIONS = [
-  "All",
-  "Shose",
-  "Apparel",
-  "Accessories",
+  'All',
+  'Shose',
+  'Apparel',
+  'Accessories',
 ];
 export const FILTER_RATING_OPTIONS = [
-  "up4Star",
-  "up3Star",
-  "up2Star",
-  "up1Star",
+  'up4Star',
+  'up3Star',
+  'up2Star',
+  'up1Star',
 ];
 export const FILTER_PRICE_OPTIONS = [
-  { value: "below", label: "Below $25" },
-  { value: "between", label: "Between $25 - $75" },
-  { value: "above", label: "Above $75" },
+  { value: 'below', label: 'Below $25' },
+  { value: 'between', label: 'Between $25 - $75' },
+  { value: 'above', label: 'Above $75' },
 ];
 export const FILTER_COLOR_OPTIONS = [
-  "#00AB55",
-  "#000000",
-  "#FFFFFF",
-  "#FFC0CB",
-  "#FF4842",
-  "#1890FF",
-  "#94D82D",
-  "#FFC107",
+  '#00AB55',
+  '#000000',
+  '#FFFFFF',
+  '#FFC0CB',
+  '#FF4842',
+  '#1890FF',
+  '#94D82D',
+  '#FFC107',
 ];
 
 // ----------------------------------------------------------------------
@@ -99,7 +99,7 @@ export default function ShopFilterSidebar({
             open={isOpenFilter}
             onClose={onCloseFilter}
             PaperProps={{
-              sx: { width: 280, border: "none", overflow: "hidden" },
+              sx: { width: 280, border: 'none', overflow: 'hidden' },
             }}
           >
             <Stack
@@ -130,7 +130,7 @@ export default function ShopFilterSidebar({
                         key={item}
                         control={
                           <Checkbox
-                            {...getFieldProps("gender")}
+                            {...getFieldProps('gender')}
                             value={item}
                             checked={values.gender.includes(item)}
                           />
@@ -145,7 +145,7 @@ export default function ShopFilterSidebar({
                   <Typography variant="subtitle1" gutterBottom>
                     Category
                   </Typography>
-                  <RadioGroup {...getFieldProps("category")}>
+                  <RadioGroup {...getFieldProps('category')}>
                     {FILTER_CATEGORY_OPTIONS.map((item) => (
                       <FormControlLabel
                         key={item}
@@ -174,7 +174,7 @@ export default function ShopFilterSidebar({
                   <Typography variant="subtitle1" gutterBottom>
                     Price
                   </Typography>
-                  <RadioGroup {...getFieldProps("priceRange")}>
+                  <RadioGroup {...getFieldProps('priceRange')}>
                     {FILTER_PRICE_OPTIONS.map((item) => (
                       <FormControlLabel
                         key={item.value}
@@ -190,7 +190,7 @@ export default function ShopFilterSidebar({
                   <Typography variant="subtitle1" gutterBottom>
                     Rating
                   </Typography>
-                  <RadioGroup {...getFieldProps("rating")}>
+                  <RadioGroup {...getFieldProps('rating')}>
                     {FILTER_RATING_OPTIONS.map((item, index) => (
                       <FormControlLabel
                         key={item}
@@ -207,13 +207,13 @@ export default function ShopFilterSidebar({
                         sx={{
                           my: 0.5,
                           borderRadius: 1,
-                          "& > :first-of-type": { py: 0.5 },
-                          "&:hover": {
+                          '& > :first-of-type': { py: 0.5 },
+                          '&:hover': {
                             opacity: 0.48,
-                            "& > *": { bgcolor: "transparent" },
+                            '& > *': { bgcolor: 'transparent' },
                           },
                           ...(values.rating.includes(item) && {
-                            bgcolor: "background.neutral",
+                            bgcolor: 'background.neutral',
                           }),
                         }}
                       />

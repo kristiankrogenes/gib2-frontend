@@ -1,17 +1,17 @@
-import React from "react";
-import { useFormik } from "formik";
-import { useState } from "react";
+import React from 'react';
+import { useFormik } from 'formik';
+import { useState } from 'react';
 // material
-import { Container, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from '@mui/material';
 // components
-import Page from "../components/general/Page";
+import Page from '../components/general/Page';
 import {
   ProductSort,
   ProductList,
   ProductFilterSidebar,
-} from "../components/_dashboard/products";
+} from '../components/_dashboard/products';
 //
-import PRODUCTS from "../_mocks_/products";
+import PRODUCTS from '../_mocks_/products';
 
 // ----------------------------------------------------------------------
 
@@ -20,11 +20,11 @@ export default function EcommerceShop() {
 
   const formik = useFormik({
     initialValues: {
-      gender: "",
-      category: "",
-      colors: "",
-      priceRange: "",
-      rating: "",
+      gender: '',
+      category: '',
+      colors: '',
+      priceRange: '',
+      rating: '',
     },
     onSubmit: () => {
       setOpenFilter(false);
