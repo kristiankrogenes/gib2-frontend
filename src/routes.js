@@ -10,6 +10,8 @@ import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
 import Map from './pages/Map';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +26,8 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
+        { path: 'register', element: <RegisterPage /> },
+        { path: 'login', element: <LoginPage /> },
         { path: 'map', element: <Map /> },
       ],
     },

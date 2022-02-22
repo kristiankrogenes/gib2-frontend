@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { filter } from 'lodash';
 import { Icon } from '@iconify/react';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
 import plusFill from '@iconify/icons-eva/plus-fill';
 import { Link as RouterLink } from 'react-router-dom';
 // material
@@ -144,8 +143,20 @@ export default function User() {
 
   const isUserNotFound = filteredUsers.length === 0;
 
+  const [isAuth, setAuth] = useState(false);
+
+  useEffect(() => {
+    setAuth(localStorage.getItem('access_token') !== null);
+  }, []);
+
+  const logOut = () => {
+    localStorage.clear();
+  };
+
   return (
     <Page title="User | Minimal-UI">
+      {isAuth ? <p>LOGGED IN</p> : <p>NOT LOGGED IN</p>}
+      <Button onClick={logOut}>LOG OUT</Button>
       <Container>
         <Stack
           direction="row"
