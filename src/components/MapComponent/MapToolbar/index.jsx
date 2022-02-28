@@ -22,6 +22,11 @@ export default function MapToolbar(props) {
     handleClickOpen,
     addGas,
   } = props;
+
+  const onClick = () => {
+    if (!addGas) handleClickOpen();
+    else handleAddStation();
+  };
   return (
     <RootStyle>
       <SearchStyle
@@ -43,20 +48,15 @@ export default function MapToolbar(props) {
         startIcon={<Icon icon={plusFill} />}
         onClick={handleAddStation}
       >
-        {addGas ? 'Confirm position' : 'Add station'}
+        Add Price
       </Button>
       <Button
         variant="contained"
-        onClick={handleClickOpen}
+        onClick={onClick}
         startIcon={<Icon icon={plusFill} />}
       >
-        Add price
+        {addGas ? 'Confirm position' : 'Add station'}
       </Button>
-      {/* <Tooltip title="Filter list">
-        <IconButton>
-          <Icon icon={roundFilterList} />
-        </IconButton>
-      </Tooltip> */}
     </RootStyle>
   );
 }
