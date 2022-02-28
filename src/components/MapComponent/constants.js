@@ -1,3 +1,5 @@
+export const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+
 // Polygons in Trondheim from geojson.io
 export const geojsonPoly = {
   type: 'FeatureCollection',

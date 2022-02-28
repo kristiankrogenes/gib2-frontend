@@ -20,8 +20,7 @@ export const gasStationsSlice = createSlice({
   initialState,
   reducers: {
     addGasStation: (state, action) => {
-      console.log(action.payload);
-      state.gasStations.push(action.payload);
+      state.gasStations[0].features.push(action.payload);
     },
   },
   extraReducers(builder) {

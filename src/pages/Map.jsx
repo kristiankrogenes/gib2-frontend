@@ -22,7 +22,7 @@ export default function Map() {
 
   return (
     <Page title="Map | GIB2">
-      <Container>
+      <Container maxWidth="lg">
         <Stack
           direction="row"
           alignItems="center"
@@ -41,10 +41,7 @@ export default function Map() {
             New User
           </Button>
         </Stack>
-
-        <Card>
-          <MapComponent />
-        </Card>
+        <MapComponent />
       </Container>
     </Page>
   );
