@@ -73,7 +73,8 @@ function MapComponent() {
                 handleClickOpen={handleClickOpen}
         
         
-                            filterName=""
+                            
+                filterName=""
         
                             
                     addGas={addGas}
