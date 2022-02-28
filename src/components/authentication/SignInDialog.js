@@ -1,18 +1,19 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import { useState } from "react";
-import axiosInstance from "../../utils/axios";
+import React from 'react';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Typography,
+  Container,
+} from '@mui/material';
+import { useState } from 'react';
+import axiosInstance from '../../utils/axios';
 
 export default function SignIn() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
   const onSubmit = (e) => {
@@ -25,12 +26,12 @@ export default function SignIn() {
     axiosInstance
       .post(`users/token/`, user)
       .then((res) => {
-        console.log("STATUS:", res);
+        console.log('STATUS:', res);
         if (res.status === 200) {
-          localStorage.setItem("access_token", res.data.access);
-          localStorage.setItem("refresh_token", res.data.refresh);
-          axiosInstance.defaults.headers["Authorization"] =
-            "JWT " + localStorage.getItem("access_token");
+          localStorage.setItem('access_token', res.data.access);
+          localStorage.setItem('refresh_token', res.data.refresh);
+          axiosInstance.defaults.headers['Authorization'] =
+            'JWT ' + localStorage.getItem('access_token');
           //   window.location.replace("http://localhost:3000");
         }
       })
@@ -89,7 +90,7 @@ export default function SignIn() {
             </Grid>
             <Grid item>
               <Link href="/registrer" variant="body2">
-                {"Ingen bruker? Registrer nå"}
+                {'Ingen bruker? Registrer nå'}
               </Link>
             </Grid>
           </Grid>

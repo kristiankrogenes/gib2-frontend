@@ -1,8 +1,8 @@
 // material
-import React from "react";
-import { Box, Grid, Container, Typography } from "@mui/material";
+import React from 'react';
+import { Box, Grid, Container, Typography } from '@mui/material';
 // components
-import Page from "../components/general/Page";
+import Page from '../components/general/Page';
 import {
   AppTasks,
   AppNewUsers,
@@ -16,7 +16,7 @@ import {
   AppTrafficBySite,
   AppCurrentSubject,
   AppConversionRates,
-} from "../components/_dashboard/app";
+} from '../components/_dashboard/app';
 
 // ----------------------------------------------------------------------
 

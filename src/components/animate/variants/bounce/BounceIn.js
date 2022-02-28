@@ -4,7 +4,7 @@ import {
   varBounceOutDown,
   varBounceOutLeft,
   varBounceOutRight,
-} from "./BounceOut";
+} from './BounceOut';
 
 // ----------------------------------------------------------------------
 
