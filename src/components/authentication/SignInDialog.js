@@ -25,13 +25,13 @@ export default function SignIn() {
     axiosInstance
       .post(`users/token/`, user)
       .then((res) => {
-        console.log("STATUS:", res);
         if (res.status === 200) {
           localStorage.setItem("access_token", res.data.access);
           localStorage.setItem("refresh_token", res.data.refresh);
           axiosInstance.defaults.headers["Authorization"] =
             "JWT " + localStorage.getItem("access_token");
-          //   window.location.replace("http://localhost:3000");
+          console.log(access_token);
+          window.location.replace(process.env.REACT_APP_WEB_URL);
         }
       })
       .catch((e) => setError(true));

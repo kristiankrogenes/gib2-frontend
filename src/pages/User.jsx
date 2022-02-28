@@ -143,20 +143,8 @@ export default function User() {
 
   const isUserNotFound = filteredUsers.length === 0;
 
-  const [isAuth, setAuth] = useState(false);
-
-  useEffect(() => {
-    setAuth(localStorage.getItem("access_token") !== null);
-  }, []);
-
-  const logOut = () => {
-    localStorage.clear();
-  };
-
   return (
     <Page title="User | Minimal-UI">
-      {isAuth ? <p>LOGGED IN</p> : <p>NOT LOGGED IN</p>}
-      <Button onClick={logOut}>LOG OUT</Button>
       <Container>
         <Stack
           direction="row"
@@ -170,7 +158,7 @@ export default function User() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="#"
+            to="/auth/register"
             startIcon={<Icon icon={plusFill} />}
           >
             New User
