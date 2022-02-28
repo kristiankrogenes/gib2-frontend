@@ -4,10 +4,8 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Box,
-  TextField,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import MultiStep from './MultiStep';
