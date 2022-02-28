@@ -70,14 +70,9 @@ function MapComponent() {
     <Card>
       <MapToolbar
         handleAddStation={handleAddStation}
-                    handleClickOpen={handleClickOpen}
-        
-        
-                            
-                filterName=""
-        
-                            
-                    addGas={addGas}
+        handleClickOpen={handleClickOpen}
+        filterName=""
+        addGas={addGas}
       />
       <AddStationDialog
         open={open}
