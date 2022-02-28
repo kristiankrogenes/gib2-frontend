@@ -70,7 +70,7 @@ function MapComponent() {
     <Card>
       <MapToolbar
         handleAddStation={handleAddStation}
-                handleClickOpen={handleClickOpen}
+                    handleClickOpen={handleClickOpen}
         
         
                             
