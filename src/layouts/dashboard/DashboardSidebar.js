@@ -52,7 +52,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     window.location.replace(process.env.REACT_APP_WEB_URL);
   };
 
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState(null);
 
   const fetchUserInfo = async () => {
     const result = await axiosInstance.get("users/user-info/");
@@ -60,18 +60,20 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   }
 
   useEffect(() => {
-    fetchUserInfo();
-  }, []);
-  console.log(userInfo);
+    if (isAuth) {
+      fetchUserInfo();
+    }
+  }, [isAuth]);
+
   const renderContent = (
     <>
       <Box sx={{ px: 2.5, py: 3 }}>
         <Box component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
           <Logo />
         </Box>
-        {isAuth ? 
+        {userInfo !== null ? 
           <div>
-            <p>LOGGED IN AS</p>
+            <p>LOGGED IN AS {userInfo.username}</p>
             <Button onClick={logOut}>LOG OUT</Button>
           </div> 
           : 
@@ -82,6 +84,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               component={RouterLink}
               to="/auth/login"
             >LOG IN</Button>
+            <Button
+              variant="contained"
+              component={RouterLink}
+              to="/auth/register"
+            >New User</Button>
           </div>
         }
       </Box>

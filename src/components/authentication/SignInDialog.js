@@ -1,14 +1,15 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import { useState } from "react";
+import React, { useState } from "react";
 import axiosInstance from "../../utils/axios";
+
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Typography,
+  Container,
+} from "@mui/material";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
@@ -17,7 +18,6 @@ export default function SignIn() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(error);
     const user = {
       username: username,
       password: password,
@@ -28,13 +28,11 @@ export default function SignIn() {
         if (res.status === 200) {
           localStorage.setItem("access_token", res.data.access);
           localStorage.setItem("refresh_token", res.data.refresh);
-          axiosInstance.defaults.headers["Authorization"] =
-            "JWT " + localStorage.getItem("access_token");
-          console.log(access_token);
+          axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
           window.location.replace(process.env.REACT_APP_WEB_URL);
         }
       })
-      .catch((e) => setError(true));
+      .catch((e) => console.log(e));
   };
 
   return (
