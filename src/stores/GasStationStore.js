@@ -17,13 +17,11 @@ export const GasStationStore = types
     },
     async fetchGasStations() {
       const response = await axiosInstance.get('gasstations/');
-      console.log(response.data);
       const newGasStations = response.data.features.map((gasStation) => ({
         name: gasStation.properties.name,
         price: gasStation.properties.price,
         point: gasStation.geometry.coordinates,
       }));
-      console.log(newGasStations);
       store.setGasStations(newGasStations);
     },
     addGasStation(gasStation) {

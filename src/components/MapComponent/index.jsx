@@ -5,7 +5,11 @@ import Map, { GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapToolbar from './MapToolbar';
 import { initialViewState, mapStyle, MAPBOX_TOKEN } from './constants';
-import { getGasStationPOST, makeMarkerFromMapClick } from './helpers';
+import {
+  getGasStationPOST,
+  makeMarkerFromMapClick,
+  getGasStationFromAPI,
+} from './helpers';
 import AddStationDialog from './AddStationDialog';
 import MapPopup from './MapPopup';
 import MapMarker from './MapMarker';
@@ -47,9 +51,9 @@ function MapComponent() {
           newStationInfo.price
         );
         const response = await axiosInstance.post('gasstations/', data); // Inserting a new gas station to the database table
+        gasStationStore.addGasStation(getGasStationFromAPI(response.data));
         setAddGas(!addGas);
         setMarker(null);
-        gasStationStore.addGasStation(response.data);
       }
     }
   };
