@@ -11,6 +11,7 @@ import User from "./pages/User";
 import NotFound from "./pages/Page404";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import About from "./pages/About";
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default function Router() {
         { path: "blog", element: <Blog /> },
         { path: "register", element: <RegisterPage /> },
         { path: "login", element: <LoginPage /> },
+        { path: "about", element: <About /> },
       ],
     },
     {

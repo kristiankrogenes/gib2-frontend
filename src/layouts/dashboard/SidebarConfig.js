@@ -5,6 +5,7 @@ import peopleFill from "@iconify/icons-eva/people-fill";
 import shoppingBagFill from "@iconify/icons-eva/shopping-bag-fill";
 import fileTextFill from "@iconify/icons-eva/file-text-fill";
 import alertTriangleFill from "@iconify/icons-eva/alert-triangle-fill";
+import infoFill from "@iconify/icons-eva/info-fill";
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,11 @@ const sidebarConfig = [
     title: "blog",
     path: "/dashboard/blog",
     icon: getIcon(fileTextFill),
+  },
+  {
+    title: "About us",
+    path: "/dashboard/about",
+    icon: getIcon(infoFill),
   },
   {
     title: "Not found",
