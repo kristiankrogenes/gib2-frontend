@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 // material
 import { styled } from "@mui/material/styles";
-import { Box, Drawer } from "@mui/material";
+import { Box, Drawer, Button } from "@mui/material";
 // components
 import Logo from "../../components/general/Logo";
 import NavSection from "../../components/general/NavSection";
 import { MHidden } from "../../components/@material-extend";
 //
 import sidebarConfig from "./SidebarConfig";
+
+import axiosInstance from "../../utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -39,12 +41,56 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     }
   }, [pathname]);
 
+  const [isAuth, setAuth] = useState(false);
+
+  useEffect(() => {
+    setAuth(localStorage.getItem("access_token") !== null);
+  }, []);
+
+  const logOut = () => {
+    localStorage.clear();
+    window.location.replace(process.env.REACT_APP_WEB_URL);
+  };
+
+  const [userInfo, setUserInfo] = useState(null);
+
+  const fetchUserInfo = async () => {
+    const result = await axiosInstance.get("users/user-info/");
+    setUserInfo(result.data);
+  }
+
+  useEffect(() => {
+    if (isAuth) {
+      fetchUserInfo();
+    }
+  }, [isAuth]);
+
   const renderContent = (
     <>
       <Box sx={{ px: 2.5, py: 3 }}>
         <Box component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
           <Logo />
         </Box>
+        {userInfo !== null ? 
+          <div>
+            <p>LOGGED IN AS {userInfo.username}</p>
+            <Button onClick={logOut}>LOG OUT</Button>
+          </div> 
+          : 
+          <div>
+            <p>NOT LOGGED IN</p>
+            <Button
+              variant="contained"
+              component={RouterLink}
+              to="/auth/login"
+            >LOG IN</Button>
+            <Button
+              variant="contained"
+              component={RouterLink}
+              to="/auth/register"
+            >New User</Button>
+          </div>
+        }
       </Box>
 
       <NavSection navConfig={sidebarConfig} />
