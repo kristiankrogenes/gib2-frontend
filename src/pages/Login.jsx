@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { Box, Link, Container, Typography } from '@mui/material';
+import { Stack, Link, Container, Typography } from '@mui/material';
 import AuthLayout from '../layouts/AuthLayout';
 import Page from '../components/general/Page';
 import { MHidden } from '../components/@material-extend';
-import { RegisterForm } from '../components/authentication/register';
+import { LoginForm } from '../components/authentication/login';
 
 const RootStyle = styled(Page)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -23,38 +23,39 @@ const ContentStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(12, 0),
 }));
 
-export default function Register() {
+export default function Login() {
   return (
-    <RootStyle title="Register | Minimal-UI">
+    <RootStyle title="Login | Minimal-UI">
       <AuthLayout>
-        Already have an account? &nbsp;
+        Don’t have an account? &nbsp;
         <Link
           underline="none"
           variant="subtitle2"
           component={RouterLink}
-          to="/login"
+          to="/register"
         >
-          Login
+          Get started
         </Link>
       </AuthLayout>
-      <Container>
+
+      <Container maxWidth="sm">
         <ContentStyle>
-          <Box sx={{ mb: 5 }}>
+          <Stack sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Get started absolutely free.
+              Sign in
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-              Free forever. No credit card needed.
+              Enter your details below.
             </Typography>
-          </Box>
+          </Stack>
 
-          <RegisterForm />
+          <LoginForm />
 
           <MHidden width="smUp">
-            <Typography variant="subtitle2" sx={{ mt: 3, textAlign: 'center' }}>
-              Already have an account?&nbsp;
-              <Link to="/login" component={RouterLink}>
-                Login
+            <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+              Don’t have an account?&nbsp;
+              <Link variant="subtitle2" component={RouterLink} to="register">
+                Get started
               </Link>
             </Typography>
           </MHidden>

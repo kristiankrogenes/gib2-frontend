@@ -20,7 +20,7 @@ export default function MapPopup({ popupInfo, setPopupInfo }) {
       <div>
         {/* {popupInfo.geometry.coordinates[0]}, {popupInfo.geometry.coordinates[1]}
         , {'navn:'} {popupInfo.properties.name} */}
-        <div style={{ fontWeight: 'bold' }}>Circle K Trondheim</div>
+        <div style={{ fontWeight: 'bold' }}>{popupInfo.properties.name}</div>
         Last registered price: 18.37 <br /> yesterday at 14:03
       </div>
       <Button>More Info</Button>

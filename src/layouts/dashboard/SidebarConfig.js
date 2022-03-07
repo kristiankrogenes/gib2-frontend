@@ -6,6 +6,8 @@ import shoppingBagFill from '@iconify/icons-eva/shopping-bag-fill';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 import globe2fill from '@iconify/icons-eva/globe-2-fill';
+import lockFill from '@iconify/icons-eva/lock-fill';
+import personAddFill from '@iconify/icons-eva/person-add-fill';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +43,16 @@ const sidebarConfig = [
     title: 'Map page',
     path: '/dashboard/map',
     icon: getIcon(globe2fill),
+  },
+  {
+    title: 'login',
+    path: '/login',
+    icon: getIcon(lockFill),
+  },
+  {
+    title: 'register',
+    path: '/register',
+    icon: getIcon(personAddFill),
   },
 ];
 
