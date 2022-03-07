@@ -23,7 +23,7 @@ export default function MapToolbar(props) {
     addGas,
   } = props;
 
-  const onClick = () => {
+  const handleClickAddStation = () => {
     if (!addGas) handleClickOpen();
     else handleAddStation();
   };
@@ -46,13 +46,13 @@ export default function MapToolbar(props) {
       <Button
         variant="contained"
         startIcon={<Icon icon={plusFill} />}
-        onClick={handleAddStation}
+        // onClick={handleAddStation}
       >
         Add Price
       </Button>
       <Button
         variant="contained"
-        onClick={onClick}
+        onClick={handleClickAddStation}
         startIcon={<Icon icon={plusFill} />}
       >
         {addGas ? 'Confirm position' : 'Add station'}
