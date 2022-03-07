@@ -12,8 +12,8 @@ export default function MapMarker(props) {
   const { station, setPopupInfo } = props;
   return (
     <Marker
-      longitude={station.geometry.coordinates[0]}
-      latitude={station.geometry.coordinates[1]}
+      longitude={station.point[0]}
+      latitude={station.point[1]}
       anchor="bottom"
     >
       <MapPin onClick={() => setPopupInfo(station)} />
