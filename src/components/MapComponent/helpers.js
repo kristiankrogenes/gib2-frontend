@@ -37,3 +37,8 @@ export const makeMarkerFromMapClick = (e) => ({
   ),
   coordinates: e.lngLat,
 });
+export const getGasStationFromAPI = (gasStation) => ({
+  name: gasStation.properties.name,
+  price: gasStation.properties.price,
+  point: gasStation.geometry.coordinates,
+});

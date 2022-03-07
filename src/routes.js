@@ -10,8 +10,10 @@ import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
 import Map from './pages/Map';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
+// import RegisterPage from './pages/RegisterPage';
+// import LoginPage from './pages/LoginPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 // ----------------------------------------------------------------------
 
@@ -22,24 +24,21 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" replace /> },
-        { path: "app", element: <DashboardApp /> },
-        { path: "user", element: <User /> },
-        { path: "products", element: <Products /> },
-        { path: "blog", element: <Blog /> },
-      ],
-    },
-    {
-      path: "/auth",
-      element: <DashboardLayout />,
-      children: [
-        { path: "register", element: <RegisterPage /> },
-        { path: "login", element: <LoginPage /> },
+        { path: 'app', element: <DashboardApp /> },
+        { path: 'user', element: <User /> },
+        { path: 'products', element: <Products /> },
+        { path: 'blog', element: <Blog /> },
+        // { path: 'register', element: <RegisterPage /> },
+        // { path: 'login', element: <LoginPage /> },
+        { path: 'map', element: <Map /> },
       ],
     },
     {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
+        { path: 'login', element: <Login /> },
+        { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
         { path: '/', element: <Navigate to="/dashboard" /> },
         { path: '*', element: <Navigate to="/404" /> },
