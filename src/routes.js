@@ -22,13 +22,18 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" replace /> },
-        { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <User /> },
-        { path: 'products', element: <Products /> },
-        { path: 'blog', element: <Blog /> },
-        { path: 'register', element: <RegisterPage /> },
-        { path: 'login', element: <LoginPage /> },
-        { path: 'map', element: <Map /> },
+        { path: "app", element: <DashboardApp /> },
+        { path: "user", element: <User /> },
+        { path: "products", element: <Products /> },
+        { path: "blog", element: <Blog /> },
+      ],
+    },
+    {
+      path: "/auth",
+      element: <DashboardLayout />,
+      children: [
+        { path: "register", element: <RegisterPage /> },
+        { path: "login", element: <LoginPage /> },
       ],
     },
     {

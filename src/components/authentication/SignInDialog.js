@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from "react";
+import axiosInstance from "../../utils/axios";
+
 import {
   Button,
   CssBaseline,
@@ -7,9 +9,7 @@ import {
   Grid,
   Typography,
   Container,
-} from '@mui/material';
-import { useState } from 'react';
-import axiosInstance from '../../utils/axios';
+} from "@mui/material";
 
 export default function SignIn() {
   const [username, setUsername] = useState('');
@@ -18,7 +18,6 @@ export default function SignIn() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(error);
     const user = {
       username: username,
       password: password,
@@ -26,16 +25,14 @@ export default function SignIn() {
     axiosInstance
       .post(`users/token/`, user)
       .then((res) => {
-        console.log('STATUS:', res);
         if (res.status === 200) {
-          localStorage.setItem('access_token', res.data.access);
-          localStorage.setItem('refresh_token', res.data.refresh);
-          axiosInstance.defaults.headers['Authorization'] =
-            'JWT ' + localStorage.getItem('access_token');
-          //   window.location.replace("http://localhost:3000");
+          localStorage.setItem("access_token", res.data.access);
+          localStorage.setItem("refresh_token", res.data.refresh);
+          axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
+          window.location.replace(process.env.REACT_APP_WEB_URL);
         }
       })
-      .catch((e) => setError(true));
+      .catch((e) => console.log(e));
   };
 
   return (

@@ -30,23 +30,23 @@ export default function SignUp() {
     axiosInstance
       .post('/users/register/', user)
       .then((res) => {
-        console.log('RESULT:', res);
         if (res.status === 201) {
           axiosInstance
             .post('users/token/', user)
             .then((res) => {
-              console.log('ACCESS:', res.data.access);
-              localStorage.setItem('access_token', res.data.access);
-              localStorage.setItem('refresh_token', res.data.refresh);
-              axiosInstance.defaults.headers['Authorization'] =
-                'JWT ' + localStorage.getItem('access_token');
+              localStorage.setItem("access_token", res.data.access);
+              localStorage.setItem("refresh_token", res.data.refresh);
+              axiosInstance.defaults.headers["Authorization"] =
+                "JWT " + localStorage.getItem("access_token");
+                window.location.replace(process.env.REACT_APP_WEB_URL);
               // sendVerificationEmail();
               // window.location.replace("http://localhost:3000/profil/bekreft");
             })
             .catch((e) => {
               console.log('ERROR:', e);
             });
-          setStatus('Din bruker er nå registrert.');
+          setStatus("Din bruker er nå registrert.");
+          
         } else if (res.status === 226) {
           setStatus('Denne brukeren er allrede registrert.');
         }
