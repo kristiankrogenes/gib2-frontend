@@ -15,15 +15,6 @@ export const createPointGeojson = (point) => ({
   ],
 });
 
-export const getGasStationPOST = (marker, name, price) => ({
-  name: name,
-  geom: {
-    type: 'Point',
-    coordinates: [marker.coordinates.lng, marker.coordinates.lat],
-  },
-  price: parseFloat(price),
-});
-
 export const makeMarkerFromMapClick = (e) => ({
   marker: (
     <Marker
@@ -36,9 +27,4 @@ export const makeMarkerFromMapClick = (e) => ({
     </Marker>
   ),
   coordinates: e.lngLat,
-});
-export const getGasStationFromAPI = (gasStation) => ({
-  name: gasStation.properties.name,
-  price: gasStation.properties.price,
-  point: gasStation.geometry.coordinates,
 });
