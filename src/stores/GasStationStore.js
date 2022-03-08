@@ -51,13 +51,3 @@ export const GasStationStore = types
       return store.gasStations.find((gasStation) => gasStation.id === id);
     },
   }));
-
-let _gasStationStore;
-export const useGasStations = () => {
-  if (!_gasStationStore) {
-    _gasStationStore = GasStationStore.create({
-      gasStations: [],
-    });
-  }
-  return _gasStationStore;
-};

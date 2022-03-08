@@ -41,12 +41,3 @@ export const PriceStore = types
       store.setPrices([...store.prices, price]);
     },
   }));
-let _priceStore;
-export const usePrices = () => {
-  if (!_priceStore) {
-    _priceStore = PriceStore.create({
-      prices: [],
-    });
-  }
-  return _priceStore;
-};
