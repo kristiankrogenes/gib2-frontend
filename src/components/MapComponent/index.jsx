@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
 import { Box, Card } from '@mui/material';
-import axiosInstance from '../../utils/axios';
-import Map, { GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import MapToolbar from './MapToolbar';
-import { initialViewState, mapStyle, MAPBOX_TOKEN } from './constants';
-import {
-  getGasStationPOST,
-  makeMarkerFromMapClick,
-  getGasStationFromAPI,
-} from './helpers';
-import AddStationDialog from './AddStationDialog';
-import MapPopup from './MapPopup';
-import MapMarker from './MapMarker';
 import { observer } from 'mobx-react-lite';
-import { useGasStations } from '../../stores/GasStationStore';
+import React, { useEffect, useState } from 'react';
+import Map, { GeolocateControl } from 'react-map-gl';
+import { useStore } from '../../stores/RootStore';
+import AddStationDialog from './AddStationDialog';
+import { initialViewState, MAPBOX_TOKEN, mapStyle } from './constants';
+import { makeMarkerFromMapClick } from './helpers';
+import MapMarker from './MapMarker';
+import MapPopup from './MapPopup';
+import MapToolbar from './MapToolbar';
 
 function MapComponent() {
   const [addGas, setAddGas] = useState(false);
@@ -25,12 +20,16 @@ function MapComponent() {
     name: '',
     price: '',
   });
-  const gasStationStore = useGasStations();
+
+  const { gasStationStore, priceStore } = useStore();
 
   useEffect(() => {
-    gasStationStore.fetchGasStations();
-    console.log(gasStationStore.gasStations.length);
-  }, [gasStationStore]);
+    async function fetchData() {
+      await gasStationStore.fetchGasStations();
+      priceStore.fetchPrices();
+    }
+    fetchData();
+  }, [gasStationStore, priceStore]);
 
   const handleGeoLocationChange = (e) => {
     console.log(e.coords);
@@ -45,13 +44,7 @@ function MapComponent() {
       setAddGas(!addGas);
     } else {
       if (marker) {
-        const data = getGasStationPOST(
-          marker,
-          newStationInfo.name,
-          newStationInfo.price
-        );
-        const response = await axiosInstance.post('gasstations/', data); // Inserting a new gas station to the database table
-        gasStationStore.addGasStation(getGasStationFromAPI(response.data));
+        await gasStationStore.addGasStation(marker, newStationInfo);
         setAddGas(!addGas);
         setMarker(null);
       }
