@@ -47,6 +47,10 @@ function MapComponent() {
         await gasStationStore.addGasStation(marker, newStationInfo);
         setAddGas(!addGas);
         setMarker(null);
+        setNewStationInfo({
+          name: '',
+          price: '',
+        });
       }
     }
   };

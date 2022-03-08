@@ -14,6 +14,9 @@ import Map from './pages/Map';
 // import LoginPage from './pages/LoginPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import GasStations from './pages/GasStations';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 
 // ----------------------------------------------------------------------
 
@@ -28,9 +31,16 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
-        // { path: 'register', element: <RegisterPage /> },
-        // { path: 'login', element: <LoginPage /> },
         { path: 'map', element: <Map /> },
+        { path: 'gasstations', element: <GasStations /> },
+      ],
+    },
+    {
+      path: '/auth',
+      element: <DashboardLayout />,
+      children: [
+        { path: 'register', element: <RegisterPage /> },
+        { path: 'login', element: <LoginPage /> },
       ],
     },
     {

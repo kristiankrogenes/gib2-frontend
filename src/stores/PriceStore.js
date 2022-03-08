@@ -21,7 +21,7 @@ export const PriceStore = types
     },
     fetchPrices: flow(function* () {
       try {
-        const response = yield axiosInstance.get('prices/');
+        const response = yield axiosInstance.get('/api/prices/');
         const newPrices = response.data.map((price) => ({
           id: price.id,
           gasStation: getParent(store).getGasStationById(

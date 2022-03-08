@@ -19,7 +19,7 @@ export const GasStationStore = types
     },
     fetchGasStations: flow(function* () {
       try {
-        const response = yield axiosInstance.get('gasstations/');
+        const response = yield axiosInstance.get('/api/gasstations/');
         const newGasStations = response.data.features.map((gasStation) => ({
           id: gasStation.id.toString(),
           name: gasStation.properties.name,
@@ -38,7 +38,7 @@ export const GasStationStore = types
           stationInfo.name,
           stationInfo.price
         );
-        const response = yield axiosInstance.post('gasstations/', data);
+        const response = yield axiosInstance.post('/api/gasstations/', data);
         const gasStation = getGasStationFromAPI(response.data);
         store.setGasStations([...store.gasStations, gasStation]);
       } catch (e) {

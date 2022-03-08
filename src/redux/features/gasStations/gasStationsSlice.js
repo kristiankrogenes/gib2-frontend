@@ -10,7 +10,7 @@ const initialState = {
 export const fetchGasStations = createAsyncThunk(
   'gasStations/fetchGasStations',
   async () => {
-    const response = await axiosInstance.get('gasstations/');
+    const response = await axiosInstance.get('/api/gasstations/');
     return response.data;
   }
 );
