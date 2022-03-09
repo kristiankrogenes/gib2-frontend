@@ -54,6 +54,11 @@ const sidebarConfig = [
     path: '/register',
     icon: getIcon(personAddFill),
   },
+  {
+    title: 'Gas Stations',
+    path: '/dashboard/gasstations',
+    icon: getIcon(personAddFill),
+  },
 ];
 
 export default sidebarConfig;

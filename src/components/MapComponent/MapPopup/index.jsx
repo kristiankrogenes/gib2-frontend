@@ -1,27 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Popup } from 'react-map-gl';
 import { Button } from '@mui/material';
+import { useStore } from '../../../stores/RootStore';
+import { fDateTime } from '../../../utils/formatTime';
 
-MapPopup.propTypes = {
-  popupInfo: PropTypes.object,
-  setPopupInfo: PropTypes.func,
-};
+MapPopup.propTypes = {};
 
-export default function MapPopup({ popupInfo, setPopupInfo }) {
+export default function MapPopup() {
+  const {
+    gasStationStore: { selectedGasStation, setSelectedGasStation },
+  } = useStore();
+
   return (
     <Popup
       anchor="top"
-      longitude={popupInfo.point[0]}
-      latitude={popupInfo.point[1]}
+      longitude={selectedGasStation.point[0]}
+      latitude={selectedGasStation.point[1]}
       closeOnClick={false}
-      onClose={() => setPopupInfo(null)}
+      onClose={() => setSelectedGasStation(null)}
     >
       <div>
-        {/* {popupInfo.geometry.coordinates[0]}, {popupInfo.geometry.coordinates[1]}
-        , {'navn:'} {popupInfo.properties.name} */}
-        <div style={{ fontWeight: 'bold' }}>{popupInfo.name}</div>
-        Last registered price: {popupInfo.price} <br /> yesterday at 14:03
+        <div style={{ fontWeight: 'bold' }}>{selectedGasStation.name}</div>
+        Last registered prices: <br />
+        {`Diesel: ${selectedGasStation.latestPrice.diesel}`} <br />
+        {`Unleaded: ${selectedGasStation.latestPrice.unleaded}`} <br />
+        {`Electric: ${selectedGasStation.latestPrice.electric}`} <br />{' '}
+        {fDateTime(selectedGasStation.latestPrice.createdAt)}
       </div>
       <Button>More Info</Button>
       <Button>Register Price</Button>

@@ -11,7 +11,9 @@ function ConfirmInfo({ newStationInfo }) {
     <DialogContentText component={'span'}>
       <Typography sx={{ fontWeight: 'bold' }}>Confirm information</Typography>
       <Typography>Name: {newStationInfo.name}</Typography>
-      <Typography>Price: {newStationInfo.price}</Typography>
+      <Typography>Diesel: {newStationInfo.price.diesel}</Typography>
+      <Typography>Unleaded: {newStationInfo.price.unleaded}</Typography>
+      <Typography>Electric: {newStationInfo.price.electric}</Typography>
     </DialogContentText>
   );
 }

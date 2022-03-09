@@ -29,6 +29,7 @@ export default function AddStationDialog(props) {
   const handleClose = () => {
     setOpen(false);
     handleAddStation();
+    setActiveStep(0);
   };
 
   const handleNext = () => {
