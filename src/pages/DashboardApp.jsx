@@ -1,7 +1,5 @@
-// material
 import React from 'react';
 import { Box, Grid, Container, Typography } from '@mui/material';
-// components
 import Page from '../components/general/Page';
 import {
   AppTasks,

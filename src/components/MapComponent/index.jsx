@@ -1,4 +1,4 @@
-import { Box, Card } from '@mui/material';
+import { Box, Card, Typography } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
@@ -14,7 +14,6 @@ import MapToolbar from './MapToolbar';
 function MapComponent() {
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
-  const [popupInfo, setPopupInfo] = useState(null);
   const [marker, setMarker] = useState(null);
   const [newStationInfo, setNewStationInfo] = useState({
     name: '',
@@ -22,14 +21,6 @@ function MapComponent() {
   });
 
   const { gasStationStore, priceStore } = useStore();
-
-  useEffect(() => {
-    async function fetchData() {
-      await gasStationStore.fetchGasStations();
-      priceStore.fetchPrices();
-    }
-    fetchData();
-  }, [gasStationStore, priceStore]);
 
   const handleGeoLocationChange = (e) => {
     console.log(e.coords);
@@ -97,16 +88,10 @@ function MapComponent() {
           />
           {gasStationStore.gasStations.length > 0 &&
             gasStationStore.gasStations.map((station, index) => (
-              <MapMarker
-                key={`marker-${index}`}
-                station={station}
-                setPopupInfo={setPopupInfo}
-              />
+              <MapMarker key={station.id} station={station} />
             ))}
-          {marker ? marker.marker : ''}
-          {popupInfo && (
-            <MapPopup popupInfo={popupInfo} setPopupInfo={setPopupInfo} />
-          )}
+          {marker?.marker}
+          {gasStationStore.selectedGasStation && <MapPopup />}
         </Map>
       </Box>
     </Card>

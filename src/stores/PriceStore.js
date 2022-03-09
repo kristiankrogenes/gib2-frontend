@@ -40,4 +40,9 @@ export const PriceStore = types
     addPrice(price) {
       store.setPrices([...store.prices, price]);
     },
+  }))
+  .views((store) => ({
+    getLatestPriceById(id) {
+      return store.prices.find((price) => price.gasStation.id === id);
+    },
   }));

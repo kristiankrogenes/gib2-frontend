@@ -11,6 +11,9 @@ export const RootStore = types
     getGasStationById(id) {
       return store.gasStationStore?.getGasStationById(id);
     },
+    getLatestPriceById(id) {
+      return store.priceStore?.getLatestPriceById(id);
+    },
   }));
 
 let _rootStore;
@@ -18,7 +21,7 @@ export const useStore = () => {
   if (!_rootStore) {
     _rootStore = RootStore.create({
       PriceStore,
-      GasStationStore,
+      GasStationStore: { gasStations: [], selectedGasStation: null },
     });
   }
   return _rootStore;
