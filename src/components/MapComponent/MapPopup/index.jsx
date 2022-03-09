@@ -2,6 +2,7 @@ import React from 'react';
 import { Popup } from 'react-map-gl';
 import { Button } from '@mui/material';
 import { useStore } from '../../../stores/RootStore';
+import { fDateTime } from '../../../utils/formatTime';
 
 MapPopup.propTypes = {};
 
@@ -20,8 +21,11 @@ export default function MapPopup() {
     >
       <div>
         <div style={{ fontWeight: 'bold' }}>{selectedGasStation.name}</div>
-        Last registered price:
-        {selectedGasStation.latestPrice.diesel} <br /> yesterday at 14:03
+        Last registered prices: <br />
+        {`Diesel: ${selectedGasStation.latestPrice.diesel}`} <br />
+        {`Unleaded: ${selectedGasStation.latestPrice.unleaded}`} <br />
+        {`Electric: ${selectedGasStation.latestPrice.electric}`} <br />{' '}
+        {fDateTime(selectedGasStation.latestPrice.createdAt)}
       </div>
       <Button>More Info</Button>
       <Button>Register Price</Button>

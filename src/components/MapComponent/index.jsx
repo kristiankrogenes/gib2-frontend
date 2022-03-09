@@ -1,13 +1,15 @@
-import { Box, Card, Typography } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Map, { GeolocateControl } from 'react-map-gl';
 import { useStore } from '../../stores/RootStore';
 import AddStationDialog from './AddStationDialog';
 import { initialViewState, MAPBOX_TOKEN, mapStyle } from './constants';
 import { makeMarkerFromMapClick } from './helpers';
-import MapMarker from './MapMarker';
+// import MapMarker from './MapMarker';
+import MapPin from './MapPin';
+import { Marker } from 'react-map-gl';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 
@@ -17,7 +19,11 @@ function MapComponent() {
   const [marker, setMarker] = useState(null);
   const [newStationInfo, setNewStationInfo] = useState({
     name: '',
-    price: '',
+    price: {
+      diesel: '',
+      unleaded: '',
+      electric: '',
+    },
   });
 
   const { gasStationStore, priceStore } = useStore();
@@ -35,12 +41,20 @@ function MapComponent() {
       setAddGas(!addGas);
     } else {
       if (marker) {
-        await gasStationStore.addGasStation(marker, newStationInfo);
+        const gasStationId = await gasStationStore.addGasStation(
+          marker,
+          newStationInfo.name
+        );
+        await priceStore.addPrice(newStationInfo.price, parseInt(gasStationId));
         setAddGas(!addGas);
         setMarker(null);
         setNewStationInfo({
           name: '',
-          price: '',
+          price: {
+            diesel: '',
+            unleaded: '',
+            electric: '',
+          },
         });
       }
     }
@@ -87,8 +101,17 @@ function MapComponent() {
             onGeolocate={handleGeoLocationChange}
           />
           {gasStationStore.gasStations.length > 0 &&
-            gasStationStore.gasStations.map((station, index) => (
-              <MapMarker key={station.id} station={station} />
+            gasStationStore.gasStations.map((station) => (
+              <Marker
+                key={station.id}
+                longitude={station.point[0]}
+                latitude={station.point[1]}
+                anchor="bottom"
+              >
+                <MapPin
+                  onClick={() => gasStationStore.setSelectedGasStation(station)}
+                />
+              </Marker>
             ))}
           {marker?.marker}
           {gasStationStore.selectedGasStation && <MapPopup />}

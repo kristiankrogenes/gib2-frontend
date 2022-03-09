@@ -39,12 +39,13 @@ export const GasStationStore = types
         console.log(e.stack);
       }
     }),
-    addGasStation: flow(function* (marker, stationInfo) {
+    addGasStation: flow(function* (marker, name) {
       try {
-        const data = getGasStationPOST(marker, stationInfo.name);
+        const data = getGasStationPOST(marker, name);
         const response = yield axiosInstance.post('/api/gasstations/', data);
         const gasStation = getGasStationFromAPI(response.data);
         store.setGasStations([...store.gasStations, gasStation]);
+        return gasStation.id;
       } catch (e) {
         console.log(e.message);
       }
