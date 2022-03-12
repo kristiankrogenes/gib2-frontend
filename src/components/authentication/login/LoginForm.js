@@ -5,34 +5,29 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-// material
 import {
   Link,
   Stack,
-  Checkbox,
+  // Checkbox,
   TextField,
   IconButton,
   InputAdornment,
-  FormControlLabel,
+  // FormControlLabel,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-
-// ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Email must be a valid email address')
-      .required('Email is required'),
+    username: Yup.string().required('Username is required'),
     password: Yup.string().required('Password is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      username: '',
       password: '',
       remember: true,
     },
@@ -46,7 +41,8 @@ export default function LoginForm() {
     formik;
 
   const handleShowPassword = () => {
-    setShowPassword((show) => !show);
+    // setShowPassword((show) => !show);
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -56,11 +52,11 @@ export default function LoginForm() {
           <TextField
             fullWidth
             autoComplete="username"
-            type="email"
-            label="Email address"
-            {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
+            type="username"
+            label="Brukernavn"
+            {...getFieldProps('username')}
+            error={Boolean(touched.username && errors.username)}
+            helperText={touched.username && errors.username}
           />
 
           <TextField
@@ -81,6 +77,15 @@ export default function LoginForm() {
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
           />
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+          >
+            Logg inn
+          </LoadingButton>
         </Stack>
 
         <Stack
@@ -89,7 +94,7 @@ export default function LoginForm() {
           justifyContent="space-between"
           sx={{ my: 2 }}
         >
-          <FormControlLabel
+          {/* <FormControlLabel
             control={
               <Checkbox
                 {...getFieldProps('remember')}
@@ -97,22 +102,15 @@ export default function LoginForm() {
               />
             }
             label="Remember me"
-          />
+          /> */}
+          <Link component={RouterLink} variant="subtitle2" to="#">
+            Ingen bruker? Registrer nå
+          </Link>
 
           <Link component={RouterLink} variant="subtitle2" to="#">
-            Forgot password?
+            Glemt passord?
           </Link>
         </Stack>
-
-        <LoadingButton
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-          loading={isSubmitting}
-        >
-          Login
-        </LoadingButton>
       </Form>
     </FormikProvider>
   );
