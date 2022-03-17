@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Icon } from "@iconify/react";
-import { NavLink as RouterLink } from "react-router-dom";
-import arrowIosForwardFill from "@iconify/icons-eva/arrow-ios-forward-fill";
-import arrowIosDownwardFill from "@iconify/icons-eva/arrow-ios-downward-fill";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Icon } from '@iconify/react';
+import { NavLink as RouterLink } from 'react-router-dom';
+import arrowIosForwardFill from '@iconify/icons-eva/arrow-ios-forward-fill';
+import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
 // material
-import { alpha, useTheme } from "@mui/material/styles";
-import { Box, List, Collapse, ListItemText } from "@mui/material";
-import { ListItemStyle, ListItemIconStyle } from "./styles";
+import { alpha, useTheme } from '@mui/material/styles';
+import { Box, List, Collapse, ListItemText } from '@mui/material';
+import { ListItemStyle, ListItemIconStyle } from './styles';
 
 NavItem.propTypes = {
   item: PropTypes.object,
@@ -25,18 +25,18 @@ export default function NavItem({ item, active }) {
   };
 
   const activeRootStyle = {
-    color: "primary.main",
-    fontWeight: "fontWeightMedium",
+    color: 'primary.main',
+    fontWeight: 'fontWeightMedium',
     bgcolor: alpha(
       theme.palette.primary.main,
       theme.palette.action.selectedOpacity
     ),
-    "&:before": { display: "block" },
+    '&:before': { display: 'block' },
   };
 
   const activeSubStyle = {
-    color: "text.primary",
-    fontWeight: "fontWeightMedium",
+    color: 'text.primary',
+    fontWeight: 'fontWeightMedium',
   };
 
   if (children) {
@@ -79,16 +79,16 @@ export default function NavItem({ item, active }) {
                       sx={{
                         width: 4,
                         height: 4,
-                        display: "flex",
-                        borderRadius: "50%",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        bgcolor: "text.disabled",
+                        display: 'flex',
+                        borderRadius: '50%',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        bgcolor: 'text.disabled',
                         transition: (theme) =>
-                          theme.transitions.create("transform"),
+                          theme.transitions.create('transform'),
                         ...(isActiveSub && {
-                          transform: "scale(2)",
-                          bgcolor: "primary.main",
+                          transform: 'scale(2)',
+                          bgcolor: 'primary.main',
                         }),
                       }}
                     />

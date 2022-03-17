@@ -1,10 +1,10 @@
-import React from "react";
-import faker from "faker";
-import PropTypes from "prop-types";
-import { Icon } from "@iconify/react";
-import { formatDistance } from "date-fns";
-import { Link as RouterLink } from "react-router-dom";
-import arrowIosForwardFill from "@iconify/icons-eva/arrow-ios-forward-fill";
+import React from 'react';
+import faker from 'faker';
+import PropTypes from 'prop-types';
+import { Icon } from '@iconify/react';
+import { formatDistance } from 'date-fns';
+import { Link as RouterLink } from 'react-router-dom';
+import arrowIosForwardFill from '@iconify/icons-eva/arrow-ios-forward-fill';
 // material
 import {
   Box,
@@ -15,9 +15,9 @@ import {
   Divider,
   Typography,
   CardHeader,
-} from "@mui/material";
+} from '@mui/material';
 // utils
-import { mockImgCover } from "../../../utils/mockImages";
+import { mockImgCover } from '../../../utils/mockImages';
 //
 
 // ----------------------------------------------------------------------
@@ -55,13 +55,13 @@ function NewsItem({ news }) {
             {title}
           </Typography>
         </Link>
-        <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
           {description}
         </Typography>
       </Box>
       <Typography
         variant="caption"
-        sx={{ pr: 3, flexShrink: 0, color: "text.secondary" }}
+        sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}
       >
         {formatDistance(postedAt, new Date())}
       </Typography>
@@ -82,7 +82,7 @@ export default function AppNewsUpdate() {
 
       <Divider />
 
-      <Box sx={{ p: 2, textAlign: "right" }}>
+      <Box sx={{ p: 2, textAlign: 'right' }}>
         <Button
           to="#"
           size="small"

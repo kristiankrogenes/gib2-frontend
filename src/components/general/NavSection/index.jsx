@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { matchPath, useLocation } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { matchPath, useLocation } from 'react-router-dom';
 
-import { Box, List } from "@mui/material";
-import NavItem from "./NavItem";
+import { Box, List } from '@mui/material';
+import NavItem from './NavItem';
 
 NavSection.propTypes = {
   navConfig: PropTypes.array,

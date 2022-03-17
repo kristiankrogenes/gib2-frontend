@@ -1,12 +1,12 @@
-import React from "react";
-import { merge } from "lodash";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import { merge } from 'lodash';
+import ReactApexChart from 'react-apexcharts';
 // material
-import { Box, Card, CardHeader } from "@mui/material";
+import { Box, Card, CardHeader } from '@mui/material';
 // utils
-import { fNumber } from "../../../utils/formatNumber";
+import { fNumber } from '../../../utils/formatNumber';
 //
-import { BaseOptionChart } from "../../charts";
+import { BaseOptionChart } from '../../charts';
 
 // ----------------------------------------------------------------------
 
@@ -26,20 +26,20 @@ export default function AppConversionRates() {
       },
     },
     plotOptions: {
-      bar: { horizontal: true, barHeight: "28%", borderRadius: 2 },
+      bar: { horizontal: true, barHeight: '28%', borderRadius: 2 },
     },
     xaxis: {
       categories: [
-        "Italy",
-        "Japan",
-        "China",
-        "Canada",
-        "France",
-        "Germany",
-        "South Korea",
-        "Netherlands",
-        "United States",
-        "United Kingdom",
+        'Italy',
+        'Japan',
+        'China',
+        'Canada',
+        'France',
+        'Germany',
+        'South Korea',
+        'Netherlands',
+        'United States',
+        'United Kingdom',
       ],
     },
   });

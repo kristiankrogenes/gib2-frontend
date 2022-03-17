@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Box } from "@mui/material";
-import { SimpleBarStyle, RootStyle } from "./styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Box } from '@mui/material';
+import { SimpleBarStyle, RootStyle } from './styles';
 
 Scrollbar.propTypes = {
   children: PropTypes.node.isRequired,
@@ -16,7 +16,7 @@ export default function Scrollbar({ children, sx, ...other }) {
 
   if (isMobile) {
     return (
-      <Box sx={{ overflowX: "auto", ...sx }} {...other}>
+      <Box sx={{ overflowX: 'auto', ...sx }} {...other}>
         {children}
       </Box>
     );

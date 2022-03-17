@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axiosInstance from "../../utils/axios";
+import React, { useState } from 'react';
+import axiosInstance from '../../utils/axios';
 
 import {
   Button,
@@ -9,15 +9,15 @@ import {
   Grid,
   Typography,
   Container,
-} from "@mui/material";
+} from '@mui/material';
 
 export default function SignUp() {
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [status, setStatus] = useState("");
+  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [status, setStatus] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -28,31 +28,30 @@ export default function SignUp() {
       last_name: lastName,
     };
     axiosInstance
-      .post("/users/register/", user)
+      .post('/users/register/', user)
       .then((res) => {
         if (res.status === 201) {
           axiosInstance
-            .post("users/token/", user)
+            .post('users/token/', user)
             .then((res) => {
-              localStorage.setItem("access_token", res.data.access);
-              localStorage.setItem("refresh_token", res.data.refresh);
-              axiosInstance.defaults.headers["Authorization"] =
-                "JWT " + localStorage.getItem("access_token");
-                window.location.replace(process.env.REACT_APP_WEB_URL);
+              localStorage.setItem('access_token', res.data.access);
+              localStorage.setItem('refresh_token', res.data.refresh);
+              axiosInstance.defaults.headers['Authorization'] =
+                'JWT ' + localStorage.getItem('access_token');
+              window.location.replace(process.env.REACT_APP_WEB_URL);
               // sendVerificationEmail();
               // window.location.replace("http://localhost:3000/profil/bekreft");
             })
             .catch((e) => {
-              console.log("ERROR:", e);
+              console.log('ERROR:', e);
             });
-          setStatus("Din bruker er nå registrert.");
-          
+          setStatus('Din bruker er nå registrert.');
         } else if (res.status === 226) {
-          setStatus("Denne brukeren er allrede registrert.");
+          setStatus('Denne brukeren er allrede registrert.');
         }
       })
       .catch(() => {
-        setStatus("oh fuck");
+        setStatus('oh fuck');
       });
   };
 
@@ -63,7 +62,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Registrer
         </Typography>
-        {status === "" ? null : (
+        {status === '' ? null : (
           <Typography color="error" align="center">
             {status}
           </Typography>
@@ -148,8 +147,8 @@ export default function SignUp() {
             onClick={onSubmit}
             disabled={
               password !== password2 ||
-              password === "" ||
-              password.trim().replace(" ", "").length < 7
+              password === '' ||
+              password.trim().replace(' ', '').length < 7
             }
           >
             Registrer profil

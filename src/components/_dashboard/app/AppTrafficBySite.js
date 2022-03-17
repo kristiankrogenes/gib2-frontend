@@ -1,11 +1,11 @@
-import React from "react";
-import faker from "faker";
-import PropTypes from "prop-types";
-import { Icon } from "@iconify/react";
-import googleFill from "@iconify/icons-eva/google-fill";
-import twitterFill from "@iconify/icons-eva/twitter-fill";
-import facebookFill from "@iconify/icons-eva/facebook-fill";
-import linkedinFill from "@iconify/icons-eva/linkedin-fill";
+import React from 'react';
+import faker from 'faker';
+import PropTypes from 'prop-types';
+import { Icon } from '@iconify/react';
+import googleFill from '@iconify/icons-eva/google-fill';
+import twitterFill from '@iconify/icons-eva/twitter-fill';
+import facebookFill from '@iconify/icons-eva/facebook-fill';
+import linkedinFill from '@iconify/icons-eva/linkedin-fill';
 // material
 import {
   Box,
@@ -15,30 +15,30 @@ import {
   Typography,
   CardHeader,
   CardContent,
-} from "@mui/material";
+} from '@mui/material';
 // utils
-import { fShortenNumber } from "../../../utils/formatNumber";
+import { fShortenNumber } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
 const SOCIALS = [
   {
-    name: "FaceBook",
+    name: 'FaceBook',
     value: faker.datatype.number(),
     icon: <Icon icon={facebookFill} color="#1877F2" width={32} height={32} />,
   },
   {
-    name: "Google",
+    name: 'Google',
     value: faker.datatype.number(),
     icon: <Icon icon={googleFill} color="#DF3E30" width={32} height={32} />,
   },
   {
-    name: "Linkedin",
+    name: 'Linkedin',
     value: faker.datatype.number(),
     icon: <Icon icon={linkedinFill} color="#006097" width={32} height={32} />,
   },
   {
-    name: "Twitter",
+    name: 'Twitter',
     value: faker.datatype.number(),
     icon: <Icon icon={twitterFill} color="#1C9CEA" width={32} height={32} />,
   },
@@ -55,10 +55,10 @@ function SiteItem({ site }) {
 
   return (
     <Grid item xs={6}>
-      <Paper variant="outlined" sx={{ py: 2.5, textAlign: "center" }}>
+      <Paper variant="outlined" sx={{ py: 2.5, textAlign: 'center' }}>
         <Box sx={{ mb: 0.5 }}>{icon}</Box>
         <Typography variant="h6">{fShortenNumber(value)}</Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {name}
         </Typography>
       </Paper>

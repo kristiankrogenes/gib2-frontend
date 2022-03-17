@@ -1,28 +1,37 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
-import { styled } from "@mui/material/styles";
-import { Box, Drawer, Button } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import { Box, Drawer, Link, Typography, Avatar, Button } from '@mui/material';
 // components
-import Logo from "../../components/general/Logo";
-import NavSection from "../../components/general/NavSection";
-import { MHidden } from "../../components/@material-extend";
+import Logo from '../../components/general/Logo';
+import NavSection from '../../components/general/NavSection';
+import { MHidden } from '../../components/@material-extend';
 //
-import sidebarConfig from "./SidebarConfig";
+import sidebarConfig from './SidebarConfig';
+import account from '../../_mocks_/account';
 
-import axiosInstance from "../../utils/axios";
+import axiosInstance from '../../utils/axios';
 
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
 
-const RootStyle = styled("div")(({ theme }) => ({
-  [theme.breakpoints.up("lg")]: {
+const RootStyle = styled('div')(({ theme }) => ({
+  [theme.breakpoints.up('lg')]: {
     flexShrink: 0,
     width: DRAWER_WIDTH,
   },
+}));
+
+const AccountStyle = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(2, 2.5),
+  borderRadius: theme.shape.borderRadiusSm,
+  backgroundColor: theme.palette.grey[200],
 }));
 
 // ----------------------------------------------------------------------
@@ -39,12 +48,13 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     if (isOpenSidebar) {
       onCloseSidebar();
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const [isAuth, setAuth] = useState(false);
 
   useEffect(() => {
-    setAuth(localStorage.getItem("access_token") !== null);
+    setAuth(localStorage.getItem('access_token') !== null);
   }, []);
 
   const logOut = () => {
@@ -55,9 +65,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const [userInfo, setUserInfo] = useState(null);
 
   const fetchUserInfo = async () => {
-    const result = await axiosInstance.get("users/user-info/");
+    const result = await axiosInstance.get('users/user-info/');
     setUserInfo(result.data);
-  }
+  };
 
   useEffect(() => {
     if (isAuth) {
@@ -68,29 +78,45 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const renderContent = (
     <>
       <Box sx={{ px: 2.5, py: 3 }}>
-        <Box component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
+        <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
           <Logo />
         </Box>
-        {userInfo !== null ? 
+        {userInfo !== null ? (
           <div>
             <p>LOGGED IN AS {userInfo.username}</p>
             <Button onClick={logOut}>LOG OUT</Button>
-          </div> 
-          : 
+          </div>
+        ) : (
           <div>
             <p>NOT LOGGED IN</p>
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to="/auth/login"
-            >LOG IN</Button>
+            <Button variant="contained" component={RouterLink} to="/auth/login">
+              LOG IN
+            </Button>
             <Button
               variant="contained"
               component={RouterLink}
               to="/auth/register"
-            >New User</Button>
+            >
+              New User
+            </Button>
           </div>
-        }
+        )}
+      </Box>
+
+      <Box sx={{ mb: 5, mx: 2.5 }}>
+        <Link underline="none" component={RouterLink} to="#">
+          <AccountStyle>
+            <Avatar src={account.photoURL} alt="photoURL" />
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                {account.displayName}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                {account.role}
+              </Typography>
+            </Box>
+          </AccountStyle>
+        </Link>
       </Box>
 
       <NavSection navConfig={sidebarConfig} />
@@ -120,7 +146,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           PaperProps={{
             sx: {
               width: DRAWER_WIDTH,
-              bgcolor: "background.default",
+              bgcolor: 'background.default',
             },
           }}
         >

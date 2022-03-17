@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axiosInstance from "../../utils/axios";
+import React, { useState } from 'react';
+import axiosInstance from '../../utils/axios';
 
 import {
   Button,
@@ -9,11 +9,11 @@ import {
   Grid,
   Typography,
   Container,
-} from "@mui/material";
+} from '@mui/material';
 
 export default function SignIn() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
   const onSubmit = (e) => {
@@ -26,13 +26,14 @@ export default function SignIn() {
       .post(`users/token/`, user)
       .then((res) => {
         if (res.status === 200) {
-          localStorage.setItem("access_token", res.data.access);
-          localStorage.setItem("refresh_token", res.data.refresh);
-          axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
+          localStorage.setItem('access_token', res.data.access);
+          localStorage.setItem('refresh_token', res.data.refresh);
+          axiosInstance.defaults.headers['Authorization'] =
+            'JWT ' + res.data.access;
           window.location.replace(process.env.REACT_APP_WEB_URL);
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => setError(true));
   };
 
   return (
@@ -87,7 +88,7 @@ export default function SignIn() {
             </Grid>
             <Grid item>
               <Link href="/registrer" variant="body2">
-                {"Ingen bruker? Registrer nå"}
+                {'Ingen bruker? Registrer nå'}
               </Link>
             </Grid>
           </Grid>

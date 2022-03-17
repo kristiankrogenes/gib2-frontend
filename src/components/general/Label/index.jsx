@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { RootStyle } from "./styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { RootStyle } from './styles';
 
 export default function Label({
-  color = "default",
-  variant = "ghost",
+  color = 'default',
+  variant = 'ghost',
   children,
   ...other
 }) {
@@ -18,13 +18,13 @@ export default function Label({
 Label.propTypes = {
   children: PropTypes.node,
   color: PropTypes.oneOf([
-    "default",
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
+    'default',
+    'primary',
+    'secondary',
+    'info',
+    'success',
+    'warning',
+    'error',
   ]),
-  variant: PropTypes.oneOf(["filled", "outlined", "ghost"]),
+  variant: PropTypes.oneOf(['filled', 'outlined', 'ghost']),
 };
