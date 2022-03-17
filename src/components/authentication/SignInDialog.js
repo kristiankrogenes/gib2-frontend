@@ -33,7 +33,7 @@ export default function SignIn() {
           window.location.replace(process.env.REACT_APP_WEB_URL);
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => setError(true));
   };
 
   return (
