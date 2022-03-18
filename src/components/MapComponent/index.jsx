@@ -12,7 +12,10 @@ import MapPin from './MapPin';
 import { Marker } from 'react-map-gl';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
+import axios from 'axios';
 
+const opti = (start, end) =>
+  `https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`;
 function MapComponent() {
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
@@ -25,6 +28,13 @@ function MapComponent() {
       electric: '',
     },
   });
+  const test = async () => {
+    const res = await axios.get(
+      `https://api.mapbox.com/optimized-trips/v1/mapbox/driving/-122.42,37.78;-122.45,37.91;-122.48,37.73?steps=true&geometries=geojson&access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`
+    );
+    console.log(res.data);
+  };
+  test();
 
   const { gasStationStore, priceStore } = useStore();
 

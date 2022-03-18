@@ -30,10 +30,14 @@ export default function SignIn() {
           localStorage.setItem('refresh_token', res.data.refresh);
           axiosInstance.defaults.headers['Authorization'] =
             'JWT ' + res.data.access;
+          setError(false);
           window.location.replace(process.env.REACT_APP_WEB_URL);
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setError(true);
+        console.log(e);
+      });
   };
 
   return (
