@@ -1,12 +1,23 @@
 import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
-import Map, { GeolocateControl } from 'react-map-gl';
+import React, { useState, useEffect } from 'react';
+import Map, { GeolocateControl, Layer, Source } from 'react-map-gl';
 import { useStore } from '../../stores/RootStore';
 import AddStationDialog from './AddStationDialog';
-import { initialViewState, MAPBOX_TOKEN, mapStyle } from './constants';
-import { makeMarkerFromMapClick } from './helpers';
+import {
+  initialViewState,
+  MAPBOX_TOKEN,
+  mapStyle,
+  lerka,
+  heimdal,
+  lineLayerStyle,
+} from './constants';
+import {
+  makeMarkerFromMapClick,
+  createGeoJson,
+  optimizedRoute,
+} from './helpers';
 // import MapMarker from './MapMarker';
 import MapPin from './MapPin';
 import { Marker } from 'react-map-gl';
@@ -14,12 +25,12 @@ import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 import axios from 'axios';
 
-const opti = (start, end) =>
-  `https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`;
 function MapComponent() {
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
   const [marker, setMarker] = useState(null);
+  const [testData, setTestData] = useState({});
+
   const [newStationInfo, setNewStationInfo] = useState({
     name: '',
     price: {
@@ -28,13 +39,34 @@ function MapComponent() {
       electric: '',
     },
   });
-  const test = async () => {
-    const res = await axios.get(
-      `https://api.mapbox.com/optimized-trips/v1/mapbox/driving/-122.42,37.78;-122.45,37.91;-122.48,37.73?steps=true&geometries=geojson&access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`
-    );
-    console.log(res.data);
-  };
-  test();
+
+  useEffect(() => {
+    const test = async () => {
+      const url = optimizedRoute(lerka, heimdal);
+      console.log(url);
+      const res = await axios.get(url);
+      console.log(res.data.trips[0].geometry);
+      setTestData(createGeoJson(res.data));
+      console.log(res.data);
+    };
+    test();
+  }, []);
+
+  // const overpass_url = 'http://overpass-api.de/api/interpreter';
+  // const overpass_query =
+  //   '[out:json];(node["amenity"="fuel"](area););out center;';
+
+  // useEffect(() => {
+  //   console.log('HEIIIII');
+  //   const fetchData = async () => {
+  //     console.log('HEIIII2');
+  //     const response = await axios.get(overpass_url, {
+  //       params: { data: overpass_query },
+  //     });
+  //     console.log(response);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const { gasStationStore, priceStore } = useStore();
 
@@ -110,6 +142,9 @@ function MapComponent() {
             showUserLocation={true}
             onGeolocate={handleGeoLocationChange}
           />
+          <Source id="test" type="geojson" data={testData}>
+            <Layer {...lineLayerStyle} />
+          </Source>
           {gasStationStore.gasStations.length > 0 &&
             gasStationStore.gasStations.map((station) => (
               <Marker
