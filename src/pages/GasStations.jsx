@@ -28,7 +28,6 @@ import {
   UserListToolbar,
   UserMoreMenu,
 } from '../components/_dashboard/user';
-import USERLIST from '../_mocks_/user';
 import { mockImgAvatar } from '../utils/mockImages';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../stores/RootStore';
@@ -67,7 +66,7 @@ function GasStations() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
+      const newSelecteds = gasStationStore.gasStations.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -106,7 +105,12 @@ function GasStations() {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+    page > 0
+      ? Math.max(
+          0,
+          (1 + page) * rowsPerPage - gasStationStore.gasStations.length
+        )
+      : 0;
 
   const isUserNotFound = gasStationStore.gasStations.length === 0;
 
@@ -146,7 +150,7 @@ function GasStations() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={gasStationStore.gasStations.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
@@ -157,7 +161,6 @@ function GasStations() {
                     .map((row) => {
                       const { id, name } = row;
                       const isItemSelected = selected.indexOf(name) !== -1;
-
                       return (
                         <TableRow
                           hover
@@ -189,17 +192,17 @@ function GasStations() {
                             <Label variant="ghost" color={'error'}>
                               Lorem ipsum
                             </Label>
-                          </TableCell>{' '}
+                          </TableCell>
                           <TableCell align="left">
                             <Label variant="ghost" color={'info'}>
                               Lorem ipsum
                             </Label>
-                          </TableCell>{' '}
+                          </TableCell>
                           <TableCell align="left">
                             <Label variant="ghost" color={'success'}>
                               Lorem ipsum
                             </Label>
-                          </TableCell>{' '}
+                          </TableCell>
                           <TableCell align="left">
                             <Label variant="ghost" color={'warning'}>
                               Lorem ipsum
@@ -233,7 +236,7 @@ function GasStations() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={gasStationStore.gasStations.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
