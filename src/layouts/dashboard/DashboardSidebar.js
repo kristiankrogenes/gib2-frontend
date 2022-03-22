@@ -9,6 +9,7 @@ import { MHidden } from '../../components/@material-extend';
 import sidebarConfig from './SidebarConfig';
 import account from '../../_mocks_/account';
 import { useStore } from '../../stores/RootStore';
+import { observer } from 'mobx-react-lite';
 
 const DRAWER_WIDTH = 280;
 
@@ -32,7 +33,7 @@ DashboardSidebar.propTypes = {
   onCloseSidebar: PropTypes.func,
 };
 
-export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
+function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
   const {
     userStore: { currentUser },
@@ -45,11 +46,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  const logOut = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    window.location.replace(process.env.REACT_APP_WEB_URL);
-  };
+  // const logOut = () => {
+  //   localStorage.removeItem('access_token');
+  //   localStorage.removeItem('refresh_token');
+  //   window.location.replace(process.env.REACT_APP_WEB_URL);
+  // };
 
   const renderContent = (
     <>
@@ -57,7 +58,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
           <Logo />
         </Box>
-        {currentUser ? (
+        {/* {currentUser ? (
           <div>
             <p>
               LOGGED IN AS {`${currentUser.firstName} ${currentUser.lastName}`}
@@ -78,7 +79,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               New User
             </Button>
           </div>
-        )}
+        )} */}
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
@@ -136,3 +137,5 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     </RootStyle>
   );
 }
+
+export default observer(DashboardSidebar);
