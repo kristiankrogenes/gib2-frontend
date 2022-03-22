@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { Box, Drawer, Link, Typography, Avatar, Button } from '@mui/material';
+import { Box, Drawer, Link, Typography, Avatar } from '@mui/material';
 import Logo from '../../components/general/Logo';
 import NavSection from '../../components/general/NavSection';
 import { MHidden } from '../../components/@material-extend';
@@ -46,40 +46,12 @@ function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // const logOut = () => {
-  //   localStorage.removeItem('access_token');
-  //   localStorage.removeItem('refresh_token');
-  //   window.location.replace(process.env.REACT_APP_WEB_URL);
-  // };
-
   const renderContent = (
     <>
       <Box sx={{ px: 2.5, py: 3 }}>
         <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
           <Logo />
         </Box>
-        {/* {currentUser ? (
-          <div>
-            <p>
-              LOGGED IN AS {`${currentUser.firstName} ${currentUser.lastName}`}
-            </p>
-            <Button onClick={logOut}>LOG OUT</Button>
-          </div>
-        ) : (
-          <div>
-            <p>NOT LOGGED IN</p>
-            <Button variant="contained" component={RouterLink} to="/auth/login">
-              LOG IN
-            </Button>
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to="/auth/register"
-            >
-              New User
-            </Button>
-          </div>
-        )} */}
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
