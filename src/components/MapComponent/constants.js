@@ -3,14 +3,42 @@ export const mapStyle = 'mapbox://styles/mapbox/streets-v11';
 
 // coordinates for lerkendalsbygget
 export const lerka = {
-  longitude: 10.406852960586548,
-  latitude: 63.4147798358434,
+  lng: 10.406852960586548,
+  lat: 63.4147798358434,
+};
+
+export const heimdal = {
+  lng: 10.348777770996094,
+  lat: 63.35274520773996,
 };
 
 export const layerStyle = {
   id: 'polygon',
   type: 'fill',
   paint: { 'fill-color': '#007cbf', 'fill-opacity': 0.5 },
+};
+
+export const lineLayerStyle = {
+  id: 'route',
+  type: 'line',
+  // layout: {
+  //   'line-join': 'round',
+  //   'line-cap': 'round',
+  // },
+  layout: {
+    'line-join': 'round',
+    'line-cap': 'round',
+  },
+  paint: {
+    'line-color': '#0048BA',
+    'line-opacity': 0.5,
+    'line-width': 8,
+    'line-blur': 0.9,
+  },
+  // paint: {
+  //   'line-color': '#888',
+  //   'line-width': 8,
+  // },
 };
 export const pointLayerStyle = {
   id: 'point',
@@ -21,8 +49,8 @@ export const pointLayerStyle = {
   },
 };
 export const initialViewState = {
-  longitude: lerka.longitude,
-  latitude: lerka.latitude,
+  longitude: lerka.lng,
+  latitude: lerka.lat,
   zoom: 14,
   width: '100%',
   height: 600,

@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import React, { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
@@ -15,10 +15,13 @@ import {
   // FormControlLabel,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { useStore } from '../../../stores/RootStore';
 
 export default function LoginForm() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const { userStore } = useStore();
 
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
@@ -32,13 +35,16 @@ export default function LoginForm() {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (values) => {
+      const user = {
+        username: values.username,
+        password: values.password,
+      };
+      userStore.loginUser(user);
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
-    formik;
+  const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => {
     // setShowPassword((show) => !show);
