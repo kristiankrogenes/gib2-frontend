@@ -43,30 +43,11 @@ function MapComponent() {
   useEffect(() => {
     const test = async () => {
       const url = optimizedRoute(lerka, heimdal);
-      console.log(url);
       const res = await axios.get(url);
-      console.log(res.data.trips[0].geometry);
       setTestData(createGeoJson(res.data));
-      console.log(res.data);
     };
     test();
   }, []);
-
-  // const overpass_url = 'http://overpass-api.de/api/interpreter';
-  // const overpass_query =
-  //   '[out:json];(node["amenity"="fuel"](area););out center;';
-
-  // useEffect(() => {
-  //   console.log('HEIIIII');
-  //   const fetchData = async () => {
-  //     console.log('HEIIII2');
-  //     const response = await axios.get(overpass_url, {
-  //       params: { data: overpass_query },
-  //     });
-  //     console.log(response);
-  //   };
-  //   fetchData();
-  // }, []);
 
   const { gasStationStore, priceStore } = useStore();
 
