@@ -24,36 +24,36 @@ const sidebarConfig = [
     path: '/dashboard/user',
     icon: getIcon(peopleFill),
   },
-  {
-    title: 'product',
-    path: '/dashboard/products',
-    icon: getIcon(shoppingBagFill),
-  },
-  {
-    title: 'blog',
-    path: '/dashboard/blog',
-    icon: getIcon(fileTextFill),
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon(alertTriangleFill),
-  },
+  // {
+  //   title: 'product',
+  //   path: '/dashboard/products',
+  //   icon: getIcon(shoppingBagFill),
+  // },
+  // {
+  //   title: 'blog',
+  //   path: '/dashboard/blog',
+  //   icon: getIcon(fileTextFill),
+  // },
+  // {
+  //   title: 'Not found',
+  //   path: '/404',
+  //   icon: getIcon(alertTriangleFill),
+  // },
   {
     title: 'Map page',
     path: '/dashboard/map',
     icon: getIcon(globe2fill),
   },
-  {
-    title: 'login',
-    path: '/login',
-    icon: getIcon(lockFill),
-  },
-  {
-    title: 'register',
-    path: '/register',
-    icon: getIcon(personAddFill),
-  },
+  // {
+  //   title: 'login',
+  //   path: '/login',
+  //   icon: getIcon(lockFill),
+  // },
+  // {
+  //   title: 'register',
+  //   path: '/register',
+  //   icon: getIcon(personAddFill),
+  // },
   {
     title: 'Gas Stations',
     path: '/dashboard/gasstations',

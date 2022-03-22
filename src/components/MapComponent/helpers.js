@@ -15,6 +15,22 @@ export const createPointGeojson = (point) => ({
   ],
 });
 
+export const createGeoJson = (geometry) => ({
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      geometry: {
+        type: geometry.trips[0].geometry.type,
+        coordinates: geometry.trips[0].geometry.coordinates,
+      },
+    },
+  ],
+});
+
+export const optimizedRoute = (start, end) =>
+  `https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}?roundtrip=false&source=first&destination=last&steps=true&geometries=geojson&access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`;
+
 export const makeMarkerFromMapClick = (e) => ({
   marker: (
     <Marker

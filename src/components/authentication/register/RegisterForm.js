@@ -4,13 +4,23 @@ import { Icon } from '@iconify/react';
 import { useFormik, Form, FormikProvider } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import { useNavigate } from 'react-router-dom';
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
+import {
+  Stack,
+  TextField,
+  IconButton,
+  InputAdornment,
+  Typography,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import axiosInstance from '../../../utils/axios';
+import { useStore } from '../../../stores/RootStore';
 
 export default function RegisterForm() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [validUsername, setvalidUsername] = useState(true);
+
+  const { userStore } = useStore();
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -21,10 +31,12 @@ export default function RegisterForm() {
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Last name required'),
-    username: Yup.string()
-      // .email('Email must be a valid email address')
-      .required('Username is required'),
+    username: Yup.string().required('Username is required'),
     password: Yup.string().required('Password is required'),
+    passwordConfirmation: Yup.string().oneOf(
+      [Yup.ref('password'), null],
+      'Passwords must match'
+    ),
   });
 
   const formik = useFormik({
@@ -33,14 +45,41 @@ export default function RegisterForm() {
       lastName: '',
       username: '',
       password: '',
+      passwordConfirmation: '',
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (values) => {
+      const user = {
+        username: values.username,
+        password: values.password,
+        first_name: values.firstName,
+        last_name: values.lastName,
+      };
+      axiosInstance
+        .post('/users/register/', user)
+        .then((res) => {
+          if (res.status === 201) {
+            userStore.loginUser(user);
+          } else if (res.status === 226) {
+            setSubmitting(false);
+            setvalidUsername(false);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      // navigate('/dashboard', { replace: true });
     },
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const {
+    errors,
+    touched,
+    handleSubmit,
+    isSubmitting,
+    getFieldProps,
+    setSubmitting,
+  } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -95,6 +134,31 @@ export default function RegisterForm() {
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
           />
+          <TextField
+            fullWidth
+            // autoComplete="current-password"
+            type={showPassword ? 'text' : 'password'}
+            label="Confirm Password"
+            {...getFieldProps('passwordConfirmation')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    edge="end"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={Boolean(
+              touched.passwordConfirmation && errors.passwordConfirmation
+            )}
+            helperText={
+              touched.passwordConfirmation && errors.passwordConfirmation
+            }
+          />
 
           <LoadingButton
             fullWidth
@@ -105,6 +169,11 @@ export default function RegisterForm() {
           >
             Register
           </LoadingButton>
+          {!validUsername ? (
+            <Typography color="error" align="center">
+              Username already exists
+            </Typography>
+          ) : null}
         </Stack>
       </Form>
     </FormikProvider>

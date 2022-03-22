@@ -1,21 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-// material
 import { styled } from '@mui/material/styles';
-import { Box, Drawer, Link, Typography, Avatar, Button } from '@mui/material';
-// components
+import { Box, Drawer, Link, Typography, Avatar } from '@mui/material';
 import Logo from '../../components/general/Logo';
 import NavSection from '../../components/general/NavSection';
 import { MHidden } from '../../components/@material-extend';
-//
 import sidebarConfig from './SidebarConfig';
 import account from '../../_mocks_/account';
-
-import axiosInstance from '../../utils/axios';
-
-// ----------------------------------------------------------------------
+import { useStore } from '../../stores/RootStore';
+import { observer } from 'mobx-react-lite';
 
 const DRAWER_WIDTH = 280;
 
@@ -34,15 +28,16 @@ const AccountStyle = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.grey[200],
 }));
 
-// ----------------------------------------------------------------------
-
 DashboardSidebar.propTypes = {
   isOpenSidebar: PropTypes.bool,
   onCloseSidebar: PropTypes.func,
 };
 
-export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
+function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+  const {
+    userStore: { currentUser },
+  } = useStore();
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -51,71 +46,29 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  const [isAuth, setAuth] = useState(false);
-
-  useEffect(() => {
-    setAuth(localStorage.getItem('access_token') !== null);
-  }, []);
-
-  const logOut = () => {
-    localStorage.clear();
-    window.location.replace(process.env.REACT_APP_WEB_URL);
-  };
-
-  const [userInfo, setUserInfo] = useState(null);
-
-  const fetchUserInfo = async () => {
-    const result = await axiosInstance.get('users/user-info/');
-    setUserInfo(result.data);
-  };
-
-  useEffect(() => {
-    if (isAuth) {
-      fetchUserInfo();
-    }
-  }, [isAuth]);
-
   const renderContent = (
     <>
       <Box sx={{ px: 2.5, py: 3 }}>
         <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
           <Logo />
         </Box>
-        {userInfo !== null ? (
-          <div>
-            <p>LOGGED IN AS {userInfo.username}</p>
-            <Button onClick={logOut}>LOG OUT</Button>
-          </div>
-        ) : (
-          <div>
-            <p>NOT LOGGED IN</p>
-            <Button variant="contained" component={RouterLink} to="/auth/login">
-              LOG IN
-            </Button>
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to="/auth/register"
-            >
-              New User
-            </Button>
-          </div>
-        )}
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
-              </Typography>
-            </Box>
-          </AccountStyle>
+          {currentUser ? (
+            <AccountStyle>
+              <Avatar src={account.photoURL} alt="photoURL" />
+              <Box sx={{ ml: 2 }}>
+                <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                  {`${currentUser.firstName} ${currentUser.lastName}`}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  {account.role}
+                </Typography>
+              </Box>
+            </AccountStyle>
+          ) : null}
         </Link>
       </Box>
 
@@ -156,3 +109,5 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     </RootStyle>
   );
 }
+
+export default observer(DashboardSidebar);

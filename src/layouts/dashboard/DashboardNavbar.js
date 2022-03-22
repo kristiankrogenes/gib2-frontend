@@ -14,9 +14,7 @@ import {
 } from '@mui/material';
 // components
 import { MHidden } from '../../components/@material-extend';
-//
-
-// ----------------------------------------------------------------------
+import AccountPopover from './AccountPopover';
 
 const DRAWER_WIDTH = 280;
 const APPBAR_MOBILE = 40;
@@ -66,6 +64,7 @@ export default function DashboardNavbar({ onOpenSidebar }) {
           alignItems="center"
           spacing={{ xs: 0.5, sm: 1.5 }}
         >
+          <AccountPopover />
           <Typography color={'black'}>GIB2</Typography>
         </Stack>
       </ToolbarStyle>

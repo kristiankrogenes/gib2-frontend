@@ -1,11 +1,13 @@
 import { types } from 'mobx-state-tree';
 import { GasStationStore } from './GasStationStore';
 import { PriceStore } from './PriceStore';
+import { UserStore } from './UserStore';
 
 export const RootStore = types
   .model('RootStore', {
     gasStationStore: types.optional(GasStationStore, { gasStations: [] }),
     priceStore: types.optional(PriceStore, { prices: [] }),
+    userStore: types.optional(UserStore, { users: [] }),
   })
   .views((store) => ({
     getGasStationById(id) {
@@ -22,6 +24,7 @@ export const useStore = () => {
     _rootStore = RootStore.create({
       PriceStore,
       GasStationStore: { gasStations: [], selectedGasStation: null },
+      UserStore: { users: [], currentUser: null },
     });
   }
   return _rootStore;
