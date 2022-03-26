@@ -31,7 +31,6 @@ import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 import axios from 'axios';
 import Cluster from '@urbica/react-map-gl-cluster';
-import './MapComponent.css';
 
 function MapComponent() {
   const [viewport, setViewport] = useState({
