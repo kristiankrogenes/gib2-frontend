@@ -2,11 +2,17 @@ import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
-import Map, { GeolocateControl, Layer, Source } from 'react-map-gl';
+// import Map, { GeolocateControl, Layer, Source, Marker } from 'react-map-gl';
+import MapGL, {
+  GeolocateControl,
+  Layer,
+  Source,
+  Marker,
+} from '@urbica/react-map-gl';
 import { useStore } from '../../stores/RootStore';
 import AddStationDialog from './AddStationDialog';
 import {
-  initialViewState,
+  // initialViewState,
   MAPBOX_TOKEN,
   mapStyle,
   lerka,
@@ -17,15 +23,25 @@ import {
   makeMarkerFromMapClick,
   createGeoJson,
   optimizedRoute,
+  ClusterMarker,
 } from './helpers';
 // import MapMarker from './MapMarker';
 import MapPin from './MapPin';
-import { Marker } from 'react-map-gl';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 import axios from 'axios';
+import Cluster from '@urbica/react-map-gl-cluster';
+import './MapComponent.css';
 
 function MapComponent() {
+  const [viewport, setViewport] = useState({
+    latitude: lerka.lat,
+    longitude: lerka.lng,
+    width: '100vw',
+    height: '100vh',
+    zoom: 12,
+  });
+
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
   const [marker, setMarker] = useState(null);
@@ -111,11 +127,17 @@ function MapComponent() {
           height: 600,
         }}
       >
-        <Map
-          initialViewState={initialViewState}
+        <MapGL
+          // initialViewState={initialViewState}
+          onViewportChange={(newViewport) => {
+            setViewport({ ...newViewport });
+          }}
+          style={{ width: '100%', height: 600 }}
           mapStyle={mapStyle}
-          mapboxApiAccessToken={MAPBOX_TOKEN}
+          // mapboxApiAccessToken={MAPBOX_TOKEN}
+          accessToken={MAPBOX_TOKEN}
           onClick={onMapClick}
+          {...viewport}
         >
           <GeolocateControl
             position="top-left"
@@ -126,22 +148,32 @@ function MapComponent() {
           <Source id="test" type="geojson" data={testData}>
             <Layer {...lineLayerStyle} />
           </Source>
-          {gasStationStore.gasStations.length > 0 &&
-            gasStationStore.gasStations.map((station) => (
-              <Marker
-                key={station.id}
-                longitude={station.point[0]}
-                latitude={station.point[1]}
-                anchor="bottom"
-              >
-                <MapPin
-                  onClick={() => gasStationStore.setSelectedGasStation(station)}
-                />
-              </Marker>
-            ))}
+          {gasStationStore.gasStations.length > 0 && (
+            <Cluster
+              radius={80}
+              extent={512}
+              nodeSize={64}
+              component={ClusterMarker}
+            >
+              {gasStationStore.gasStations.map((station) => (
+                <Marker
+                  key={station.id}
+                  longitude={station.point[0]}
+                  latitude={station.point[1]}
+                  anchor="bottom"
+                >
+                  <MapPin
+                    onClick={() =>
+                      gasStationStore.setSelectedGasStation(station)
+                    }
+                  />
+                </Marker>
+              ))}
+            </Cluster>
+          )}
           {marker?.marker}
           {gasStationStore.selectedGasStation && <MapPopup />}
-        </Map>
+        </MapGL>
       </Box>
     </Card>
   );

@@ -21,10 +21,7 @@ export const layerStyle = {
 export const lineLayerStyle = {
   id: 'route',
   type: 'line',
-  // layout: {
-  //   'line-join': 'round',
-  //   'line-cap': 'round',
-  // },
+  source: 'test',
   layout: {
     'line-join': 'round',
     'line-cap': 'round',
@@ -35,10 +32,6 @@ export const lineLayerStyle = {
     'line-width': 8,
     'line-blur': 0.9,
   },
-  // paint: {
-  //   'line-color': '#888',
-  //   'line-width': 8,
-  // },
 };
 export const pointLayerStyle = {
   id: 'point',

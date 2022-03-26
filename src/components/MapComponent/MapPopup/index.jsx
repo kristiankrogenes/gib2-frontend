@@ -1,5 +1,6 @@
 import React from 'react';
-import { Popup } from 'react-map-gl';
+// import { Popup } from 'react-map-gl';
+import { Popup } from '@urbica/react-map-gl';
 import { Button } from '@mui/material';
 import { useStore } from '../../../stores/RootStore';
 import { fDateTime } from '../../../utils/formatTime';
