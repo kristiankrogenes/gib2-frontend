@@ -1,6 +1,8 @@
 import React from 'react';
-import { Marker } from 'react-map-gl';
+// import { Marker } from 'react-map-gl';
+import { Marker } from '@urbica/react-map-gl';
 import MapPin from './MapPin';
+import PropTypes from 'prop-types';
 
 export const createPointGeojson = (point) => ({
   type: 'FeatureCollection',
@@ -46,3 +48,16 @@ export const makeMarkerFromMapClick = (e) => ({
   ),
   coordinates: e.lngLat,
 });
+
+export const ClusterMarker = ({ longitude, latitude, pointCount }) => {
+  ClusterMarker.propTypes = {
+    longitude: PropTypes.number,
+    latitude: PropTypes.number,
+    pointCount: PropTypes.number,
+  };
+  return (
+    <Marker longitude={longitude} latitude={latitude}>
+      <MapPin size={10 * pointCount} onClick={() => console.log('test')} />
+    </Marker>
+  );
+};
