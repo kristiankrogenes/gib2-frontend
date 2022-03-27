@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
@@ -24,12 +25,13 @@ import { Marker } from 'react-map-gl';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 import axios from 'axios';
+import axiosInstance from '../../utils/axios';
 
 function MapComponent() {
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
   const [marker, setMarker] = useState(null);
-  const [testData, setTestData] = useState({});
+  const [optimizedRoutes, setOptimizedRoutes] = useState({});
 
   const [newStationInfo, setNewStationInfo] = useState({
     name: '',
@@ -39,15 +41,6 @@ function MapComponent() {
       electric: '',
     },
   });
-
-  useEffect(() => {
-    const test = async () => {
-      const url = optimizedRoute(lerka, heimdal);
-      const res = await axios.get(url);
-      setTestData(createGeoJson(res.data));
-    };
-    test();
-  }, []);
 
   const { gasStationStore, priceStore } = useStore();
 
@@ -83,6 +76,40 @@ function MapComponent() {
     }
   };
 
+  const handleOptimizedRoute = async () => {
+    const from = {
+      lon: lerka.lng,
+      lat: lerka.lat,
+    };
+
+    let geojson_routes = {
+      type: 'FeatureCollection',
+      features: [],
+    }
+
+    const result = await axiosInstance
+      .get(`api/nearest-stations`, {params: from});
+
+    const nearestStations = result.data.features;
+    let routes = [];
+    for (let i=0; i<nearestStations.length; i++) {
+      const url = optimizedRoute(lerka, {
+        lng: nearestStations[i].geometry.coordinates[0], 
+        lat: nearestStations[i].geometry.coordinates[1]
+      });
+      const route = await axios.get(url);
+      routes.push(createGeoJson(route.data));
+      geojson_routes.features.push({
+        type: 'Feature',
+        geometry: {
+          type: route.data.trips[0].geometry.type,
+          coordinates: route.data.trips[0].geometry.coordinates,
+        },
+      },)
+    }
+    setOptimizedRoutes(geojson_routes);
+  };
+
   const onMapClick = (e) => {
     if (addGas) {
       const marker = makeMarkerFromMapClick(e);
@@ -93,6 +120,7 @@ function MapComponent() {
   return (
     <Card>
       <MapToolbar
+        handleOptimizedRoute={handleOptimizedRoute}
         handleAddStation={handleAddStation}
         handleClickOpen={handleClickOpen}
         filterName=""
@@ -123,9 +151,18 @@ function MapComponent() {
             showUserLocation={true}
             onGeolocate={handleGeoLocationChange}
           />
-          <Source id="test" type="geojson" data={testData}>
-            <Layer {...lineLayerStyle} />
-          </Source>
+
+          {Object.keys(optimizedRoutes).length === 0 ? 
+            <></> : 
+            <Source
+              id="optimized-routes"
+              type="geojson"
+              data={optimizedRoutes}
+            >
+              <Layer {...lineLayerStyle} />
+            </Source>
+          }
+
           {gasStationStore.gasStations.length > 0 &&
             gasStationStore.gasStations.map((station) => (
               <Marker

@@ -12,6 +12,8 @@ MapToolbar.propTypes = {
   handleAddStation: PropTypes.func,
   handleClickOpen: PropTypes.func,
   addGas: PropTypes.bool,
+  handleOptimizedRoute: PropTypes.func,
+  resetOptimizedRoutes: PropTypes.func,
 };
 
 export default function MapToolbar(props) {
@@ -21,12 +23,18 @@ export default function MapToolbar(props) {
     handleAddStation,
     handleClickOpen,
     addGas,
+    handleOptimizedRoute,
   } = props;
 
   const handleClickAddStation = () => {
     if (!addGas) handleClickOpen();
     else handleAddStation();
   };
+
+  const handleClickOptimizedRoute = () => {
+    handleOptimizedRoute();
+  };
+
   return (
     <RootStyle>
       <SearchStyle
@@ -56,6 +64,13 @@ export default function MapToolbar(props) {
         startIcon={<Icon icon={plusFill} />}
       >
         {addGas ? 'Confirm position' : 'Add station'}
+      </Button>
+      <Button
+        variant="contained"
+        startIcon={<Icon icon={plusFill} />}
+        onClick={handleClickOptimizedRoute}
+      >
+        Optimized Route
       </Button>
     </RootStyle>
   );
