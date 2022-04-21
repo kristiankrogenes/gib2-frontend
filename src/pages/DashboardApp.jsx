@@ -15,6 +15,7 @@ import {
   AppCurrentSubject,
   AppConversionRates,
 } from '../components/_dashboard/app';
+import Histogram from '../components/histogram';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +38,10 @@ export default function DashboardApp() {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppBugReports />
+          </Grid>
+
+          <Grid item xs={12} md={12} lg={12}>
+            <Histogram />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
