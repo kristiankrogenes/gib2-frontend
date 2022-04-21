@@ -183,7 +183,7 @@ function MapComponent() {
               <Layer {...lineLayerStyle} />
             </Source>
           }
-          
+
           {gasStationStore.gasStations.length > 0 && (
             <Cluster
               radius={80}
