@@ -1,6 +1,6 @@
 import React from 'react';
-// import { Popup } from 'react-map-gl';
-import { Popup } from '@urbica/react-map-gl';
+import { Popup } from 'react-map-gl';
+// import { Popup } from '@urbica/react-map-gl';
 import { Button } from '@mui/material';
 import { useStore } from '../../../stores/RootStore';
 import { fDateTime } from '../../../utils/formatTime';
@@ -25,12 +25,12 @@ function MapPopup() {
         <div style={{ fontWeight: 'bold' }}>{selectedGasStation.name}</div>
         Last registered prices: <br />
         {`Diesel: ${selectedGasStation.latestPrice?.diesel}`} <br />
-        {`Unleaded: ${selectedGasStation.latestPrice?.unleaded}`} <br />
+        {`Octane95: ${selectedGasStation.latestPrice?.octane95}`} <br />
         {`Electric: ${selectedGasStation.latestPrice?.electric}`} <br />{' '}
         {fDateTime(selectedGasStation.latestPrice?.createdAt)}
       </div>
-      <Button>More Info</Button>
-      <Button>Register Price</Button>
+      {/* <Button>More Info</Button> */}
+      <Button variant="outlined">Register Price</Button>
     </Popup>
   );
 }

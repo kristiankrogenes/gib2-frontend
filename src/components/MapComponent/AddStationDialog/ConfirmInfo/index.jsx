@@ -12,7 +12,7 @@ function ConfirmInfo({ newStationInfo }) {
       <Typography sx={{ fontWeight: 'bold' }}>Confirm information</Typography>
       <Typography>Name: {newStationInfo.name}</Typography>
       <Typography>Diesel: {newStationInfo.price.diesel}</Typography>
-      <Typography>Unleaded: {newStationInfo.price.unleaded}</Typography>
+      <Typography>Octane95: {newStationInfo.price.octane95}</Typography>
       <Typography>Electric: {newStationInfo.price.electric}</Typography>
     </DialogContentText>
   );
