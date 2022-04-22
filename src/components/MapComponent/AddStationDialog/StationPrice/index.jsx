@@ -19,7 +19,7 @@ function StationPrice({ newStationInfo, setNewStationInfo }) {
           setNewStationInfo({
             name: newStationInfo.name,
             price: {
-              unleaded: newStationInfo.price.unleaded,
+              octane95: newStationInfo.price.octane95,
               electric: newStationInfo.price.electric,
               diesel: e.target.value,
             },
@@ -30,20 +30,20 @@ function StationPrice({ newStationInfo, setNewStationInfo }) {
         Diesel Price
       </TextField>
       <TextField
-        value={newStationInfo.price.unleaded}
+        value={newStationInfo.price.octane95}
         onChange={(e) =>
           setNewStationInfo({
             name: newStationInfo.name,
             price: {
               diesel: newStationInfo.price.diesel,
               electric: newStationInfo.price.electric,
-              unleaded: e.target.value,
+              octane95: e.target.value,
             },
           })
         }
-        label="Unleaded Price"
+        label="Octane95 Price"
       >
-        Unleaded Price
+        Octane95 Price
       </TextField>
       <TextField
         value={newStationInfo.price.electric}
@@ -51,7 +51,7 @@ function StationPrice({ newStationInfo, setNewStationInfo }) {
           setNewStationInfo({
             name: newStationInfo.name,
             price: {
-              unleaded: newStationInfo.price.unleaded,
+              octane95: newStationInfo.price.octane95,
               diesel: newStationInfo.price.diesel,
               electric: e.target.value,
             },

@@ -1,6 +1,6 @@
 import React from 'react';
-// import { Marker } from 'react-map-gl';
-import { Marker } from '@urbica/react-map-gl';
+import { Marker } from 'react-map-gl';
+// import { Marker } from '@urbica/react-map-gl';
 import MapPin from './MapPin';
 import PropTypes from 'prop-types';
 

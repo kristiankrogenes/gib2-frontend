@@ -3,17 +3,17 @@ import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
-// import Map, { GeolocateControl, Layer, Source, Marker } from 'react-map-gl';
-import MapGL, {
-  GeolocateControl,
-  Layer,
-  Source,
-  Marker,
-} from '@urbica/react-map-gl';
+import Map, { GeolocateControl, Layer, Source, Marker } from 'react-map-gl';
+// import MapGL, {
+//   GeolocateControl,
+//   Layer,
+//   Source,
+//   Marker,
+// } from '@urbica/react-map-gl';
 import { useStore } from '../../stores/RootStore';
 import AddStationDialog from './AddStationDialog';
 import {
-  // initialViewState,
+  initialViewState,
   MAPBOX_TOKEN,
   mapStyle,
   lerka,
@@ -24,7 +24,7 @@ import {
   makeMarkerFromMapClick,
   createGeoJson,
   optimizedRoute,
-  ClusterMarker,
+  // ClusterMarker,
 } from './helpers';
 // import MapMarker from './MapMarker';
 import MapPin from './MapPin';
@@ -32,16 +32,16 @@ import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 import axios from 'axios';
 import axiosInstance from '../../utils/axios';
-import Cluster from '@urbica/react-map-gl-cluster';
+// import Cluster from '@urbica/react-map-gl-cluster';
 
 function MapComponent() {
-  const [viewport, setViewport] = useState({
-    latitude: lerka.lat,
-    longitude: lerka.lng,
-    width: '100vw',
-    height: '100vh',
-    zoom: 12,
-  });
+  // const [viewport, setViewport] = useState({
+  //   latitude: lerka.lat,
+  //   longitude: lerka.lng,
+  //   width: '100vw',
+  //   height: '100vh',
+  //   zoom: 12,
+  // });
 
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
@@ -52,7 +52,7 @@ function MapComponent() {
     name: '',
     price: {
       diesel: '',
-      unleaded: '',
+      octane95: '',
       electric: '',
     },
   });
@@ -83,7 +83,7 @@ function MapComponent() {
           name: '',
           price: {
             diesel: '',
-            unleaded: '',
+            octane95: '',
             electric: '',
           },
         });
@@ -154,17 +154,16 @@ function MapComponent() {
           height: 600,
         }}
       >
-        <MapGL
-          // initialViewState={initialViewState}
-          onViewportChange={(newViewport) => {
-            setViewport({ ...newViewport });
-          }}
-          style={{ width: '100%', height: 600 }}
+        <Map
+          initialViewState={initialViewState}
+          // onViewportChange={(newViewport) => {
+          //   setViewport({ ...newViewport });
+          // }}
+          // style={{ width: '100%', height: 600 }}
           mapStyle={mapStyle}
-          // mapboxApiAccessToken={MAPBOX_TOKEN}
-          accessToken={MAPBOX_TOKEN}
+          mapboxApiAccessToken={MAPBOX_TOKEN}
+          // accessToken={MAPBOX_TOKEN}
           onClick={onMapClick}
-          {...viewport}
         >
           <GeolocateControl
             position="top-left"
@@ -184,14 +183,14 @@ function MapComponent() {
             </Source>
           }
 
-          {gasStationStore.gasStations.length > 0 && (
-            <Cluster
-              radius={80}
-              extent={512}
-              nodeSize={64}
-              component={ClusterMarker}
-            >
-              {gasStationStore.gasStations.map((station) => (
+          {gasStationStore.gasStations.length > 0 &&
+              // <Cluster
+              //   radius={80}
+              //   extent={512}
+              //   nodeSize={64}
+              //   component={ClusterMarker}
+              // >
+              gasStationStore.gasStations.map((station) => (
                 <Marker
                   key={station.id}
                   longitude={station.point[0]}
@@ -204,12 +203,12 @@ function MapComponent() {
                     }
                   />
                 </Marker>
-              ))}
-            </Cluster>
-          )}
+              ))
+            // </Cluster>
+          }
           {marker?.marker}
           {gasStationStore.selectedGasStation && <MapPopup />}
-        </MapGL>
+        </Map>
       </Box>
     </Card>
   );
