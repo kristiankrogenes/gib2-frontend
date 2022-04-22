@@ -2,7 +2,7 @@ import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
-import Map, { GeolocateControl, Layer, Source, Marker } from 'react-map-gl';
+import Map, { GeolocateControl, Marker } from 'react-map-gl';
 // import MapGL, {
 //   GeolocateControl,
 //   Layer,
@@ -29,7 +29,6 @@ import {
 import MapPin from './MapPin';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
-import MapMunicipality from './MapMunicipality';
 import axios from 'axios';
 // import Cluster from '@urbica/react-map-gl-cluster';
 
@@ -147,7 +146,6 @@ function MapComponent() {
           {/* <Source id="test" type="geojson" data={testData}>
             <Layer {...lineLayerStyle} />
           </Source> */}
-          <MapMunicipality />
           {
             gasStationStore.gasStations.length > 0 &&
               // <Cluster
@@ -176,7 +174,6 @@ function MapComponent() {
           {gasStationStore.selectedGasStation && <MapPopup />}
         </Map>
       </Box>
-      <MapMunicipality />
     </Card>
   );
 }
