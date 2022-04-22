@@ -17,6 +17,7 @@ import {
 import MenuPopover from '../../components/general/MenuPopover';
 import account from '../../_mocks_/account';
 import { useStore } from '../../stores/RootStore';
+import { observer } from 'mobx-react-lite';
 
 const MENU_OPTIONS = [
   {
@@ -36,7 +37,7 @@ const MENU_OPTIONS = [
   },
 ];
 
-export default function AccountPopover() {
+function AccountPopover() {
   const navigate = useNavigate();
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -145,3 +146,5 @@ export default function AccountPopover() {
     </>
   );
 }
+
+export default observer(AccountPopover);
