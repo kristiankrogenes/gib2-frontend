@@ -34,7 +34,7 @@ import { useStore } from '../stores/RootStore';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Unleaded price', alignRight: false },
+  { id: 'company', label: 'Octane95 price', alignRight: false },
   { id: 'role', label: 'Diesel price', alignRight: false },
   { id: 'isVerified', label: 'Electric price', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
