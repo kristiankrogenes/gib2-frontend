@@ -21,7 +21,7 @@ export const layerStyle = {
 export const lineLayerStyle = {
   id: 'route',
   type: 'line',
-  source: 'test',
+  source: 'optimized-routes',
   layout: {
     'line-join': 'round',
     'line-cap': 'round',
@@ -33,6 +33,7 @@ export const lineLayerStyle = {
     'line-blur': 0.9,
   },
 };
+
 export const pointLayerStyle = {
   id: 'point',
   type: 'circle',

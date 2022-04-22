@@ -103,7 +103,7 @@ function MapComponent() {
     }
 
     const result = await axiosInstance
-      .get(`api/nearest-stations`, {params: from});
+      .get(`api/stations-inside-radius`, {params: from});
 
     const nearestStations = result.data.features;
     let routes = [];
