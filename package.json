@@ -46,6 +46,7 @@
     "react-scripts": "5.0.0",
     "serve": "^13.0.2",
     "simplebar-react": "^2.3.6",
+    "turf": "^3.0.14",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
