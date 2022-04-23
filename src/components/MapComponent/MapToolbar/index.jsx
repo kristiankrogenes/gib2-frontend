@@ -31,10 +31,6 @@ export default function MapToolbar(props) {
     else handleAddStation();
   };
 
-  const handleClickOptimizedRoute = () => {
-    handleOptimizedRoute();
-  };
-
   return (
     <RootStyle>
       <SearchStyle
@@ -68,7 +64,7 @@ export default function MapToolbar(props) {
       <Button
         variant="contained"
         startIcon={<Icon icon={plusFill} />}
-        onClick={handleClickOptimizedRoute}
+        onClick={() => handleOptimizedRoute()}
       >
         Optimized Route
       </Button>

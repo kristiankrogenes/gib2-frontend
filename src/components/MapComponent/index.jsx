@@ -2,8 +2,8 @@
 import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
-import React, { useState, useEffect } from 'react';
-import Map, { GeolocateControl, Marker } from 'react-map-gl';
+import React, { useState } from 'react';
+import Map, { GeolocateControl, Marker, Layer, Source } from 'react-map-gl';
 // import MapGL, {
 //   GeolocateControl,
 //   Layer,
@@ -16,22 +16,17 @@ import {
   initialViewState,
   MAPBOX_TOKEN,
   mapStyle,
-  lerka,
-  heimdal,
   lineLayerStyle,
 } from './constants';
 import {
   makeMarkerFromMapClick,
-  createGeoJson,
-  optimizedRoute,
+  getOptimizedRoutes,
   // ClusterMarker,
 } from './helpers';
 // import MapMarker from './MapMarker';
 import MapPin from './MapPin';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
-import axios from 'axios';
-import axiosInstance from '../../utils/axios';
 // import Cluster from '@urbica/react-map-gl-cluster';
 
 function MapComponent() {
@@ -91,39 +86,10 @@ function MapComponent() {
     }
   };
 
-  const handleOptimizedRoute = async () => {
-    const from = {
-      lon: lerka.lng,
-      lat: lerka.lat,
-    };
-
-    let geojson_routes = {
-      type: 'FeatureCollection',
-      features: [],
+    const handleOptimizedRoute = async () => {
+      const optimizedRoutes = await getOptimizedRoutes();
+      setOptimizedRoutes(optimizedRoutes)
     }
-
-    const result = await axiosInstance
-      .get(`api/stations-inside-radius`, {params: from});
-
-    const nearestStations = result.data.features;
-    let routes = [];
-    for (let i=0; i<nearestStations.length; i++) {
-      const url = optimizedRoute(lerka, {
-        lng: nearestStations[i].geometry.coordinates[0], 
-        lat: nearestStations[i].geometry.coordinates[1]
-      });
-      const route = await axios.get(url);
-      routes.push(createGeoJson(route.data));
-      geojson_routes.features.push({
-        type: 'Feature',
-        geometry: {
-          type: route.data.trips[0].geometry.type,
-          coordinates: route.data.trips[0].geometry.coordinates,
-        },
-      },)
-    }
-    setOptimizedRoutes(geojson_routes);
-  };
 
   const onMapClick = (e) => {
     if (addGas) {
