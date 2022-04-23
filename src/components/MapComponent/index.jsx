@@ -3,7 +3,7 @@ import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
-import Map, { GeolocateControl, Layer, Source, Marker } from 'react-map-gl';
+import Map, { GeolocateControl, Marker } from 'react-map-gl';
 // import MapGL, {
 //   GeolocateControl,
 //   Layer,
