@@ -1,3 +1,5 @@
+import { getGrayColor } from '../../utils/formatColor';
+
 export const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 export const mapStyle = 'mapbox://styles/mapbox/streets-v11';
 
@@ -7,10 +9,7 @@ export const lerka = {
   lat: 63.4147798358434,
 };
 
-export const heimdal = {
-  lng: 10.348777770996094,
-  lat: 63.35274520773996,
-};
+const percentile = 1 / 9;
 
 export const layerStyle = {
   id: 'polygon',
@@ -19,19 +18,27 @@ export const layerStyle = {
     'fill-color': {
       property: 'percentile',
       stops: [
-        [0, '#3288bd'],
-        [1, '#66c2a5'],
-        [2, '#abdda4'],
-        [3, '#e6f598'],
-        [4, '#ffffbf'],
-        [5, '#fee08b'],
-        [6, '#fdae61'],
-        [7, '#f46d43'],
-        [8, '#d53e4f'],
+        [0, getGrayColor(1 * percentile)],
+        [1, getGrayColor(2 * percentile)],
+        [2, getGrayColor(3 * percentile)],
+        [3, getGrayColor(4 * percentile)],
+        [4, getGrayColor(5 * percentile)],
+        [5, getGrayColor(6 * percentile)],
+        [6, getGrayColor(7 * percentile)],
+        [7, getGrayColor(8 * percentile)],
+        [8, getGrayColor(9 * percentile)],
       ],
     },
-    'fill-opacity': 0.5,
+    'fill-opacity': 0.8,
   },
+};
+
+export const initialViewState = {
+  longitude: lerka.lng,
+  latitude: lerka.lat,
+  zoom: 14,
+  width: '100%',
+  height: 600,
 };
 
 // export const layerStyle = {
@@ -52,34 +59,3 @@ export const layerStyle = {
 //     'fill-opacity': 0.5,
 //   },
 // };
-
-export const lineLayerStyle = {
-  id: 'route',
-  type: 'line',
-  source: 'test',
-  layout: {
-    'line-join': 'round',
-    'line-cap': 'round',
-  },
-  paint: {
-    'line-color': '#0048BA',
-    'line-opacity': 0.5,
-    'line-width': 8,
-    'line-blur': 0.9,
-  },
-};
-export const pointLayerStyle = {
-  id: 'point',
-  type: 'circle',
-  paint: {
-    'circle-radius': 20,
-    'circle-color': '#007cbf',
-  },
-};
-export const initialViewState = {
-  longitude: lerka.lng,
-  latitude: lerka.lat,
-  zoom: 14,
-  width: '100%',
-  height: 600,
-};
