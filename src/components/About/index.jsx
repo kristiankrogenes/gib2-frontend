@@ -1,20 +1,11 @@
 import React from "react";
-import {
-  Grid,
-  Card,
-  CardHeader,
-  CardContent,
-  ClickAwayListener,
-  ImageList,
-} from "@mui/material";
-import { LoremIpsum } from "react-lorem-ipsum";
+import { Grid, Card, CardHeader, CardContent } from "@mui/material";
 import picture from "./abouts/pictures/gasStation.jpg";
 import ValueCard from "./abouts/ValueCard.jsx";
 import { values } from "./abouts/OurValues";
 import Fade from "react-reveal/Fade";
 import { information } from "./abouts/Informationboxes";
 import { profiles } from "./abouts/Profiles";
-import ImageListContext from "@mui/material/ImageList/ImageListContext";
 
 export default function About() {
   return (
@@ -45,7 +36,7 @@ export default function About() {
       <Grid item xs={12} sm={6} md={6}>
         <Fade bottom>
           <Card>
-            <img src={picture} />
+            <img src={picture} alt="" />
           </Card>
         </Fade>
       </Grid>
