@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import searchFill from '@iconify/icons-eva/search-fill';
-import trash2Fill from '@iconify/icons-eva/trash-2-fill';
-import roundFilterList from '@iconify/icons-ic/round-filter-list';
 // material
 import { styled } from '@mui/material/styles';
 import {
   Box,
   Toolbar,
-  Tooltip,
-  IconButton,
   Typography,
   OutlinedInput,
   InputAdornment,
+  Button,
 } from '@mui/material';
+import ProductFilterSidebar from '../products/ProductFilterSidebar';
+import plusFill from '@iconify/icons-eva/plus-fill';
+import { Link as RouterLink } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -51,6 +52,35 @@ export default function UserListToolbar({
   filterName,
   onFilterName,
 }) {
+  const [openFilter, setOpenFilter] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      gender: '',
+      category: '',
+      colors: '',
+      priceRange: '',
+      rating: '',
+    },
+    onSubmit: () => {
+      setOpenFilter(false);
+    },
+  });
+
+  const { resetForm, handleSubmit } = formik;
+
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
+  };
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+
+  const handleResetFilter = () => {
+    handleSubmit();
+    resetForm();
+  };
   return (
     <RootStyle
       sx={{
@@ -80,8 +110,24 @@ export default function UserListToolbar({
           }
         />
       )}
+      <ProductFilterSidebar
+        formik={formik}
+        isOpenFilter={openFilter}
+        onResetFilter={handleResetFilter}
+        onOpenFilter={handleOpenFilter}
+        onCloseFilter={handleCloseFilter}
+      />
 
-      {numSelected > 0 ? (
+      <Button
+        variant="contained"
+        component={RouterLink}
+        to="/auth/register"
+        startIcon={<Icon icon={plusFill} />}
+      >
+        New Gas Station
+      </Button>
+
+      {/* {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
             <Icon icon={trash2Fill} />
@@ -93,7 +139,7 @@ export default function UserListToolbar({
             <Icon icon={roundFilterList} />
           </IconButton>
         </Tooltip>
-      )}
+      )} */}
     </RootStyle>
   );
 }

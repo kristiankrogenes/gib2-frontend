@@ -2,7 +2,7 @@
 import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Map, { GeolocateControl, Marker, Layer, Source } from 'react-map-gl';
 // import MapGL, {
 //   GeolocateControl,
@@ -37,12 +37,11 @@ function MapComponent() {
   //   height: '100vh',
   //   zoom: 12,
   // });
-
+  const mapRef = useRef(null);
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
   const [marker, setMarker] = useState(null);
   const [optimizedRoutes, setOptimizedRoutes] = useState({});
-
   const [newStationInfo, setNewStationInfo] = useState({
     name: '',
     price: {
@@ -98,13 +97,27 @@ function MapComponent() {
     }
   };
 
+  const handleMapPinClick = (station) => {
+    gasStationStore.setSelectedGasStation(station);
+  }
+
+  const onFilterName = (newValue) => {
+    if (newValue) {
+      mapRef.current.flyTo({
+      center: newValue.point,
+      essential: true
+      });
+      handleMapPinClick(newValue);
+    }
+  }
+
   return (
     <Card>
       <MapToolbar
         handleOptimizedRoute={handleOptimizedRoute}
         handleAddStation={handleAddStation}
         handleClickOpen={handleClickOpen}
-        filterName=""
+        onFilterName={onFilterName}
         addGas={addGas}
       />
       <AddStationDialog
@@ -122,6 +135,7 @@ function MapComponent() {
       >
         <Map
           initialViewState={initialViewState}
+          ref={mapRef}
           // onViewportChange={(newViewport) => {
           //   setViewport({ ...newViewport });
           // }}
@@ -164,9 +178,7 @@ function MapComponent() {
                   anchor="bottom"
                 >
                   <MapPin
-                    onClick={() =>
-                      gasStationStore.setSelectedGasStation(station)
-                    }
+                    onClick={() => handleMapPinClick(station)}
                   />
                 </Marker>
               ))
