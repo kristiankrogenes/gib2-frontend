@@ -25,7 +25,7 @@ export default function MapToolbar(props) {
   } = props;
 
   const {
-    gasStationStore: { gasStations },
+    gasStationStore: { getGasStationsInsideRadius },
   } = useStore();
 
   const handleClickAddStation = () => {
@@ -39,7 +39,7 @@ export default function MapToolbar(props) {
         disablePortal
         id="combo-box-demo"
         getOptionLabel={(e) => e.name}
-        options={gasStations}
+        options={getGasStationsInsideRadius()}
         onChange={(e, newValue) => onFilterName(newValue)}
         sx={{ width: 300 }}
         renderInput={(params) => (

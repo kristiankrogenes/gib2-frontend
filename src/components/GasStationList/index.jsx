@@ -34,7 +34,9 @@ function GasStationList() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const { gasStationStore } = useStore();
+  const {
+    gasStationStore: { gasStations },
+  } = useStore();
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -44,7 +46,7 @@ function GasStationList() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = gasStationStore.gasStations.map((n) => n.name);
+      const newSelecteds = gasStations.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -65,14 +67,9 @@ function GasStationList() {
   };
 
   const emptyRows =
-    page > 0
-      ? Math.max(
-          0,
-          (1 + page) * rowsPerPage - gasStationStore.gasStations.length
-        )
-      : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - gasStations.length) : 0;
 
-  const isStationNotFound = gasStationStore.gasStations.length === 0;
+  const isStationNotFound = gasStations.length === 0;
 
   return (
     <Card>
@@ -88,13 +85,13 @@ function GasStationList() {
               order={order}
               orderBy={orderBy}
               headLabel={TABLE_HEAD}
-              rowCount={gasStationStore.gasStations.length}
+              rowCount={gasStations.length}
               numSelected={selected.length}
               onRequestSort={handleRequestSort}
               onSelectAllClick={handleSelectAllClick}
             />
             <TableBody>
-              {gasStationStore.gasStations
+              {gasStations
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
@@ -127,7 +124,7 @@ function GasStationList() {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={gasStationStore.gasStations.length}
+        count={gasStations.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

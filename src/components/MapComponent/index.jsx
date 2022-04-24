@@ -51,7 +51,16 @@ function MapComponent() {
     },
   });
 
-  const { gasStationStore, priceStore } = useStore();
+  const {
+    gasStationStore: {
+      gasStationsInsideRadius,
+      getGasStationsInsideRadius,
+      addGasStation,
+      setSelectedGasStation,
+      selectedGasStation,
+    },
+    priceStore: { addPrice },
+  } = useStore();
 
   const handleGeoLocationChange = (e) => {
     console.log(e.coords);
@@ -66,11 +75,8 @@ function MapComponent() {
       setAddGas(!addGas);
     } else {
       if (marker) {
-        const gasStationId = await gasStationStore.addGasStation(
-          marker,
-          newStationInfo.name
-        );
-        await priceStore.addPrice(newStationInfo.price, parseInt(gasStationId));
+        const gasStationId = await addGasStation(marker, newStationInfo.name);
+        await addPrice(newStationInfo.price, parseInt(gasStationId));
         setAddGas(!addGas);
         setMarker(null);
         setNewStationInfo({
@@ -85,10 +91,10 @@ function MapComponent() {
     }
   };
 
-    const handleOptimizedRoute = async () => {
-      const optimizedRoutes = await getOptimizedRoutes();
-      setOptimizedRoutes(optimizedRoutes)
-    }
+  const handleOptimizedRoute = async () => {
+    const optimizedRoutes = await getOptimizedRoutes();
+    setOptimizedRoutes(optimizedRoutes);
+  };
 
   const onMapClick = (e) => {
     if (addGas) {
@@ -98,18 +104,18 @@ function MapComponent() {
   };
 
   const handleMapPinClick = (station) => {
-    gasStationStore.setSelectedGasStation(station);
-  }
+    setSelectedGasStation(station);
+  };
 
   const onFilterName = (newValue) => {
     if (newValue) {
       mapRef.current.flyTo({
-      center: newValue.point,
-      essential: true
+        center: newValue.point,
+        essential: true,
       });
       handleMapPinClick(newValue);
     }
-  }
+  };
 
   return (
     <Card>
@@ -152,40 +158,36 @@ function MapComponent() {
             onGeolocate={handleGeoLocationChange}
           />
 
-          {Object.keys(optimizedRoutes).length === 0 ? 
-            <></> : 
-            <Source
-              id="optimized-routes"
-              type="geojson"
-              data={optimizedRoutes}
-            >
+          {Object.keys(optimizedRoutes).length === 0 ? (
+            <></>
+          ) : (
+            <Source id="optimized-routes" type="geojson" data={optimizedRoutes}>
               <Layer {...lineLayerStyle} />
             </Source>
-          }
+          )}
 
-          {gasStationStore.gasStations.length > 0 &&
+          {
+            gasStationsInsideRadius.length > 0 &&
               // <Cluster
               //   radius={80}
               //   extent={512}
               //   nodeSize={64}
               //   component={ClusterMarker}
               // >
-              gasStationStore.gasStations.map((station) => (
+              getGasStationsInsideRadius().map((station) => (
                 <Marker
                   key={station.id}
                   longitude={station.point[0]}
                   latitude={station.point[1]}
                   anchor="bottom"
                 >
-                  <MapPin
-                    onClick={() => handleMapPinClick(station)}
-                  />
+                  <MapPin onClick={() => handleMapPinClick(station)} />
                 </Marker>
               ))
             // </Cluster>
           }
           {marker?.marker}
-          {gasStationStore.selectedGasStation && <MapPopup />}
+          {selectedGasStation && <MapPopup />}
         </Map>
       </Box>
     </Card>

@@ -14,7 +14,6 @@ GasStationItem.propTypes = {
 function GasStationItem({ row, selected }) {
   const { id, name } = row;
   const isItemSelected = selected.indexOf(name) !== -1;
-  console.log(row);
 
   return (
     <TableRow
