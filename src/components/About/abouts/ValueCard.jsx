@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import ReactRoundedImage from "react-rounded-image";
+import "./about.css";
 
 ValueCard.propTypes = {
   title: propTypes.string,
@@ -15,14 +16,14 @@ export default function ValueCard({ title, text, pic }) {
         <ReactRoundedImage
           image={pic}
           roundedColor="0"
-          imageWidth="300"
-          imageHeight="300"
+          imageWidth="100%"
+          imageHeight="250"
           roundedSize="0"
           borderRadius="20"
         />
       )}
-      <h2>{title}</h2>
-      {text}
+      <h2 className="centering">{title}</h2>
+      <h4 className="centering">{text}</h4>
     </div>
   );
 }

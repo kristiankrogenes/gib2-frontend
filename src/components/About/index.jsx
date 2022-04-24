@@ -30,8 +30,13 @@ export default function About() {
             <CardContent>
               <h2>We are all about cheap gas</h2>
               <h4>
-                We at Cheap Gas AS are all about finding the best prices for our
-                customers <LoremIpsum p={1} />
+                We at GFuel are all about finding the best prices for our
+                customers. We help customers all around the world in finding
+                both the best price and the best route to the station. This is a
+                tool which can change how we look at the world, and will help to
+                improve spendings across all homes in the entire world. We know
+                that we have developed a phenomenal application, and we hope you
+                will enjoy using it in all foreseeable future.
               </h4>
             </CardContent>
           </Card>
@@ -56,7 +61,7 @@ export default function About() {
                   xs={12}
                   sm={4}
                   md={4}
-                  sx={{ height: "48rem" }}
+                  sx={{ height: "100%" }}
                 >
                   <CardContent>
                     <ValueCard
@@ -64,7 +69,6 @@ export default function About() {
                       text={card.text}
                       pic={card.pic}
                     />
-                    <LoremIpsum p={1} />
                   </CardContent>
                 </Grid>
               ))}
@@ -113,10 +117,14 @@ export default function About() {
                   xs={12}
                   sm={4}
                   md={3}
-                  sx={{ height: "10rem" }}
+                  sx={{ height: "100%" }}
                 >
                   <CardContent>
-                    <ValueCard title={profile.name} text={profile.title} />
+                    <ValueCard
+                      title={profile.name}
+                      text={profile.title}
+                      pic={profile.pic}
+                    />
                   </CardContent>
                 </Grid>
               ))}

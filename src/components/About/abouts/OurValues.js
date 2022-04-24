@@ -5,17 +5,17 @@ import picture3 from "./pictures/values3.jpeg";
 export const values = [
   {
     title: "Dedicated",
-    text: "Heisann",
+    text: "",
     pic: picture1,
   },
   {
     title: "Vigorous and transparent",
-    text: "Heisann",
+    text: "",
     pic: picture2,
   },
   {
     title: "Ambitious",
-    text: "Heisann",
+    text: "",
     pic: picture3,
   },
 ];
