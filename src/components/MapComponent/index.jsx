@@ -2,8 +2,9 @@
 import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Map, { GeolocateControl, Marker, Layer, Source } from 'react-map-gl';
+import useGeoLocation from '../../hooks/useGeoLocation';
 // import MapGL, {
 //   GeolocateControl,
 //   Layer,
@@ -38,6 +39,7 @@ function MapComponent() {
   //   zoom: 12,
   // });
   const mapRef = useRef(null);
+  const geoLocateRef = useRef(null);
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
   const [marker, setMarker] = useState(null);
@@ -61,6 +63,8 @@ function MapComponent() {
     },
     priceStore: { addPrice },
   } = useStore();
+
+  const geoLocation = useGeoLocation();
 
   const handleGeoLocationChange = (e) => {
     console.log(e.coords);
@@ -92,10 +96,14 @@ function MapComponent() {
   };
 
   const handleOptimizedRoute = async () => {
-    const optimizedRoutes = await getOptimizedRoutes();
+    const optimizedRoutes = await getOptimizedRoutes(geoLocation);
     setOptimizedRoutes(optimizedRoutes);
   };
 
+  useEffect(() => {
+    geoLocateRef.current?.trigger();
+  }, [geoLocation])
+  
   const onMapClick = (e) => {
     if (addGas) {
       const marker = makeMarkerFromMapClick(e);
@@ -152,6 +160,7 @@ function MapComponent() {
           onClick={onMapClick}
         >
           <GeolocateControl
+            ref={geoLocateRef}
             position="top-left"
             trackUserLocation={true}
             showUserLocation={true}
