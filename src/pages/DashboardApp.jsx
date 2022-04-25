@@ -1,8 +1,6 @@
-// material
-import React from "react";
-import { Box, Grid, Container, Typography } from "@mui/material";
-// components
-import Page from "../components/general/Page";
+import React from 'react';
+import { Box, Grid, Container, Typography } from '@mui/material';
+import Page from '../components/general/Page';
 import {
   AppTasks,
   AppNewUsers,
@@ -16,9 +14,8 @@ import {
   AppTrafficBySite,
   AppCurrentSubject,
   AppConversionRates,
-} from "../components/_dashboard/app";
-
-// ----------------------------------------------------------------------
+} from '../components/_dashboard/app';
+import MapMunicipality from '../components/MapMunicipality';
 
 export default function DashboardApp() {
   return (
@@ -39,6 +36,10 @@ export default function DashboardApp() {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppBugReports />
+          </Grid>
+
+          <Grid item xs={12} sm={12} md={12}>
+            <MapMunicipality />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>

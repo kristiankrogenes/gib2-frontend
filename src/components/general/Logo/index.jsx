@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 // material
-import { Box } from "@mui/material";
-
+import { Box } from '@mui/material';
+import logo from '../../../static/img/gFuel_logo.jpg';
 // ----------------------------------------------------------------------
 
 Logo.propTypes = {
@@ -10,11 +10,5 @@ Logo.propTypes = {
 };
 
 export default function Logo({ sx }) {
-  return (
-    <Box
-      component="img"
-      src="/static/logo.svg"
-      sx={{ width: 40, height: 40, ...sx }}
-    />
-  );
+  return <Box component="img" src={logo} sx={{ width: 200, ...sx }} />;
 }

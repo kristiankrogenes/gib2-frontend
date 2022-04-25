@@ -1,13 +1,13 @@
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet-async";
-import React, { forwardRef } from "react";
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet-async';
+import React, { forwardRef } from 'react';
 // material
-import { Box } from "@mui/material";
+import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 // eslint-disable-next-line react/display-name
-const Page = forwardRef(({ children, title = "", ...other }, ref) => (
+const Page = forwardRef(({ children, title = '', ...other }, ref) => (
   <Box ref={ref} {...other}>
     <Helmet>
       <title>{title}</title>

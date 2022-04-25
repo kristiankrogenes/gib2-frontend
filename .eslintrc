@@ -10,7 +10,7 @@
   "rules": {
     "prettier/prettier": [
       "error",
-      { "endOfLine": "auto", "singleQuote": false }
+      { "endOfLine": "auto", "singleQuote": true }
     ]
   }
 }

@@ -1,7 +1,7 @@
 // material
-import React from "react";
-import { alpha, useTheme } from "@mui/material/styles";
-import { GlobalStyles } from "@mui/material";
+import React from 'react';
+import { alpha, useTheme } from '@mui/material/styles';
+import { GlobalStyles } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -9,57 +9,57 @@ export function BaseOptionChartStyle() {
   const theme = useTheme();
 
   const background = {
-    backdropFilter: "blur(6px)",
-    WebkitBackdropFilter: "blur(6px)", // Fix on Mobile
+    backdropFilter: 'blur(6px)',
+    WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
     backgroundColor: alpha(theme.palette.background.default, 0.72),
   };
 
   return (
     <GlobalStyles
       styles={{
-        "&.apexcharts-canvas": {
+        '&.apexcharts-canvas': {
           // Tooltip
-          ".apexcharts-xaxistooltip": {
+          '.apexcharts-xaxistooltip': {
             ...background,
             border: 0,
             boxShadow: theme.customShadows.z24,
             color: theme.palette.text.primary,
             borderRadius: theme.shape.borderRadiusSm,
-            "&:before": { borderBottomColor: "transparent" },
-            "&:after": {
+            '&:before': { borderBottomColor: 'transparent' },
+            '&:after': {
               borderBottomColor: alpha(theme.palette.background.default, 0.72),
             },
           },
-          ".apexcharts-tooltip.apexcharts-theme-light": {
+          '.apexcharts-tooltip.apexcharts-theme-light': {
             ...background,
             border: 0,
             boxShadow: theme.customShadows.z24,
             borderRadius: theme.shape.borderRadiusSm,
-            "& .apexcharts-tooltip-title": {
+            '& .apexcharts-tooltip-title': {
               border: 0,
-              textAlign: "center",
+              textAlign: 'center',
               fontWeight: theme.typography.fontWeightBold,
               backgroundColor: theme.palette.grey[500_16],
               color:
                 theme.palette.text[
-                  theme.palette.mode === "light" ? "secondary" : "primary"
+                  theme.palette.mode === 'light' ? 'secondary' : 'primary'
                 ],
             },
           },
           // Legend
-          ".apexcharts-legend": {
+          '.apexcharts-legend': {
             padding: 0,
           },
-          ".apexcharts-legend-series": {
-            display: "flex !important",
-            alignItems: "center",
+          '.apexcharts-legend-series': {
+            display: 'flex !important',
+            alignItems: 'center',
           },
-          ".apexcharts-legend-marker": {
+          '.apexcharts-legend-marker': {
             marginRight: 8,
           },
-          ".apexcharts-legend-text": {
-            lineHeight: "18px",
-            textTransform: "capitalize",
+          '.apexcharts-legend-text': {
+            lineHeight: '18px',
+            textTransform: 'capitalize',
           },
         },
       }}
@@ -72,7 +72,7 @@ export default function BaseOptionChart() {
 
   const LABEL_TOTAL = {
     show: true,
-    label: "Total",
+    label: 'Total',
     color: theme.palette.text.secondary,
     ...theme.typography.subtitle2,
   };
@@ -107,13 +107,13 @@ export default function BaseOptionChart() {
     states: {
       hover: {
         filter: {
-          type: "lighten",
+          type: 'lighten',
           value: 0.04,
         },
       },
       active: {
         filter: {
-          type: "darken",
+          type: 'darken',
           value: 0.88,
         },
       },
@@ -123,7 +123,7 @@ export default function BaseOptionChart() {
     fill: {
       opacity: 1,
       gradient: {
-        type: "vertical",
+        type: 'vertical',
         shadeIntensity: 0,
         opacityFrom: 0.4,
         opacityTo: 0,
@@ -137,8 +137,8 @@ export default function BaseOptionChart() {
     // Stroke
     stroke: {
       width: 3,
-      curve: "smooth",
-      lineCap: "round",
+      curve: 'smooth',
+      lineCap: 'round',
     },
 
     // Grid
@@ -170,8 +170,8 @@ export default function BaseOptionChart() {
     legend: {
       show: true,
       fontSize: 13,
-      position: "top",
-      horizontalAlign: "right",
+      position: 'top',
+      horizontalAlign: 'right',
       markers: {
         radius: 12,
       },
@@ -186,7 +186,7 @@ export default function BaseOptionChart() {
     plotOptions: {
       // Bar
       bar: {
-        columnWidth: "28%",
+        columnWidth: '28%',
         borderRadius: 4,
       },
       // Pie + Donut
@@ -202,7 +202,7 @@ export default function BaseOptionChart() {
       // Radialbar
       radialBar: {
         track: {
-          strokeWidth: "100%",
+          strokeWidth: '100%',
           background: theme.palette.grey[500_16],
         },
         dataLabels: {
@@ -213,7 +213,7 @@ export default function BaseOptionChart() {
       // Radar
       radar: {
         polygons: {
-          fill: { colors: ["transparent"] },
+          fill: { colors: ['transparent'] },
           strokeColors: theme.palette.divider,
           connectorColors: theme.palette.divider,
         },
@@ -235,14 +235,14 @@ export default function BaseOptionChart() {
         // sm
         breakpoint: theme.breakpoints.values.sm,
         options: {
-          plotOptions: { bar: { columnWidth: "40%" } },
+          plotOptions: { bar: { columnWidth: '40%' } },
         },
       },
       {
         // md
         breakpoint: theme.breakpoints.values.md,
         options: {
-          plotOptions: { bar: { columnWidth: "32%" } },
+          plotOptions: { bar: { columnWidth: '32%' } },
         },
       },
     ],
