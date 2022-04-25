@@ -7,15 +7,19 @@ import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
 import { useStore } from './stores/RootStore';
 
 export default function App() {
-  const { gasStationStore, priceStore, userStore } = useStore();
+  const {
+    gasStationStore: { fetchGasStations },
+    priceStore: { fetchPrices },
+    userStore: { fetchUsers },
+  } = useStore();
   useEffect(() => {
     async function fetchData() {
-      await gasStationStore.fetchGasStations();
-      priceStore.fetchPrices();
-      userStore.fetchUsers();
+      await fetchGasStations();
+      fetchPrices();
+      fetchUsers();
     }
     fetchData();
-  }, [gasStationStore, priceStore, userStore]);
+  }, [fetchGasStations, fetchPrices, fetchUsers]);
   return (
     <ThemeConfig>
       <ScrollToTop />

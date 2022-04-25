@@ -1,6 +1,7 @@
 import { types, flow, getRoot } from 'mobx-state-tree';
 import axiosInstance from '../utils/axios';
 import { getGasStationFromAPI, getGasStationPOST } from './helpers';
+import { lerka } from '../components/MapComponent/constants';
 
 export const GasStationModel = types
   .model({
@@ -17,11 +18,15 @@ export const GasStationModel = types
 export const GasStationStore = types
   .model('GasStationStore', {
     gasStations: types.array(GasStationModel),
+    gasStationsInsideRadius: types.array(types.string),
     selectedGasStation: types.maybeNull(types.reference(GasStationModel)),
   })
   .actions((store) => ({
     setGasStations(newGasStations) {
       store.gasStations = newGasStations;
+    },
+    setGasStationsInsideRadius(newGasStations) {
+      store.gasStationsInsideRadius = newGasStations;
     },
     setSelectedGasStation(gasStation) {
       store.selectedGasStation = gasStation;
@@ -35,6 +40,14 @@ export const GasStationStore = types
           point: gasStation.geometry.coordinates,
         }));
         store.setGasStations(newGasStations);
+        const response2 = yield axiosInstance.get(
+          '/api/stations-inside-radius/',
+          { params: { lon: lerka.lng, lat: lerka.lat } }
+        );
+        const nearGasStations = response2.data.features.map((gasStation) =>
+          gasStation.id.toString()
+        );
+        store.setGasStationsInsideRadius(nearGasStations);
       } catch (e) {
         console.log(e.stack);
       }
@@ -54,5 +67,10 @@ export const GasStationStore = types
   .views((store) => ({
     getGasStationById(id) {
       return store.gasStations.find((gasStation) => gasStation.id === id);
+    },
+    getGasStationsInsideRadius() {
+      return store.gasStations.filter((gasStation) =>
+        store.gasStationsInsideRadius.includes(gasStation.id)
+      );
     },
   }));

@@ -7,7 +7,7 @@ export const PriceModel = types.model({
   gasStation: types.reference(GasStationModel),
   createdAt: types.Date,
   diesel: types.optional(types.number, 0),
-  unleaded: types.optional(types.number, 0),
+  octane95: types.optional(types.number, 0),
   electric: types.optional(types.number, 0),
 });
 
@@ -29,7 +29,7 @@ export const PriceStore = types
           ),
           createdAt: new Date(price.created_at),
           diesel: price.diesel,
-          unleaded: price.unleaded,
+          octane95: price.octane_95,
           electric: price.electric,
         }));
         store.setPrices(newPrices);
@@ -41,7 +41,7 @@ export const PriceStore = types
       try {
         const data = {
           diesel: price.diesel,
-          unleaded: price.unleaded,
+          octane_95: price.octane95,
           electric: price.electric,
           gas_station: gasStationId,
         };
@@ -49,7 +49,7 @@ export const PriceStore = types
         const newPrice = {
           id: response.data.id,
           diesel: response.data.diesel,
-          unleaded: response.data.unleaded,
+          octane95: response.data.octane_95,
           electric: response.data.electric,
           createdAt: new Date(response.data.created_at),
           gasStation: getParent(store).getGasStationById(
@@ -64,6 +64,11 @@ export const PriceStore = types
   }))
   .views((store) => ({
     getLatestPriceById(id) {
-      return store.prices.find((price) => price.gasStation.id === id);
+      const latestPrice = store.prices
+        .filter((price) => price.gasStation.id === id)
+        .reduce((max, price) =>
+          max.createdAt > price.createdAt ? max : price
+        );
+      return latestPrice;
     },
   }));

@@ -6,8 +6,6 @@ import { styled } from '@mui/material/styles';
 import DashboardSidebar from './DashboardSidebar';
 import DashboardNavbar from './DashboardNavbar';
 
-// ----------------------------------------------------------------------
-
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
 
