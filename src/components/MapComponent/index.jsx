@@ -28,9 +28,14 @@ import {
 import MapPin from './MapPin';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
+import PropTypes from 'prop-types';
 // import Cluster from '@urbica/react-map-gl-cluster';
 
-function MapComponent() {
+MapComponent.propTypes = {
+  geoLocation: PropTypes.object,
+};
+
+function MapComponent({ geoLocation }) {
   // const [viewport, setViewport] = useState({
   //   latitude: lerka.lat,
   //   longitude: lerka.lng,
@@ -63,12 +68,6 @@ function MapComponent() {
     },
     priceStore: { addPrice },
   } = useStore();
-
-  const geoLocation = useGeoLocation();
-
-  const handleGeoLocationChange = (e) => {
-    console.log(e.coords);
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -164,7 +163,6 @@ function MapComponent() {
             position="top-left"
             trackUserLocation={true}
             showUserLocation={true}
-            onGeolocate={handleGeoLocationChange}
           />
 
           {Object.keys(optimizedRoutes).length === 0 ? (

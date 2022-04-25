@@ -13,7 +13,7 @@ function GasStations() {
     async function fetchData() {
       await gasStationStore.fetchGasStations();
     }
-    fetchData();
+    if (gasStationStore.gasStations.length === 0) fetchData();
   }, [gasStationStore]);
 
   return (

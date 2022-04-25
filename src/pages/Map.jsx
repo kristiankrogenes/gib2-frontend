@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import plusFill from '@iconify/icons-eva/plus-fill';
 import { Link as RouterLink } from 'react-router-dom';
 import { Stack, Button, Container, Typography } from '@mui/material';
 import Page from '../components/general/Page';
 import MapComponent from '../components/MapComponent';
+import { useStore } from '../stores/RootStore';
+import useGeoLocation from '../hooks/useGeoLocation';
 
 export default function Map() {
+  const geoLocation = useGeoLocation();
+  const {
+    gasStationStore: { fetchGasStations },
+    priceStore: { fetchPrices },
+    userStore: { fetchUsers },
+  } = useStore();
+  useEffect(() => {
+    async function fetchData() {
+      await fetchGasStations(geoLocation.coordinates);
+      fetchPrices();
+      fetchUsers();
+    }
+    if (geoLocation.loaded) fetchData();
+  }, [fetchGasStations, fetchPrices, fetchUsers, geoLocation]);
   return (
     <Page title="Map | GIB2">
       <Container maxWidth="lg">
@@ -28,7 +44,7 @@ export default function Map() {
             New User
           </Button>
         </Stack>
-        <MapComponent />
+        <MapComponent geoLocation={geoLocation} />
       </Container>
     </Page>
   );
