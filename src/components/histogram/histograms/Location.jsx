@@ -2,40 +2,28 @@ import React from 'react';
 import { useState } from 'react';
 import { merge } from 'lodash';
 import Chart from 'react-apexcharts';
-// material
 import { Card, CardHeader, Box, Stack } from '@mui/material';
-//
-import { BaseOptionChart } from '../../charts';
-import { ProductSort } from '../../_dashboard/products';
+import PropTypes from 'prop-types';
 
 // ----------------------------------------------------------------------
+Location.propTypes = {
+  counties: PropTypes.object,
+};
 
-export default function Histogram() {
+export default function Location({ counties }) {
   const options = {
     chart: {
       id: 'basic-bar',
     },
     xaxis: {
-      categories: [
-        'Oslo',
-        'Rogaland',
-        'Møre og Romsdal',
-        'Nordland',
-        'Viken',
-        'Innlandet',
-        'Vestfold og Telemark',
-        'Agder',
-        'Vestland',
-        'Trøndelag',
-        'Troms og Finnmark',
-      ],
+      categories: Object.keys(counties),
     },
   };
 
   const series = [
     {
       name: 'series-1',
-      data: [30, 40, 45, 50, 49, 60, 70, 91, 44, 51, 77],
+      data: Object.keys(counties).map((key, index) => counties[key].total),
     },
   ];
 
