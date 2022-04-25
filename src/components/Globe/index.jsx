@@ -1,8 +1,8 @@
-import React from "react";
-import ReactGlobe from "react-globe.gl";
-import { renderToStaticMarkup } from "react-dom/server";
-import pic from "./Picture/picture.jpg";
-import "./globe.css";
+import React from 'react';
+import ReactGlobe from 'react-globe.gl';
+import { renderToStaticMarkup } from 'react-dom/server';
+import pic from './Picture/picture.jpg';
+import './globe.css';
 
 const _renderPopup = (index) => {
   return (
@@ -21,8 +21,8 @@ const arcsData = [...Array(N).keys()].map((_, index) => ({
   endLng: (Math.random() - 0.5) * 360,
   name: renderToStaticMarkup(_renderPopup(index)),
   color: [
-    ["red", "white", "blue", "green"][Math.round(Math.random() * 3)],
-    ["red", "white", "blue", "green"][Math.round(Math.random() * 3)],
+    ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)],
+    ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)],
   ],
   endpoint: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
 }));
@@ -33,11 +33,11 @@ const shiftAmmount = shiftFactor * w;
 
 function Globe() {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: 'center' }}>
       <ReactGlobe
         globeImageUrl={pic}
         arcsData={arcsData}
-        arcColor={"color"}
+        arcColor={'color'}
         arcStroke={0.7}
         arcDashLength={() => Math.random()}
         arcDashGap={() => Math.random()}

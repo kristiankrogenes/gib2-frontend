@@ -1,23 +1,23 @@
-import React from "react";
-import { Grid, Card, CardHeader, CardContent } from "@mui/material";
-import picture from "./abouts/pictures/gasStation.jpg";
-import ValueCard from "./abouts/ValueCard.jsx";
-import { values } from "./abouts/OurValues";
-import Fade from "react-reveal/Fade";
-import { information } from "./abouts/Informationboxes";
-import { profiles } from "./abouts/Profiles";
+import React from 'react';
+import { Grid, Card, CardHeader, CardContent } from '@mui/material';
+import picture from './abouts/pictures/gasStation.jpg';
+import ValueCard from './abouts/ValueCard.jsx';
+import { values } from './abouts/OurValues';
+import Fade from 'react-reveal/Fade';
+import { information } from './abouts/Informationboxes';
+import { profiles } from './abouts/Profiles';
 
 export default function About() {
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12} sm={6} md={6} sx={{ display: "flex" }}>
+      <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex' }}>
         <Fade bottom>
           <Card
             sx={{
-              height: "100%",
+              height: '100%',
             }}
           >
-            <CardHeader sx={{ textAlign: "center" }} title="About us" />
+            <CardHeader sx={{ textAlign: 'center' }} title="About us" />
             <CardContent>
               <h2>We are all about cheap gas</h2>
               <h4>
@@ -43,7 +43,7 @@ export default function About() {
       <Grid item xs={12} sm={4} md={12}>
         <Fade bottom>
           <Card>
-            <CardHeader sx={{ textAlign: "center" }} title="Our Values" />
+            <CardHeader sx={{ textAlign: 'center' }} title="Our Values" />
             <Grid container spacing={3}>
               {values.map((card) => (
                 <Grid
@@ -52,7 +52,7 @@ export default function About() {
                   xs={12}
                   sm={4}
                   md={4}
-                  sx={{ height: "100%" }}
+                  sx={{ height: '100%' }}
                 >
                   <CardContent>
                     <ValueCard
@@ -71,7 +71,7 @@ export default function About() {
         <Fade bottom>
           <Card>
             <CardHeader
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: 'center' }}
               title="How we are changing the world"
             />
             <Grid container spacing={3}>
@@ -82,7 +82,7 @@ export default function About() {
                   xs={12}
                   sm={3}
                   md={3}
-                  sx={{ height: "10rem" }}
+                  sx={{ height: '10rem' }}
                 >
                   <CardContent>
                     <ValueCard title={info.title} text={info.text} />
@@ -97,7 +97,7 @@ export default function About() {
         <Fade bottom>
           <Card>
             <CardHeader
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: 'center' }}
               title="Meet our leadership"
             ></CardHeader>
             <Grid container spacing={3}>
@@ -108,7 +108,7 @@ export default function About() {
                   xs={12}
                   sm={4}
                   md={3}
-                  sx={{ height: "100%" }}
+                  sx={{ height: '100%' }}
                 >
                   <CardContent>
                     <ValueCard
