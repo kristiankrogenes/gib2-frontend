@@ -16,7 +16,6 @@ export const getPolygons = async (value) => {
       e.properties.insight = insight.data[value][e.properties[name]];
     } else {
       e.properties.insight = emptyInsight;
-      console.log('hei');
     }
   });
   return polygons;
