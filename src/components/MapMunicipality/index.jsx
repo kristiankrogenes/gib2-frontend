@@ -13,6 +13,9 @@ import Map, { Layer, Source } from 'react-map-gl';
 import { updatePercentiles } from '../../utils/updatePercentiles';
 import {
   average,
+  diesel,
+  octane95,
+  electric,
   county,
   initialViewState,
   layerStyle,
@@ -27,14 +30,19 @@ function MapMunicipality() {
   const [munies, setMunies] = useState(null);
   const [counties, setCounties] = useState(null);
   // const [polygons, setPolygons] = useState(null);
-  const [value, setValue] = useState(municipality);
+  const [value, setValue] = useState(county);
   const [compareValue, setCompareValue] = useState(total);
+  const [fuel, setFuel] = useState('diesel');
 
   const handleChangeType = (event) => {
     setValue(event.target.value);
   };
   const handleChangeCompare = (event) => {
     setCompareValue(event.target.value);
+  };
+
+  const handleChangeFuel = (event) => {
+    setFuel(event.target.value);
   };
 
   useEffect(() => {
@@ -48,9 +56,11 @@ function MapMunicipality() {
 
   const data = useMemo(() => {
     return value === county
-      ? counties && updatePercentiles(counties, getValueFunction(compareValue))
-      : munies && updatePercentiles(munies, getValueFunction(compareValue));
-  }, [compareValue, counties, munies, value]);
+      ? counties &&
+          updatePercentiles(counties, getValueFunction(compareValue, fuel))
+      : munies &&
+          updatePercentiles(munies, getValueFunction(compareValue, fuel));
+  }, [compareValue, counties, munies, value, fuel]);
 
   return (
     <Card>
@@ -84,10 +94,36 @@ function MapMunicipality() {
           <FormControlLabel
             value={average}
             control={<Radio />}
-            label="Gjennomsnittlig dieselpris"
+            label="Gjennomsnittlig pris"
           />
         </RadioGroup>
       </FormControl>
+      {compareValue === average ? (
+        <FormControl>
+          <FormLabel id="id3">Fuel</FormLabel>
+          <RadioGroup
+            aria-labelledby="id3"
+            value={fuel}
+            onChange={handleChangeFuel}
+          >
+            <FormControlLabel
+              value={octane95}
+              control={<Radio />}
+              label="Bensin"
+            />
+            <FormControlLabel
+              value={diesel}
+              control={<Radio />}
+              label="Diesel"
+            />
+            <FormControlLabel
+              value={electric}
+              control={<Radio />}
+              label="Elektrisk"
+            />
+          </RadioGroup>
+        </FormControl>
+      ) : null}
       <Box sx={{ width: '100%', height: 600 }}>
         <Map
           initialViewState={initialViewState}

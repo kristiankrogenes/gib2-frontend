@@ -8,6 +8,10 @@ export const county = 'county';
 export const municipality = 'municipality';
 export const total = 'total';
 export const average = 'average';
+export const diesel = 'diesel';
+export const octane95 = 'octane_95';
+export const electric = 'electric';
+
 // coordinates for lerkendalsbygget
 export const lerka = {
   lng: 10.406852960586548,
@@ -32,6 +36,7 @@ export const layerStyle = {
         // [6, '#fdae61'],
         // [7, '#f46d43'],
         // [8, '#d53e4f'],
+        // [0, '#ff0000'],
         [0, getGrayColor(9 * percentile)],
         [1, getGrayColor(8 * percentile)],
         [2, getGrayColor(7 * percentile)],
