@@ -66,9 +66,8 @@ export const PriceStore = types
     getLatestPriceById(id) {
       const latestPrice = store.prices
         .filter((price) => price.gasStation.id === id)
-        .reduce(
-          (max, price) => (max.createdAt > price.createdAt ? max : price),
-          null
+        .reduce((max, price) =>
+          max.createdAt > price.createdAt ? max : price
         );
       return latestPrice;
     },

@@ -38,6 +38,9 @@ export default function DashboardApp() {
             <AppBugReports />
           </Grid>
 
+          <Box sx={{ pb: 5 }}>
+            <Typography variant="h4">Temakart</Typography>
+          </Box>
           <Grid item xs={12} sm={12} md={12}>
             <MapMunicipality />
           </Grid>
