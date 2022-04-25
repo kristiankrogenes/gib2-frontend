@@ -17,6 +17,7 @@ import Register from './pages/Register';
 import GasStations from './pages/GasStations';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
+import About from './pages/About';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,7 @@ export default function Router() {
         { path: 'blog', element: <Blog /> },
         { path: 'map', element: <Map /> },
         { path: 'gasstations', element: <GasStations /> },
+        { path: 'about', element: <About /> },
       ],
     },
     {

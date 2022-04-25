@@ -7,6 +7,7 @@ export function fDate(date) {
 }
 
 export function fDateTime(date) {
+  if (!date) return null;
   return format(new Date(date), 'dd MMM yyyy HH:mm');
 }
 

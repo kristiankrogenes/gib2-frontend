@@ -1,23 +1,22 @@
 import React from 'react';
 import { Box, Grid, Container, Typography } from '@mui/material';
 import Page from '../components/general/Page';
-import {
-  AppTasks,
-  AppNewUsers,
-  AppBugReports,
-  AppItemOrders,
-  AppNewsUpdate,
-  AppWeeklySales,
-  AppOrderTimeline,
-  AppCurrentVisits,
-  AppWebsiteVisits,
-  AppTrafficBySite,
-  AppCurrentSubject,
-  AppConversionRates,
-} from '../components/_dashboard/app';
+// import {
+//   AppTasks,
+//   AppNewUsers,
+//   AppBugReports,
+//   AppItemOrders,
+//   AppNewsUpdate,
+//   AppWeeklySales,
+//   AppOrderTimeline,
+//   AppCurrentVisits,
+//   AppWebsiteVisits,
+//   AppTrafficBySite,
+//   AppCurrentSubject,
+//   AppConversionRates,
+// } from '../components/_dashboard/app';
 import Histogram from '../components/histogram';
-
-// ----------------------------------------------------------------------
+import MapMunicipality from '../components/MapMunicipality';
 
 export default function DashboardApp() {
   return (
@@ -43,7 +42,15 @@ export default function DashboardApp() {
           <Grid item xs={12} md={12} lg={12}>
             <Histogram />
           </Grid>
+          <Box sx={{ pb: 5 }}>
+            <Typography variant="h4">Temakart</Typography>
+          </Box>
+          <Grid item xs={12} sm={12} md={12}>
+            <MapMunicipality />
+          </Grid>
           {/* 
+          
+
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits />
           </Grid>
