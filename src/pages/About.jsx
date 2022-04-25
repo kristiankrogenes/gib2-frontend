@@ -1,7 +1,7 @@
-import React from "react";
-import Page from "../components/general/Page";
-import { Container, Stack, Typography } from "@mui/material";
-import About from "../components/About";
+import React from 'react';
+import Page from '../components/general/Page';
+import { Container, Stack, Typography } from '@mui/material';
+import About from '../components/About';
 
 export default function AboutPage() {
   return (

@@ -1,7 +1,7 @@
-import React from "react";
-import propTypes from "prop-types";
-import ReactRoundedImage from "react-rounded-image";
-import "./about.css";
+import React from 'react';
+import propTypes from 'prop-types';
+import ReactRoundedImage from 'react-rounded-image';
+import './about.css';
 
 ValueCard.propTypes = {
   title: propTypes.string,
