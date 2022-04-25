@@ -32,7 +32,7 @@ export default function RegisterForm() {
       .max(50, 'Too Long!')
       .required('Last name required'),
     username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().min(8, 'Too short').required('Password is required'),
     passwordConfirmation: Yup.string().oneOf(
       [Yup.ref('password'), null],
       'Passwords must match'
