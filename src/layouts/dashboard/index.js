@@ -5,7 +5,6 @@ import { styled } from "@mui/material/styles";
 import { Card } from "@mui/material";
 //
 import DashboardSidebar from "./DashboardSidebar";
-import Globe from "../dashboard/Globe/Globegl";
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -42,7 +41,6 @@ export default function DashboardLayout() {
       />
       <MainStyle>
         <Outlet />
-        <Globe />
       </MainStyle>
     </RootStyle>
   );
