@@ -1,21 +1,18 @@
 import React from 'react';
-import { merge } from 'lodash';
 import Chart from 'react-apexcharts';
-import { Card, CardHeader, Box, Stack } from '@mui/material';
+import { Card, CardHeader, Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import { options } from './constants';
+import { options } from '../constants';
 
-// ----------------------------------------------------------------------
-
-PricesBensin.propTypes = {
+PricesHistogram.propTypes = {
   prices: PropTypes.array,
   labels: PropTypes.object,
 };
 
-export default function PricesBensin({ prices, labels }) {
+export default function PricesHistogram({ prices, labels }) {
   const series = [
     {
-      name: 'series-1',
+      name: 'Antall forekomster',
       data: prices,
     },
   ];

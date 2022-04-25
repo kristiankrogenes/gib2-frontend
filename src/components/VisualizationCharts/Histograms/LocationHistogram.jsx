@@ -1,16 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
-import { merge } from 'lodash';
 import Chart from 'react-apexcharts';
-import { Card, CardHeader, Box, Stack } from '@mui/material';
+import { Card, CardHeader, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 
-// ----------------------------------------------------------------------
-Location.propTypes = {
+LocationHistogram.propTypes = {
   counties: PropTypes.object,
 };
 
-export default function Location({ counties }) {
+export default function LocationHistogram({ counties }) {
   const options = {
     chart: {
       id: 'basic-bar',
@@ -22,7 +19,7 @@ export default function Location({ counties }) {
 
   const series = [
     {
-      name: 'series-1',
+      name: 'Antall bensinstasjoner',
       data: Object.keys(counties).map((key, index) => counties[key].total),
     },
   ];

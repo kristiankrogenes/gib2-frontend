@@ -15,8 +15,8 @@ import Page from '../components/general/Page';
 //   AppCurrentSubject,
 //   AppConversionRates,
 // } from '../components/_dashboard/app';
-import Histogram from '../components/histogram';
-import MapMunicipality from '../components/MapMunicipality';
+import VisualizationCharts from '../components/VisualizationCharts';
+import ChoroplethMap from '../components/ChoroplethMap';
 
 export default function DashboardApp() {
   return (
@@ -38,15 +38,11 @@ export default function DashboardApp() {
           <Grid item xs={12} sm={6} md={3}>
             <AppBugReports />
           </Grid> */}
-
-          <Grid item xs={12} md={12} lg={12}>
-            <Histogram />
-          </Grid>
-          <Box sx={{ pb: 5 }}>
-            <Typography variant="h4">Temakart</Typography>
-          </Box>
           <Grid item xs={12} sm={12} md={12}>
-            <MapMunicipality />
+            <ChoroplethMap />
+          </Grid>
+          <Grid item xs={12} md={12} lg={12}>
+            <VisualizationCharts />
           </Grid>
           {/* 
           

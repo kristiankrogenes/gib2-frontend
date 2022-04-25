@@ -26,7 +26,7 @@ import {
 } from './constants';
 import { getPolygons, getValueFunction } from './helpers';
 
-function MapMunicipality() {
+function ChoroplethMap() {
   const [munies, setMunies] = useState(null);
   const [counties, setCounties] = useState(null);
   // const [polygons, setPolygons] = useState(null);
@@ -139,4 +139,4 @@ function MapMunicipality() {
   );
 }
 
-export default MapMunicipality;
+export default ChoroplethMap;

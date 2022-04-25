@@ -1,3 +1,21 @@
+export const labels = {
+  diesel: {
+    title: 'Histogram over dieselpriser',
+    subheader:
+      'x-aksen teller antall forekomster av forskjellige dieselpriser i kr per liter',
+  },
+  octane_95: {
+    title: 'Histogram over bensinpriser',
+    subheader:
+      'x-aksen teller antall forekomster av forskjellige bensinpriser i kr per liter',
+  },
+  electric: {
+    title: 'Histogram over elektriske priser',
+    subheader:
+      'x-aksen teller antall forekomster av forskjellige elektriske priser i kWh',
+  },
+};
+
 export const options = {
   xaxis: {
     categories: [
