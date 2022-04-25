@@ -55,9 +55,24 @@ const sidebarConfig = [
   //   icon: getIcon(personAddFill),
   // },
   {
-    title: 'Gas Stations',
+    title: "blog",
+    path: "/dashboard/blog",
+    icon: getIcon(fileTextFill),
+  },
+  {
+    title: "About us",
+    path: "/dashboard/about",
+    icon: getIcon(infoFill),
+  },
+  {
+    title: "Not found",
+    path: "/404",
+    icon: getIcon(alertTriangleFill),
+  },
+  {    title: 'Gas Stations',
     path: '/dashboard/gasstations',
     icon: getIcon(personAddFill),
+  
   },
 ];
 
