@@ -95,6 +95,20 @@ function MapComponent() {
 
   const handleClickOpenUpdatePrice = () => {
     setOpenUpdatePriceDialog(true);
+    setNewStationInfo({
+      name: selectedGasStation.name,
+      price: {
+        diesel: selectedGasStation.latestPrice
+          ? selectedGasStation.latestPrice.diesel
+          : null,
+        octane95: selectedGasStation.latestPrice
+          ? selectedGasStation.latestPrice.octane95
+          : null,
+        electric: selectedGasStation.latestPrice
+          ? selectedGasStation.latestPrice.electric
+          : null,
+      },
+    });
   };
 
   const handleOptimizedRoute = async () => {

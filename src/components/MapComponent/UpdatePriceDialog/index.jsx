@@ -47,7 +47,9 @@ export default function UpdatePriceDialog({
   return (
     <Dialog
       open={openUpdatePriceDialog}
-      onClose={() => setOpenUpdatePriceDialog(false)}
+      onClose={() => {
+        setOpenUpdatePriceDialog(false);
+      }}
     >
       <DialogTitle>Update Price</DialogTitle>
       <DialogContent>
