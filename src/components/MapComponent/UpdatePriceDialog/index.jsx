@@ -8,7 +8,6 @@ import {
   DialogTitle,
   DialogContentText,
   TextField,
-  Box,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
@@ -27,7 +26,7 @@ export default function UpdatePriceDialog({
   setNewStationInfo,
 }) {
   const {
-    gasStationStore: { selectedGasStation, addGasStation },
+    gasStationStore: { selectedGasStation },
     priceStore: { addPrice },
   } = useStore();
 

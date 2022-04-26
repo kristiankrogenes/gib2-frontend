@@ -4,7 +4,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
 import React, { useRef, useState, useEffect } from 'react';
 import Map, { GeolocateControl, Marker, Layer, Source } from 'react-map-gl';
-import useGeoLocation from '../../hooks/useGeoLocation';
 // import MapGL, {
 //   GeolocateControl,
 //   Layer,

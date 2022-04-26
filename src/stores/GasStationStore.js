@@ -1,7 +1,6 @@
 import { types, flow, getRoot } from 'mobx-state-tree';
 import axiosInstance from '../utils/axios';
 import { getGasStationFromAPI, getGasStationPOST } from './helpers';
-import { lerka } from '../components/MapComponent/constants';
 
 export const GasStationModel = types
   .model({
