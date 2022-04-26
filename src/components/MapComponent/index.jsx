@@ -2,8 +2,9 @@
 import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { observer } from 'mobx-react-lite';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Map, { GeolocateControl, Marker, Layer, Source } from 'react-map-gl';
+import useGeoLocation from '../../hooks/useGeoLocation';
 // import MapGL, {
 //   GeolocateControl,
 //   Layer,
@@ -28,9 +29,14 @@ import MapPin from './MapPin';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 import UpdatePriceDialog from './UpdatePriceDialog';
+import PropTypes from 'prop-types';
 // import Cluster from '@urbica/react-map-gl-cluster';
 
-function MapComponent() {
+MapComponent.propTypes = {
+  geoLocation: PropTypes.object,
+};
+
+function MapComponent({ geoLocation }) {
   // const [viewport, setViewport] = useState({
   //   latitude: lerka.lat,
   //   longitude: lerka.lng,
@@ -39,6 +45,7 @@ function MapComponent() {
   //   zoom: 12,
   // });
   const mapRef = useRef(null);
+  const geoLocateRef = useRef(null);
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
   const [openUpdatePriceDialog, setOpenUpdatePriceDialog] = useState(false);
@@ -63,10 +70,6 @@ function MapComponent() {
     },
     priceStore: { addPrice },
   } = useStore();
-
-  const handleGeoLocationChange = (e) => {
-    console.log(e.coords);
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -112,9 +115,13 @@ function MapComponent() {
   };
 
   const handleOptimizedRoute = async () => {
-    const optimizedRoutes = await getOptimizedRoutes();
+    const optimizedRoutes = await getOptimizedRoutes(geoLocation);
     setOptimizedRoutes(optimizedRoutes);
   };
+
+  useEffect(() => {
+    geoLocateRef.current?.trigger();
+  }, [geoLocation]);
 
   const onMapClick = (e) => {
     if (addGas) {
@@ -178,10 +185,10 @@ function MapComponent() {
           onClick={onMapClick}
         >
           <GeolocateControl
+            ref={geoLocateRef}
             position="top-left"
             trackUserLocation={true}
             showUserLocation={true}
-            onGeolocate={handleGeoLocationChange}
           />
 
           {Object.keys(optimizedRoutes).length === 0 ? (

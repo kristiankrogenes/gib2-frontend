@@ -1,21 +1,22 @@
 import React from 'react';
 import { Box, Grid, Container, Typography } from '@mui/material';
 import Page from '../components/general/Page';
-import {
-  AppTasks,
-  AppNewUsers,
-  AppBugReports,
-  AppItemOrders,
-  AppNewsUpdate,
-  AppWeeklySales,
-  AppOrderTimeline,
-  AppCurrentVisits,
-  AppWebsiteVisits,
-  AppTrafficBySite,
-  AppCurrentSubject,
-  AppConversionRates,
-} from '../components/_dashboard/app';
-import MapMunicipality from '../components/MapMunicipality';
+// import {
+//   AppTasks,
+//   AppNewUsers,
+//   AppBugReports,
+//   AppItemOrders,
+//   AppNewsUpdate,
+//   AppWeeklySales,
+//   AppOrderTimeline,
+//   AppCurrentVisits,
+//   AppWebsiteVisits,
+//   AppTrafficBySite,
+//   AppCurrentSubject,
+//   AppConversionRates,
+// } from '../components/_dashboard/app';
+import VisualizationCharts from '../components/VisualizationCharts';
+import ChoroplethMap from '../components/ChoroplethMap';
 
 export default function DashboardApp() {
   return (
@@ -25,7 +26,7 @@ export default function DashboardApp() {
           <Typography variant="h4">Hi, Welcome back</Typography>
         </Box>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
+          {/* <Grid item xs={12} sm={6} md={3}>
             <AppWeeklySales />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -36,14 +37,15 @@ export default function DashboardApp() {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppBugReports />
-          </Grid>
-
-          <Box sx={{ pb: 5 }}>
-            <Typography variant="h4">Temakart</Typography>
-          </Box>
+          </Grid> */}
           <Grid item xs={12} sm={12} md={12}>
-            <MapMunicipality />
+            <ChoroplethMap />
           </Grid>
+          <Grid item xs={12} md={12} lg={12}>
+            <VisualizationCharts />
+          </Grid>
+          {/* 
+          
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits />
@@ -75,7 +77,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} md={6} lg={8}>
             <AppTasks />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>

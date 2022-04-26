@@ -31,7 +31,7 @@ export const GasStationStore = types
     setSelectedGasStation(gasStation) {
       store.selectedGasStation = gasStation;
     },
-    fetchGasStations: flow(function* () {
+    fetchGasStations: flow(function* (geoLocation) {
       try {
         const response = yield axiosInstance.get('/api/gasstations/');
         const newGasStations = response.data.features.map((gasStation) => ({
@@ -42,7 +42,7 @@ export const GasStationStore = types
         store.setGasStations(newGasStations);
         const response2 = yield axiosInstance.get(
           '/api/stations-inside-radius/',
-          { params: { lon: lerka.lng, lat: lerka.lat } }
+          { params: { lon: geoLocation.lng, lat: geoLocation.lat } }
         );
         const nearGasStations = response2.data.features.map((gasStation) =>
           gasStation.id.toString()

@@ -25,8 +25,9 @@ import {
   total,
 } from './constants';
 import { getPolygons, getValueFunction } from './helpers';
+import axiosInstance from '../../utils/axios';
 
-function MapMunicipality() {
+function ChoroplethMap() {
   const [munies, setMunies] = useState(null);
   const [counties, setCounties] = useState(null);
   // const [polygons, setPolygons] = useState(null);
@@ -47,9 +48,13 @@ function MapMunicipality() {
 
   useEffect(() => {
     const renderChoroplethMap = async () => {
-      const polygons = await getPolygons(value);
-      if (value === county && !counties) setCounties(polygons);
-      else if (value === municipality && !munies) setMunies(polygons);
+      if (!counties && !munies) {
+        const insight = await axiosInstance.get('api/insights/');
+        let polygons = await getPolygons(county, insight);
+        setCounties(polygons);
+        polygons = await getPolygons(municipality, insight);
+        setMunies(polygons);
+      }
     };
     renderChoroplethMap();
   }, [value, counties, munies]);
@@ -139,4 +144,4 @@ function MapMunicipality() {
   );
 }
 
-export default MapMunicipality;
+export default ChoroplethMap;
