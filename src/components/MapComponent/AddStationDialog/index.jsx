@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import MultiStep from './MultiStep';
-import { isStepSkipped, isStepOptional } from './helpers';
+import { isStepSkipped, isStepOptional, isNotValidPrice } from './helpers';
 import RenderSteps from './RenderSteps';
 
 AddStationDialog.propTypes = {
@@ -45,6 +45,14 @@ export default function AddStationDialog(props) {
 
   const handleSkip = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setNewStationInfo({
+      name: newStationInfo.name,
+      price: {
+        diesel: '',
+        octane95: '',
+        electric: '',
+      },
+    });
     setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
       newSkipped.add(activeStep);
@@ -101,7 +109,16 @@ export default function AddStationDialog(props) {
           {activeStep === 2 ? (
             <Button onClick={handleClose}>Finish</Button>
           ) : (
-            <Button onClick={handleNext}>Next</Button>
+            <Button
+              disabled={
+                activeStep === 1
+                  ? isNotValidPrice(newStationInfo.price)
+                  : newStationInfo.name === ''
+              }
+              onClick={handleNext}
+            >
+              Next
+            </Button>
           )}
         </DialogActions>
       </Dialog>

@@ -17,6 +17,7 @@ import {
   MAPBOX_TOKEN,
   mapStyle,
   lineLayerStyle,
+  initialNewStationInfo
 } from './constants';
 import {
   makeMarkerFromMapClick,
@@ -29,6 +30,7 @@ import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
 import UpdatePriceDialog from './UpdatePriceDialog';
 import PropTypes from 'prop-types';
+import { isNotValidPrice } from './AddStationDialog/helpers';
 // import Cluster from '@urbica/react-map-gl-cluster';
 
 MapComponent.propTypes = {
@@ -50,14 +52,7 @@ function MapComponent({ geoLocation }) {
   const [openUpdatePriceDialog, setOpenUpdatePriceDialog] = useState(false);
   const [marker, setMarker] = useState(null);
   const [optimizedRoutes, setOptimizedRoutes] = useState({});
-  const [newStationInfo, setNewStationInfo] = useState({
-    name: '',
-    price: {
-      diesel: '',
-      octane95: '',
-      electric: '',
-    },
-  });
+  const [newStationInfo, setNewStationInfo] = useState(initialNewStationInfo);
 
   const {
     gasStationStore: {
@@ -80,17 +75,12 @@ function MapComponent({ geoLocation }) {
     } else {
       if (marker) {
         const gasStationId = await addGasStation(marker, newStationInfo.name);
-        await addPrice(newStationInfo.price, parseInt(gasStationId));
+        if (!isNotValidPrice(newStationInfo.price)) {
+          await addPrice(newStationInfo.price, parseInt(gasStationId));
+        }
         setAddGas(!addGas);
         setMarker(null);
-        setNewStationInfo({
-          name: '',
-          price: {
-            diesel: '',
-            octane95: '',
-            electric: '',
-          },
-        });
+        setNewStationInfo(initialNewStationInfo);
       }
     }
   };
