@@ -52,28 +52,17 @@ export const makeMarkerFromMapClick = (e) => ({
   coordinates: e.lngLat,
 });
 
-export const getOptimizedRoutes = async (start) => {
-  const response = await axiosInstance.get('api/stations-inside-radius', {
-    params: { lon: start.coordinates.lng, lat: start.coordinates.lat },
+export const getOptimizedRoutes = async (start, fuelType, weight) => {
+  const res = await axiosInstance.get('api/fuzzy/', {
+    params: {
+      start_lng: start.coordinates.lng,
+      start_lat: start.coordinates.lat,
+      price_weight: weight,
+      duration_weight: 1 - weight,
+      fuel_type: fuelType,
+    },
   });
-
-  const nearestStations = response.data.features;
-  const routes = [];
-
-  for (let i = 0; i < nearestStations.length; i++) {
-    const url = optimizedRouteURL(lerka, {
-      lng: nearestStations[i].geometry.coordinates[0],
-      lat: nearestStations[i].geometry.coordinates[1],
-    });
-    const route = await axios.get(url);
-    routes.push(route.data.trips[0]);
-  }
-
-  const bestRoute = routes.reduce((min, route) =>
-    min.duration < route.duration ? min : route
-  );
-
-  return featureCollection([feature(bestRoute.geometry)]);
+  return featureCollection([feature(res.data.geometry)]);
 };
 
 // export const ClusterMarker = ({ longitude, latitude, pointCount }) => {

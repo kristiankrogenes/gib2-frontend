@@ -104,7 +104,9 @@ function MapComponent({ geoLocation }) {
   };
 
   const handleOptimizedRoute = async () => {
-    const optimizedRoutes = await getOptimizedRoutes(geoLocation);
+    const fuelType = 'diesel';
+    const weight = 0.95
+    const optimizedRoutes = await getOptimizedRoutes(geoLocation, fuelType, weight);
     setOptimizedRoutes(optimizedRoutes);
   };
 
