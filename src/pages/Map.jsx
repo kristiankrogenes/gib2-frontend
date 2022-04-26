@@ -13,16 +13,14 @@ export default function Map() {
   const {
     gasStationStore: { fetchGasStations },
     priceStore: { fetchPrices },
-    userStore: { fetchUsers },
   } = useStore();
   useEffect(() => {
     async function fetchData() {
       await fetchGasStations(geoLocation.coordinates);
       fetchPrices();
-      fetchUsers();
     }
     if (geoLocation.loaded) fetchData();
-  }, [fetchGasStations, fetchPrices, fetchUsers, geoLocation]);
+  }, [fetchGasStations, fetchPrices, geoLocation]);
   return (
     <Page title="Map | GIB2">
       <Container maxWidth="lg">
