@@ -27,6 +27,7 @@ import {
 import MapPin from './MapPin';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
+import UpdatePriceDialog from './UpdatePriceDialog';
 // import Cluster from '@urbica/react-map-gl-cluster';
 
 function MapComponent() {
@@ -40,6 +41,7 @@ function MapComponent() {
   const mapRef = useRef(null);
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openUpdatePriceDialog, setOpenUpdatePriceDialog] = useState(false);
   const [marker, setMarker] = useState(null);
   const [optimizedRoutes, setOptimizedRoutes] = useState({});
   const [newStationInfo, setNewStationInfo] = useState({
@@ -91,6 +93,10 @@ function MapComponent() {
     }
   };
 
+  const handleClickOpenUpdatePrice = () => {
+    setOpenUpdatePriceDialog(true);
+  };
+
   const handleOptimizedRoute = async () => {
     const optimizedRoutes = await getOptimizedRoutes();
     setOptimizedRoutes(optimizedRoutes);
@@ -130,6 +136,12 @@ function MapComponent() {
         open={open}
         setOpen={setOpen}
         handleAddStation={handleAddStation}
+        newStationInfo={newStationInfo}
+        setNewStationInfo={setNewStationInfo}
+      />
+      <UpdatePriceDialog
+        openUpdatePriceDialog={openUpdatePriceDialog}
+        setOpenUpdatePriceDialog={setOpenUpdatePriceDialog}
         newStationInfo={newStationInfo}
         setNewStationInfo={setNewStationInfo}
       />
@@ -187,7 +199,9 @@ function MapComponent() {
             // </Cluster>
           }
           {marker?.marker}
-          {selectedGasStation && <MapPopup />}
+          {selectedGasStation && (
+            <MapPopup handleClickOpenUpdatePrice={handleClickOpenUpdatePrice} />
+          )}
         </Map>
       </Box>
     </Card>

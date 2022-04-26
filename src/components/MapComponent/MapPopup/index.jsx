@@ -5,10 +5,13 @@ import { Button } from '@mui/material';
 import { useStore } from '../../../stores/RootStore';
 import { fDateTime } from '../../../utils/formatTime';
 import { observer } from 'mobx-react-lite';
+import PropTypes from 'prop-types';
 
-MapPopup.propTypes = {};
+MapPopup.propTypes = {
+  handleClickOpenUpdatePrice: PropTypes.func,
+};
 
-function MapPopup() {
+function MapPopup({ handleClickOpenUpdatePrice }) {
   const {
     gasStationStore: { selectedGasStation, setSelectedGasStation },
   } = useStore();
@@ -24,13 +27,23 @@ function MapPopup() {
       <div>
         <div style={{ fontWeight: 'bold' }}>{selectedGasStation.name}</div>
         Last registered prices: <br />
-        {`Diesel: ${selectedGasStation.latestPrice?.diesel}`} <br />
-        {`Octane95: ${selectedGasStation.latestPrice?.octane95}`} <br />
-        {`Electric: ${selectedGasStation.latestPrice?.electric}`} <br />{' '}
-        {fDateTime(selectedGasStation.latestPrice?.createdAt)}
+        {`Diesel: ${
+          Math.round(selectedGasStation.latestPrice?.diesel * 100) / 100
+        }`}{' '}
+        <br />
+        {`Octane95: ${
+          Math.round(selectedGasStation.latestPrice?.octane95 * 100) / 100
+        }`}{' '}
+        <br />
+        {`Electric: ${
+          Math.round(selectedGasStation.latestPrice?.electric * 100) / 100
+        }`}{' '}
+        <br /> {fDateTime(selectedGasStation.latestPrice?.createdAt)}
       </div>
       {/* <Button>More Info</Button> */}
-      <Button variant="outlined">Register Price</Button>
+      <Button variant="outlined" onClick={handleClickOpenUpdatePrice}>
+        Register Price
+      </Button>
     </Popup>
   );
 }
