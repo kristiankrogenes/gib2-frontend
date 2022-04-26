@@ -28,6 +28,7 @@ import {
 import MapPin from './MapPin';
 import MapPopup from './MapPopup';
 import MapToolbar from './MapToolbar';
+import UpdatePriceDialog from './UpdatePriceDialog';
 import PropTypes from 'prop-types';
 // import Cluster from '@urbica/react-map-gl-cluster';
 
@@ -47,6 +48,7 @@ function MapComponent({ geoLocation }) {
   const geoLocateRef = useRef(null);
   const [addGas, setAddGas] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openUpdatePriceDialog, setOpenUpdatePriceDialog] = useState(false);
   const [marker, setMarker] = useState(null);
   const [optimizedRoutes, setOptimizedRoutes] = useState({});
   const [newStationInfo, setNewStationInfo] = useState({
@@ -94,6 +96,24 @@ function MapComponent({ geoLocation }) {
     }
   };
 
+  const handleClickOpenUpdatePrice = () => {
+    setOpenUpdatePriceDialog(true);
+    setNewStationInfo({
+      name: selectedGasStation.name,
+      price: {
+        diesel: selectedGasStation.latestPrice
+          ? selectedGasStation.latestPrice.diesel
+          : null,
+        octane95: selectedGasStation.latestPrice
+          ? selectedGasStation.latestPrice.octane95
+          : null,
+        electric: selectedGasStation.latestPrice
+          ? selectedGasStation.latestPrice.electric
+          : null,
+      },
+    });
+  };
+
   const handleOptimizedRoute = async () => {
     const optimizedRoutes = await getOptimizedRoutes(geoLocation);
     setOptimizedRoutes(optimizedRoutes);
@@ -101,8 +121,8 @@ function MapComponent({ geoLocation }) {
 
   useEffect(() => {
     geoLocateRef.current?.trigger();
-  }, [geoLocation])
-  
+  }, [geoLocation]);
+
   const onMapClick = (e) => {
     if (addGas) {
       const marker = makeMarkerFromMapClick(e);
@@ -137,6 +157,12 @@ function MapComponent({ geoLocation }) {
         open={open}
         setOpen={setOpen}
         handleAddStation={handleAddStation}
+        newStationInfo={newStationInfo}
+        setNewStationInfo={setNewStationInfo}
+      />
+      <UpdatePriceDialog
+        openUpdatePriceDialog={openUpdatePriceDialog}
+        setOpenUpdatePriceDialog={setOpenUpdatePriceDialog}
         newStationInfo={newStationInfo}
         setNewStationInfo={setNewStationInfo}
       />
@@ -194,7 +220,9 @@ function MapComponent({ geoLocation }) {
             // </Cluster>
           }
           {marker?.marker}
-          {selectedGasStation && <MapPopup />}
+          {selectedGasStation && (
+            <MapPopup handleClickOpenUpdatePrice={handleClickOpenUpdatePrice} />
+          )}
         </Map>
       </Box>
     </Card>
