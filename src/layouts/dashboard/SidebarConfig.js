@@ -59,11 +59,11 @@ const sidebarConfig = [
   //   path: '/dashboard/blog',
   //   icon: getIcon(fileTextFill),
   // },
-  // {
-  //   title: 'Gas Stations',
-  //   path: '/dashboard/gasstations',
-  //   icon: getIcon(personAddFill),
-  // },
+  {
+    title: 'Gas Stations',
+    path: '/dashboard/gasstations',
+    icon: getIcon(personAddFill),
+  },
   {
     title: 'About us',
     path: '/dashboard/about',
