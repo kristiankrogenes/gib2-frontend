@@ -1,21 +1,9 @@
-import {
-  Box,
-  Card,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-} from '@mui/material';
+import { Box, Card } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useEffect, useMemo, useState } from 'react';
 import Map, { Layer, Source } from 'react-map-gl';
 import { updatePercentiles } from '../../utils/updatePercentiles';
 import {
-  average,
-  diesel,
-  octane95,
-  electric,
   county,
   initialViewState,
   layerStyle,
@@ -26,11 +14,11 @@ import {
 } from './constants';
 import { getPolygons, getValueFunction } from './helpers';
 import axiosInstance from '../../utils/axios';
+import ControlPanel from './ControlPanel';
 
 function ChoroplethMap() {
   const [munies, setMunies] = useState(null);
   const [counties, setCounties] = useState(null);
-  // const [polygons, setPolygons] = useState(null);
   const [value, setValue] = useState(county);
   const [compareValue, setCompareValue] = useState(total);
   const [fuel, setFuel] = useState('diesel');
@@ -69,72 +57,20 @@ function ChoroplethMap() {
 
   return (
     <Card>
-      <FormControl>
-        <FormLabel id="id">Type</FormLabel>
-        <RadioGroup
-          aria-labelledby="id"
-          value={value}
-          onChange={handleChangeType}
-        >
-          <FormControlLabel value={county} control={<Radio />} label="County" />
-          <FormControlLabel
-            value={municipality}
-            control={<Radio />}
-            label="Municipality"
-          />
-        </RadioGroup>
-      </FormControl>
-      <FormControl>
-        <FormLabel id="id2">Attribute</FormLabel>
-        <RadioGroup
-          aria-labelledby="id2"
-          value={compareValue}
-          onChange={handleChangeCompare}
-        >
-          <FormControlLabel
-            value={total}
-            control={<Radio />}
-            label="Number of gas stations"
-          />
-          <FormControlLabel
-            value={average}
-            control={<Radio />}
-            label="Average price"
-          />
-        </RadioGroup>
-      </FormControl>
-      {compareValue === average ? (
-        <FormControl>
-          <FormLabel id="id3">Fuel</FormLabel>
-          <RadioGroup
-            aria-labelledby="id3"
-            value={fuel}
-            onChange={handleChangeFuel}
-          >
-            <FormControlLabel
-              value={octane95}
-              control={<Radio />}
-              label="Octane95"
-            />
-            <FormControlLabel
-              value={diesel}
-              control={<Radio />}
-              label="Diesel"
-            />
-            <FormControlLabel
-              value={electric}
-              control={<Radio />}
-              label="Electric"
-            />
-          </RadioGroup>
-        </FormControl>
-      ) : null}
       <Box sx={{ width: '100%', height: 600 }}>
         <Map
           initialViewState={initialViewState}
           mapStyle={mapStyle}
           mapboxApiAccessToken={MAPBOX_TOKEN}
         >
+          <ControlPanel
+            fuel={fuel}
+            compareValue={compareValue}
+            value={value}
+            handleChangeCompare={handleChangeCompare}
+            handleChangeFuel={handleChangeFuel}
+            handleChangeType={handleChangeType}
+          />
           <Source id="test" type="geojson" data={data}>
             <Layer {...layerStyle} />
           </Source>

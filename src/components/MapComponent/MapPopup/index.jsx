@@ -28,7 +28,9 @@ function MapPopup({ handleClickOpenUpdatePrice }) {
         <div style={{ fontWeight: 'bold' }}>{selectedGasStation.name}</div>
         Last registered prices: <br />
         {`Diesel: ${
-          Math.round(selectedGasStation.latestPrice?.diesel * 100) / 100
+          selectedGasStation.latestPrice.diesel
+            ? Math.round(selectedGasStation.latestPrice?.diesel * 100) / 100
+            : 'Ingen pris'
         }`}{' '}
         <br />
         {`Octane95: ${

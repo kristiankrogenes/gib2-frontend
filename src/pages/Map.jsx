@@ -28,19 +28,11 @@ export default function Map() {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          mb={5}
+          mb={1}
         >
           <Typography variant="h4" gutterBottom>
             Map
           </Typography>
-          {/* <Button
-            variant="contained"
-            component={RouterLink}
-            to="#"
-            startIcon={<Icon icon={plusFill} />}
-          >
-            New User
-          </Button> */}
         </Stack>
         <MapComponent geoLocation={geoLocation} />
       </Container>

@@ -45,7 +45,16 @@ export const pointLayerStyle = {
 export const initialViewState = {
   longitude: lerka.lng,
   latitude: lerka.lat,
-  zoom: 14,
+  zoom: 12,
   width: '100%',
   height: 600,
+};
+
+export const initialNewStationInfo = {
+  name: '',
+  price: {
+    diesel: '',
+    octane95: '',
+    electric: '',
+  },
 };

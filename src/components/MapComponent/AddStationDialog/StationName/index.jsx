@@ -10,8 +10,8 @@ StationName.propTypes = {
 function StationName({ newStationInfo, setNewStationInfo }) {
   return (
     <DialogContentText component={'span'}>
-      <Typography sx={{ fontWeight: 'bold' }}>
-        Enter name of gas station
+      <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
+        Skriv inn navnet til bensinstasjonen
       </Typography>
       <TextField
         value={newStationInfo.name}
