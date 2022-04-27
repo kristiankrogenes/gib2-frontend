@@ -53,13 +53,6 @@ export default function MapToolbar(props) {
       />
       <Button
         variant="contained"
-        startIcon={<Icon icon={plusFill} />}
-        // onClick={handleAddStation}
-      >
-        Add Price
-      </Button>
-      <Button
-        variant="contained"
         onClick={handleClickAddStation}
         startIcon={<Icon icon={plusFill} />}
       >

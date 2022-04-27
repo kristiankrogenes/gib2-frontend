@@ -113,7 +113,7 @@ function MapComponent({ geoLocation }) {
   useEffect(() => {
     geoLocateRef.current?.trigger();
   }, [geoLocation]);
-
+  
   const onMapClick = (e) => {
     if (addGas) {
       const marker = makeMarkerFromMapClick(e);
