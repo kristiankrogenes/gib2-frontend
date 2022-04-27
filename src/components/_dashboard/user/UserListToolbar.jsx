@@ -1,23 +1,9 @@
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import searchFill from '@iconify/icons-eva/search-fill';
-// material
 import { styled } from '@mui/material/styles';
-import {
-  Box,
-  Toolbar,
-  Typography,
-  OutlinedInput,
-  InputAdornment,
-  Button,
-} from '@mui/material';
-import ProductFilterSidebar from '../products/ProductFilterSidebar';
-import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
-
-// ----------------------------------------------------------------------
+import { Box, Toolbar, OutlinedInput, InputAdornment } from '@mui/material';
 
 const RootStyle = styled(Toolbar)(({ theme }) => ({
   height: 96,

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
-// material
 import { alpha, styled } from '@mui/material/styles';
 import {
   Box,
@@ -11,9 +10,7 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Button,
 } from '@mui/material';
-// components
 import { MHidden } from '../../components/@material-extend';
 import AccountPopover from './AccountPopover';
 
@@ -38,8 +35,6 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
     padding: theme.spacing(0, 5),
   },
 }));
-
-// ----------------------------------------------------------------------
 
 DashboardNavbar.propTypes = {
   onOpenSidebar: PropTypes.func,
