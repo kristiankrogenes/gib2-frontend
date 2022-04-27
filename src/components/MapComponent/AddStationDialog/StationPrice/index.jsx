@@ -10,10 +10,11 @@ StationPrice.propTypes = {
 function StationPrice({ newStationInfo, setNewStationInfo }) {
   return (
     <DialogContentText component={'span'}>
-      <Typography sx={{ fontWeight: 'bold' }}>
-        Enter prices of gas station
+      <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
+        Legg inn alle prisene til bensinstasjonen(må være et positivt tall)
       </Typography>
       <TextField
+        sx={{ marginBottom: '10px', marginRight: '10px' }}
         value={newStationInfo.price.diesel}
         onChange={(e) =>
           setNewStationInfo({
