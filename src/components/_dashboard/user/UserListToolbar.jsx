@@ -39,8 +39,6 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
   },
 }));
 
-// ----------------------------------------------------------------------
-
 UserListToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,
@@ -52,94 +50,29 @@ export default function UserListToolbar({
   filterName,
   onFilterName,
 }) {
-  const [openFilter, setOpenFilter] = useState(false);
-
-  const formik = useFormik({
-    initialValues: {
-      gender: '',
-      category: '',
-      colors: '',
-      priceRange: '',
-      rating: '',
-    },
-    onSubmit: () => {
-      setOpenFilter(false);
-    },
-  });
-
-  const { resetForm, handleSubmit } = formik;
-
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
-  const handleResetFilter = () => {
-    handleSubmit();
-    resetForm();
-  };
   return (
     <RootStyle
       sx={{
         ...(numSelected > 0 && {
           color: 'primary.main',
-          bgcolor: 'primary.lighter',
+          // bgcolor: 'primary.lighter',
         }),
       }}
     >
-      {numSelected > 0 ? (
-        <Typography component="div" variant="subtitle1">
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <SearchStyle
-          value={filterName}
-          onChange={onFilterName}
-          placeholder="Search user..."
-          startAdornment={
-            <InputAdornment position="start">
-              <Box
-                component={Icon}
-                icon={searchFill}
-                sx={{ color: 'text.disabled' }}
-              />
-            </InputAdornment>
-          }
-        />
-      )}
-      <ProductFilterSidebar
-        formik={formik}
-        isOpenFilter={openFilter}
-        onResetFilter={handleResetFilter}
-        onOpenFilter={handleOpenFilter}
-        onCloseFilter={handleCloseFilter}
+      <SearchStyle
+        value={filterName}
+        onChange={onFilterName}
+        placeholder="Search gas station..."
+        startAdornment={
+          <InputAdornment position="start">
+            <Box
+              component={Icon}
+              icon={searchFill}
+              sx={{ color: 'text.disabled' }}
+            />
+          </InputAdornment>
+        }
       />
-
-      <Button
-        variant="contained"
-        component={RouterLink}
-        to="/auth/register"
-        startIcon={<Icon icon={plusFill} />}
-      >
-        New Gas Station
-      </Button>
-
-      {/* {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <Icon icon={trash2Fill} />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <Icon icon={roundFilterList} />
-          </IconButton>
-        </Tooltip>
-      )} */}
     </RootStyle>
   );
 }
