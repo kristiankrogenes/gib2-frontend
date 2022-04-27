@@ -2,9 +2,7 @@ import React from 'react';
 import { Marker } from 'react-map-gl';
 // import { Marker } from '@urbica/react-map-gl';
 import MapPin from './MapPin';
-import { lerka } from './constants';
 import axiosInstance from '../../utils/axios';
-import axios from 'axios';
 import { feature, featureCollection } from 'turf';
 
 export const createPointGeojson = (point) => ({
@@ -44,9 +42,9 @@ export const makeMarkerFromMapClick = (e) => ({
       longitude={e.lngLat.lng}
       latitude={e.lngLat.lat}
       anchor="bottom"
-      draggable={true}
+      // draggable={true}
     >
-      <MapPin onClick={() => null} />
+      <MapPin onClick={() => null} isNew={true} />
     </Marker>
   ),
   coordinates: e.lngLat,

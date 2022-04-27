@@ -90,7 +90,7 @@ export default function LoginForm() {
             variant="contained"
             loading={isSubmitting}
           >
-            Log inn
+            Login
           </LoadingButton>
         </Stack>
 

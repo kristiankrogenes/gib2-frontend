@@ -22,7 +22,7 @@ import {
 import {
   makeMarkerFromMapClick,
   getOptimizedRoutesFuzzy,
-  getOptimizedRoutesAirDistance
+  getOptimizedRoutesAirDistance,
   // ClusterMarker,
 } from './helpers';
 // import MapMarker from './MapMarker';
@@ -54,6 +54,7 @@ function MapComponent({ geoLocation }) {
   const [marker, setMarker] = useState(null);
   const [optimizedRoutes, setOptimizedRoutes] = useState({});
   const [newStationInfo, setNewStationInfo] = useState(initialNewStationInfo);
+  const [showAll, setShowAll] = useState(false);
 
   const {
     gasStationStore: {
@@ -62,6 +63,7 @@ function MapComponent({ geoLocation }) {
       addGasStation,
       setSelectedGasStation,
       selectedGasStation,
+      gasStations,
     },
     priceStore: { addPrice },
   } = useStore();
@@ -116,7 +118,7 @@ function MapComponent({ geoLocation }) {
   const handleOptimizedRouteAirDistance = async () => {
     const optimizedRoutes = await getOptimizedRoutesAirDistance(geoLocation);
     setOptimizedRoutes(optimizedRoutes);
-  }
+  };
 
   useEffect(() => {
     geoLocateRef.current?.trigger();
@@ -131,6 +133,10 @@ function MapComponent({ geoLocation }) {
 
   const handleMapPinClick = (station) => {
     setSelectedGasStation(station);
+  };
+
+  const handleShowAll = () => {
+    setShowAll(!showAll);
   };
 
   const onFilterName = (newValue) => {
@@ -152,6 +158,8 @@ function MapComponent({ geoLocation }) {
         onFilterName={onFilterName}
         addGas={addGas}
         handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy}
+        handleShowAll={handleShowAll}
+        showAll={showAll}
       />
       <AddStationDialog
         open={open}
@@ -200,23 +208,27 @@ function MapComponent({ geoLocation }) {
           )}
 
           {
-            gasStationsInsideRadius.length > 0 &&
+            (showAll
+              ? gasStations.length > 0
+              : gasStationsInsideRadius.length > 0) &&
               // <Cluster
               //   radius={80}
               //   extent={512}
               //   nodeSize={64}
               //   component={ClusterMarker}
               // >
-              getGasStationsInsideRadius().map((station) => (
-                <Marker
-                  key={station.id}
-                  longitude={station.point[0]}
-                  latitude={station.point[1]}
-                  anchor="bottom"
-                >
-                  <MapPin onClick={() => handleMapPinClick(station)} />
-                </Marker>
-              ))
+              (showAll ? gasStations : getGasStationsInsideRadius()).map(
+                (station) => (
+                  <Marker
+                    key={station.id}
+                    longitude={station.point[0]}
+                    latitude={station.point[1]}
+                    anchor="bottom"
+                  >
+                    <MapPin onClick={() => handleMapPinClick(station)} />
+                  </Marker>
+                )
+              )
             // </Cluster>
           }
           {marker?.marker}

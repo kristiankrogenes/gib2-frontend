@@ -25,7 +25,11 @@ export default function Router() {
   return useRoutes([
     {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: localStorage.getItem('access_token') ? (
+        <DashboardLayout />
+      ) : (
+        <Navigate to="/login" replace />
+      ),
       children: [
         { element: <Navigate to="/dashboard/map" replace /> },
         { path: 'app', element: <DashboardApp /> },

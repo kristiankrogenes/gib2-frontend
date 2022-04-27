@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useFormik, Form, FormikProvider } from 'formik';
+import { Link as RouterLink } from 'react-router-dom';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import {
@@ -10,6 +11,7 @@ import {
   IconButton,
   InputAdornment,
   Typography,
+  Link,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import axiosInstance from '../../../utils/axios';
@@ -174,6 +176,16 @@ export default function RegisterForm() {
               Username already exists
             </Typography>
           ) : null}
+        </Stack>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ my: 2 }}
+        >
+          <Link component={RouterLink} variant="subtitle2" to="/login">
+            Already have an account? Login now
+          </Link>
         </Stack>
       </Form>
     </FormikProvider>

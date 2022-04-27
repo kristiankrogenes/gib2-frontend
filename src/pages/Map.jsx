@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
-import { Icon } from '@iconify/react';
-import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
-import { Stack, Button, Container, Typography } from '@mui/material';
+import { Stack, Container, Typography } from '@mui/material';
 import Page from '../components/general/Page';
 import MapComponent from '../components/MapComponent';
 import { useStore } from '../stores/RootStore';
