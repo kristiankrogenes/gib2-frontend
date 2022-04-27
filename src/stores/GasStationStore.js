@@ -51,12 +51,16 @@ export const GasStationStore = types
         console.log(e.stack);
       }
     }),
-    addGasStation: flow(function* (marker, name) {
+    addGasStation: flow(function* (marker, name, geoLocation) {
       try {
         const data = getGasStationPOST(marker, name);
         const response = yield axiosInstance.post('/api/gasstations/', data);
         const gasStation = getGasStationFromAPI(response.data);
         store.setGasStations([...store.gasStations, gasStation]);
+        store.setGasStationsInsideRadius([
+          ...store.gasStationsInsideRadius,
+          gasStation.id,
+        ]);
         return gasStation.id;
       } catch (e) {
         console.log(e.message);
