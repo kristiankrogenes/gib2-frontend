@@ -48,7 +48,7 @@ export default function SignIn() {
           Log in
         </Typography>
         {error ? (
-          <Typography color="error">Feil brukernavn eller passord</Typography>
+          <Typography color="error">Wrong username or password</Typography>
         ) : null}
         <form noValidate>
           <TextField
@@ -57,7 +57,7 @@ export default function SignIn() {
             required
             fullWidth
             id="username"
-            label="Brukernavn"
+            label="Username"
             name="username"
             autoComplete="username"
             autoFocus
@@ -87,12 +87,12 @@ export default function SignIn() {
           <Grid container>
             <Grid item xs>
               <Link href="/glemt-passord" variant="body2">
-                Glemt passord?
+                Forgotten password?
               </Link>
             </Grid>
             <Grid item>
               <Link href="/registrer" variant="body2">
-                {'Ingen bruker? Registrer nå'}
+                {'No user? Register now'}
               </Link>
             </Grid>
           </Grid>

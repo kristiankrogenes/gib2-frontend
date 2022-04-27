@@ -1,18 +1,21 @@
 export const labels = {
   diesel: {
-    title: 'Histogram over dieselpriser',
+    title: 'Histogram of diesel prices',
     subheader:
-      'x-aksen teller antall forekomster av forskjellige dieselpriser i kr per liter',
+      'x-axis counts the number of occurences of different diesel prices per liter in NOK ',
+    donutTitle: 'Histogram of octane prices represented in a donut diagram',
   },
   octane_95: {
-    title: 'Histogram over bensinpriser',
+    title: 'Histogram of octane prices',
     subheader:
-      'x-aksen teller antall forekomster av forskjellige bensinpriser i kr per liter',
+      'x-axis counts the number of occurences of different octane prices per liter in NOK ',
+    donutTitle: 'Histogram of diesel prices represented in a donut diagram',
   },
   electric: {
-    title: 'Histogram over elektriske priser',
+    title: 'Histogram of electric prices',
     subheader:
-      'x-aksen teller antall forekomster av forskjellige elektriske priser i kWh',
+      'x-axis counts the number of occurences of different electric prices in kWh in NOK',
+    donutTitle: 'Histogram of electric prices represented in a donut diagram',
   },
 };
 
@@ -59,6 +62,6 @@ export const optionsLocation = {
     'Vestfold og Telemark',
     'Møre og Romsdal',
     'Nordland',
-    'Ukjent',
+    'Unknown',
   ],
 };
