@@ -53,6 +53,7 @@ export const makeMarkerFromMapClick = (e) => ({
 });
 
 export const getOptimizedRoutesFuzzy = async (start, fuelType, weight) => {
+  // preventDefault();
   const res = await axiosInstance.get('api/fuzzy/', {
     params: {
       start_lng: start.coordinates.lng,

@@ -105,15 +105,12 @@ function MapComponent({ geoLocation }) {
   };
 
   const handleOptimizedRouteFuzzy = async (fuelType, weight) => {
-    // const fuelType = 'diesel';
-    // const weight = 0.5;
     const optimizedRoutes = await getOptimizedRoutesFuzzy(
       geoLocation,
       fuelType,
       weight
     );
     setOptimizedRoutes(optimizedRoutes);
-    console.log('first');
   };
 
   const handleOptimizedRouteAirDistance = async () => {
