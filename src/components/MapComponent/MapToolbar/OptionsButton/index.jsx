@@ -6,11 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import Menu, { MenuProps } from '@mui/material/Menu';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Slider from '@mui/material/Slider';
-import VolumeDown from '@mui/icons-material/VolumeDown';
-import VolumeUp from '@mui/icons-material/VolumeUp';
+import Fuzzy from './Fuzzy/Fuzzy';
 
 OptionsButton.propTypes = {
   handleOptimizedRouteFuzzy: PropTypes.func,
@@ -22,8 +18,6 @@ export default function OptionsButton(props) {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [openCustomizeButton, setOpenCustomizeButton] = useState(false);
-  const [value, setValue] = useState(100);
 
   const StyledMenu = styled((props) => (
     <Menu
@@ -75,10 +69,6 @@ export default function OptionsButton(props) {
     setAnchorEl(null);
   };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
     <div>
       <Button
@@ -102,30 +92,20 @@ export default function OptionsButton(props) {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem
-          disableRipple
-          onClick={() => {
-            handleOptimizedRouteAirDistance();
-          }}
+        <Button
+          id="demo-customized-button"
+          aria-controls={open ? 'demo-customized-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          variant="text"
+          disableElevation
+          sx={{ width: '100%' }}
+          onClick={handleOptimizedRouteAirDistance}
         >
-          Optimized route by air distance
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleOptimizedRouteFuzzy();
-          }}
-          disableRipple
-        >
-          Customized optimate route
-        </MenuItem>
+          Optimized route by Air Distance
+        </Button>
+        <Fuzzy handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy} />
       </StyledMenu>
-      <Box sx={{ width: 200 }}>
-        <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-          Fuel price
-          <Slider aria-label="Volume" value={value} onChange={handleChange} />
-          Duration
-        </Stack>
-      </Box>
     </div>
   );
 }
