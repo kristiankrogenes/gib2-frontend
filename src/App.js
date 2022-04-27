@@ -5,17 +5,23 @@ import GlobalStyles from './theme/globalStyles';
 import ScrollToTop from './components/general/ScrollToTop';
 import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
 import { useStore } from './stores/RootStore';
+import useGeoLocation from './hooks/useGeoLocation';
 
 export default function App() {
+  const geoLocation = useGeoLocation();
   const {
     userStore: { fetchUsers },
+    gasStationStore: { fetchGasStations },
+    priceStore: { fetchPrices },
   } = useStore();
   useEffect(() => {
     async function fetchData() {
+      await fetchGasStations(geoLocation.coordinates);
+      fetchPrices();
       fetchUsers();
     }
-    fetchData();
-  }, [fetchUsers]);
+    if (geoLocation.loaded) fetchData();
+  }, [fetchGasStations, fetchPrices, fetchUsers, geoLocation]);
   return (
     <ThemeConfig>
       <ScrollToTop />

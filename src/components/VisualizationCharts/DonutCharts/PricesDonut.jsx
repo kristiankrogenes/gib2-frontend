@@ -10,7 +10,6 @@ PricesDonut.propTypes = {
 };
 
 export default function PricesDonut({ prices, labels }) {
-  console.log(labels.donutTitle);
   return (
     <Card sx={{ height: '100%' }}>
       <CardHeader title={labels.donutTitle} />
