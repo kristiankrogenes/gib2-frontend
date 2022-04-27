@@ -64,11 +64,14 @@ export const PriceStore = types
   }))
   .views((store) => ({
     getLatestPriceById(id) {
-      const latestPrice = store.prices
-        .filter((price) => price.gasStation.id === id)
-        .reduce((max, price) =>
+      let latestPrice = store.prices.filter(
+        (price) => price.gasStation.id === id
+      );
+      if (latestPrice.length > 0) {
+        latestPrice = latestPrice.reduce((max, price) =>
           max.createdAt > price.createdAt ? max : price
         );
+      }
       return latestPrice;
     },
   }));
