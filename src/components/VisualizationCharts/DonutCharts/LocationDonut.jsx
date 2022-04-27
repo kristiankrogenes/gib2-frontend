@@ -13,7 +13,7 @@ export default function LocationDonut({ counties }) {
 
   return (
     <Card sx={{ height: '100%' }}>
-      <CardHeader title="Histogram over bensinpriser representert i donutdiagram" />
+      <CardHeader title="Histogram of location of gas stations represented in a donut diagram" />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <Chart options={optionsLocation} series={data} type="pie" width="80%" />
       </Box>

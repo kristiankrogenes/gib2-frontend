@@ -29,7 +29,10 @@ export default function VisualizationCharts() {
           />
         </Grid>
         <Grid item xs={12} sm={5} md={5}>
-          <PricesDonut prices={Object.values(data.histogram.octane_95)} />
+          <PricesDonut
+            labels={labels.octane_95}
+            prices={Object.values(data.histogram.octane_95)}
+          />
         </Grid>
         <Grid item xs={12} sm={7} md={7}>
           <PricesHistogram
@@ -38,7 +41,10 @@ export default function VisualizationCharts() {
           />
         </Grid>
         <Grid item xs={12} sm={5} md={5}>
-          <PricesDonut prices={Object.values(data.histogram.diesel)} />
+          <PricesDonut
+            labels={labels.diesel}
+            prices={Object.values(data.histogram.diesel)}
+          />
         </Grid>
         <Grid item xs={12} sm={7} md={7}>
           <PricesHistogram
@@ -47,7 +53,10 @@ export default function VisualizationCharts() {
           />
         </Grid>
         <Grid item xs={12} sm={5} md={5}>
-          <PricesDonut prices={Object.values(data.histogram.electric)} />
+          <PricesDonut
+            labels={labels.electric}
+            prices={Object.values(data.histogram.electric)}
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <LocationHistogram counties={data.county} />

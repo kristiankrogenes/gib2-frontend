@@ -27,14 +27,14 @@ export default function Login() {
   return (
     <RootStyle title="Login | Minimal-UI">
       <AuthLayout>
-        Ingen bruker? &nbsp;
+        No user? &nbsp;
         <Link
           underline="none"
           variant="subtitle2"
           component={RouterLink}
           to="/register"
         >
-          Registrer nå
+          Register now
         </Link>
       </AuthLayout>
 
@@ -42,7 +42,7 @@ export default function Login() {
         <ContentStyle>
           <Stack sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Logg inn
+              Log in
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
               Enter your details below.

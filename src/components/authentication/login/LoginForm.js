@@ -59,7 +59,7 @@ export default function LoginForm() {
             fullWidth
             autoComplete="username"
             type="username"
-            label="Brukernavn"
+            label="Username"
             {...getFieldProps('username')}
             error={Boolean(touched.username && errors.username)}
             helperText={touched.username && errors.username}
@@ -90,7 +90,7 @@ export default function LoginForm() {
             variant="contained"
             loading={isSubmitting}
           >
-            Logg inn
+            Log inn
           </LoadingButton>
         </Stack>
 
@@ -109,13 +109,13 @@ export default function LoginForm() {
             }
             label="Remember me"
           /> */}
-          <Link component={RouterLink} variant="subtitle2" to="#">
-            Ingen bruker? Registrer nå
+          <Link component={RouterLink} variant="subtitle2" to="/register">
+            No user? Register now
           </Link>
 
-          <Link component={RouterLink} variant="subtitle2" to="#">
-            Glemt passord?
-          </Link>
+          {/* <Link component={RouterLink} variant="subtitle2" to="#">
+            Forgotten password?
+          </Link> */}
         </Stack>
       </Form>
     </FormikProvider>
