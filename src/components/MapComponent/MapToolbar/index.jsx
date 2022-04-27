@@ -14,6 +14,7 @@ MapToolbar.propTypes = {
   addGas: PropTypes.bool,
   handleOptimizedRouteFuzzy: PropTypes.func,
   resetOptimizedRoutes: PropTypes.func,
+  handleOptimizedRoute: PropTypes.func,
   handleOptimizedRouteAirDistance: PropTypes.func,
   handleShowAll: PropTypes.func,
   showAll: PropTypes.bool,
@@ -61,13 +62,13 @@ export default function MapToolbar(props) {
       />
       {!addGas ? (
         <>
-          <Button
+          {/* <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}
-            onClick={handleOptimizedRoute}
+            onClick={handleOptimizedRouteAirDistance}
           >
             Optimized Route
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}

@@ -111,7 +111,7 @@ export default function Fuzzy({ handleOptimizedRouteFuzzy }) {
           <Box sx={{ padding: '5px' }}>
             Choose your prioritizinging. If you slide it more towards fuel price
             we will weight the fuel price more than nearest gas station and vice
-            versa.
+            versa. This might take some time.
             <Stack
               spacing={2}
               direction="row"
