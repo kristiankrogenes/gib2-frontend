@@ -34,15 +34,18 @@ function MapPopup({ handleClickOpenUpdatePrice }) {
         }`}{' '}
         <br />
         {`Octane95: ${
-          Math.round(selectedGasStation.latestPrice?.octane95 * 100) / 100
+          selectedGasStation.latestPrice.octane95
+            ? Math.round(selectedGasStation.latestPrice.octane95 * 100) / 100
+            : 'Ingen pris'
         }`}{' '}
         <br />
         {`Electric: ${
-          Math.round(selectedGasStation.latestPrice?.electric * 100) / 100
+          selectedGasStation.latestPrice.electric
+            ? Math.round(selectedGasStation.latestPrice.electric * 100) / 100
+            : 'Ingen pris'
         }`}{' '}
         <br /> {fDateTime(selectedGasStation.latestPrice?.createdAt)}
       </div>
-      {/* <Button>More Info</Button> */}
       <Button variant="outlined" onClick={handleClickOpenUpdatePrice}>
         Register Price
       </Button>
