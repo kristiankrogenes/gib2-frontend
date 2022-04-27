@@ -14,9 +14,12 @@ import VolumeUp from '@mui/icons-material/VolumeUp';
 
 OptionsButton.propTypes = {
   handleOptimizedRouteFuzzy: PropTypes.func,
+  handleOptimizedRouteAirDistance: PropTypes.func,
 };
 
-export default function OptionsButton({ handleOptimizedRouteFuzzy }) {
+export default function OptionsButton(props) {
+  const { handleOptimizedRouteFuzzy, handleOptimizedRouteAirDistance } = props;
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [openCustomizeButton, setOpenCustomizeButton] = useState(false);
@@ -99,8 +102,13 @@ export default function OptionsButton({ handleOptimizedRouteFuzzy }) {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem disableRipple onClick={handleClose}>
-          Optimized route by duration
+        <MenuItem
+          disableRipple
+          onClick={() => {
+            handleOptimizedRouteAirDistance();
+          }}
+        >
+          Optimized route by air distance
         </MenuItem>
         <MenuItem
           onClick={() => {

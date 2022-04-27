@@ -65,6 +65,16 @@ export const getOptimizedRoutesFuzzy = async (start, fuelType, weight) => {
   return featureCollection([feature(res.data.geometry)]);
 };
 
+export const getOptimizedRoutesAirDistance = async (start) => {
+  const res = await axiosInstance.get('api/or-distance/', {
+    params: {
+      start_lng: start.coordinates.lng,
+      start_lat: start.coordinates.lat,
+    },
+  });
+  return featureCollection([feature(res.data.geometry)]);
+};
+
 // export const ClusterMarker = ({ longitude, latitude, pointCount }) => {
 //   ClusterMarker.propTypes = {
 //     longitude: PropTypes.number,
