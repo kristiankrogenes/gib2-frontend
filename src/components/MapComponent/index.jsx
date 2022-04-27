@@ -53,6 +53,7 @@ function MapComponent({ geoLocation }) {
   const [marker, setMarker] = useState(null);
   const [optimizedRoutes, setOptimizedRoutes] = useState({});
   const [newStationInfo, setNewStationInfo] = useState(initialNewStationInfo);
+  const [showAll, setShowAll] = useState(true);
 
   const {
     gasStationStore: {
@@ -61,6 +62,7 @@ function MapComponent({ geoLocation }) {
       addGasStation,
       setSelectedGasStation,
       selectedGasStation,
+      gasStations
     },
     priceStore: { addPrice },
   } = useStore();
@@ -125,6 +127,10 @@ function MapComponent({ geoLocation }) {
     setSelectedGasStation(station);
   };
 
+  const handleShowAll = () => {
+    setShowAll(!showAll);
+  }
+
   const onFilterName = (newValue) => {
     if (newValue) {
       mapRef.current.flyTo({
@@ -143,6 +149,8 @@ function MapComponent({ geoLocation }) {
         handleClickOpen={handleClickOpen}
         onFilterName={onFilterName}
         addGas={addGas}
+        handleShowAll={handleShowAll}
+        showAll={showAll}
       />
       <AddStationDialog
         open={open}
@@ -191,14 +199,14 @@ function MapComponent({ geoLocation }) {
           )}
 
           {
-            gasStationsInsideRadius.length > 0 &&
+            (showAll ? (gasStations.length > 0) : (gasStationsInsideRadius.length > 0)) &&
               // <Cluster
               //   radius={80}
               //   extent={512}
               //   nodeSize={64}
               //   component={ClusterMarker}
               // >
-              getGasStationsInsideRadius().map((station) => (
+              (showAll ? gasStations : getGasStationsInsideRadius()).map((station) => (
                 <Marker
                   key={station.id}
                   longitude={station.point[0]}

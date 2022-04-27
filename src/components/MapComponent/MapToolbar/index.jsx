@@ -13,6 +13,8 @@ MapToolbar.propTypes = {
   addGas: PropTypes.bool,
   handleOptimizedRoute: PropTypes.func,
   resetOptimizedRoutes: PropTypes.func,
+  handleShowAll: PropTypes.func,
+  showAll: PropTypes.bool,
 };
 
 export default function MapToolbar(props) {
@@ -22,6 +24,8 @@ export default function MapToolbar(props) {
     handleClickOpen,
     addGas,
     handleOptimizedRoute,
+    handleShowAll,
+    showAll,
   } = props;
 
   const {
@@ -61,9 +65,16 @@ export default function MapToolbar(props) {
       <Button
         variant="contained"
         startIcon={<Icon icon={plusFill} />}
-        onClick={() => handleOptimizedRoute()}
+        onClick={handleOptimizedRoute}
       >
         Optimized Route
+      </Button>
+      <Button
+        variant="contained"
+        startIcon={<Icon icon={plusFill} />}
+        onClick={handleShowAll}
+      >
+        {showAll ? 'Show station inside radius' : 'Show all stations'}
       </Button>
     </RootStyle>
   );
