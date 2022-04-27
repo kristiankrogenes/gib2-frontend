@@ -123,6 +123,7 @@ export default function Fuzzy({ handleOptimizedRouteFuzzy }) {
                 aria-label="Volume"
                 value={value}
                 onChange={handleChange}
+                valueLabelDisplay="on"
               />
               Duration
             </Stack>
@@ -159,7 +160,6 @@ export default function Fuzzy({ handleOptimizedRouteFuzzy }) {
           onClick={() => {
             var weigth = (100 - value) / 100;
             handleOptimizedRouteFuzzy(fuel.toLowerCase(), weigth);
-            console.log('hei');
           }}
         >
           Confirm

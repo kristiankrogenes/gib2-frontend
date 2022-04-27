@@ -14,6 +14,7 @@ MapToolbar.propTypes = {
   addGas: PropTypes.bool,
   handleOptimizedRouteFuzzy: PropTypes.func,
   resetOptimizedRoutes: PropTypes.func,
+  handleOptimizedRouteAirDistance: PropTypes.func,
 };
 
 export default function MapToolbar(props) {
@@ -23,6 +24,7 @@ export default function MapToolbar(props) {
     handleClickOpen,
     addGas,
     handleOptimizedRouteFuzzy,
+    handleOptimizedRouteAirDistance,
   } = props;
 
   const {
@@ -66,7 +68,10 @@ export default function MapToolbar(props) {
       >
         Optimized Route
       </Button> */}
-      <OptionsButton handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy} />
+      <OptionsButton
+        handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy}
+        handleOptimizedRouteAirDistance={handleOptimizedRouteAirDistance}
+      />
     </RootStyle>
   );
 }

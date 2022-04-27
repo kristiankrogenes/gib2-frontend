@@ -22,6 +22,7 @@ import {
 import {
   makeMarkerFromMapClick,
   getOptimizedRoutesFuzzy,
+  getOptimizedRoutesAirDistance
   // ClusterMarker,
 } from './helpers';
 // import MapMarker from './MapMarker';
@@ -104,16 +105,18 @@ function MapComponent({ geoLocation }) {
   };
 
   const handleOptimizedRouteFuzzy = async (fuelType, weight) => {
-    // const fuelType = 'diesel';
-    // const weight = 0.5;
     const optimizedRoutes = await getOptimizedRoutesFuzzy(
       geoLocation,
       fuelType,
       weight
     );
     setOptimizedRoutes(optimizedRoutes);
-    console.log('first');
   };
+
+  const handleOptimizedRouteAirDistance = async () => {
+    const optimizedRoutes = await getOptimizedRoutesAirDistance(geoLocation);
+    setOptimizedRoutes(optimizedRoutes);
+  }
 
   useEffect(() => {
     geoLocateRef.current?.trigger();
@@ -143,11 +146,12 @@ function MapComponent({ geoLocation }) {
   return (
     <Card>
       <MapToolbar
-        handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy}
+        handleOptimizedRouteAirDistance={handleOptimizedRouteAirDistance}
         handleAddStation={handleAddStation}
         handleClickOpen={handleClickOpen}
         onFilterName={onFilterName}
         addGas={addGas}
+        handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy}
       />
       <AddStationDialog
         open={open}

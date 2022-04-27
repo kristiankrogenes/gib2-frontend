@@ -10,9 +10,12 @@ import Fuzzy from './Fuzzy/Fuzzy';
 
 OptionsButton.propTypes = {
   handleOptimizedRouteFuzzy: PropTypes.func,
+  handleOptimizedRouteAirDistance: PropTypes.func,
 };
 
-export default function OptionsButton({ handleOptimizedRouteFuzzy }) {
+export default function OptionsButton(props) {
+  const { handleOptimizedRouteFuzzy, handleOptimizedRouteAirDistance } = props;
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -97,9 +100,9 @@ export default function OptionsButton({ handleOptimizedRouteFuzzy }) {
           variant="text"
           disableElevation
           sx={{ width: '100%' }}
-          onClick={handleClose}
+          onClick={handleOptimizedRouteAirDistance}
         >
-          Optimized route by distance
+          Optimized route by Air Distance
         </Button>
         <Fuzzy handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy} />
       </StyledMenu>

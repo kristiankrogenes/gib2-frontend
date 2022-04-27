@@ -53,6 +53,7 @@ export const makeMarkerFromMapClick = (e) => ({
 });
 
 export const getOptimizedRoutesFuzzy = async (start, fuelType, weight) => {
+  // preventDefault();
   const res = await axiosInstance.get('api/fuzzy/', {
     params: {
       start_lng: start.coordinates.lng,
@@ -60,6 +61,16 @@ export const getOptimizedRoutesFuzzy = async (start, fuelType, weight) => {
       price_weight: weight,
       duration_weight: 1 - weight,
       fuel_type: fuelType,
+    },
+  });
+  return featureCollection([feature(res.data.geometry)]);
+};
+
+export const getOptimizedRoutesAirDistance = async (start) => {
+  const res = await axiosInstance.get('api/or-distance/', {
+    params: {
+      start_lng: start.coordinates.lng,
+      start_lat: start.coordinates.lat,
     },
   });
   return featureCollection([feature(res.data.geometry)]);
