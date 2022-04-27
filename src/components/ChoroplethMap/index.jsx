@@ -76,16 +76,16 @@ function ChoroplethMap() {
           value={value}
           onChange={handleChangeType}
         >
-          <FormControlLabel value={county} control={<Radio />} label="Fylke" />
+          <FormControlLabel value={county} control={<Radio />} label="County" />
           <FormControlLabel
             value={municipality}
             control={<Radio />}
-            label="Kommune"
+            label="Municipality"
           />
         </RadioGroup>
       </FormControl>
       <FormControl>
-        <FormLabel id="id2">Atributt</FormLabel>
+        <FormLabel id="id2">Attribute</FormLabel>
         <RadioGroup
           aria-labelledby="id2"
           value={compareValue}
@@ -94,12 +94,12 @@ function ChoroplethMap() {
           <FormControlLabel
             value={total}
             control={<Radio />}
-            label="Antall bensinstasjoner"
+            label="Number of gas stations"
           />
           <FormControlLabel
             value={average}
             control={<Radio />}
-            label="Gjennomsnittlig pris"
+            label="Average price"
           />
         </RadioGroup>
       </FormControl>
@@ -114,7 +114,7 @@ function ChoroplethMap() {
             <FormControlLabel
               value={octane95}
               control={<Radio />}
-              label="Bensin"
+              label="Octane95"
             />
             <FormControlLabel
               value={diesel}
@@ -124,7 +124,7 @@ function ChoroplethMap() {
             <FormControlLabel
               value={electric}
               control={<Radio />}
-              label="Elektrisk"
+              label="Electric"
             />
           </RadioGroup>
         </FormControl>

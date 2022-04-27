@@ -26,7 +26,7 @@ export default function LocationHistogram({ counties }) {
 
   return (
     <Card>
-      <CardHeader title="Histogram av plassering til bensinstasjoner" />
+      <CardHeader title="Histogram of locations of gas stations" />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <Chart options={options} series={series} type="bar" width="100%" />
       </Box>

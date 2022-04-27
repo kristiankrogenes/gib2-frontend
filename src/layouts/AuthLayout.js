@@ -47,7 +47,7 @@ export default function AuthLayout({ children }) {
             mt: { md: -2 },
           }}
         >
-          {children}
+          {/* {children} */}
         </Typography>
       </MHidden>
     </HeaderStyle>

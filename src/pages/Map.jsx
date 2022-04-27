@@ -33,14 +33,14 @@ export default function Map() {
           <Typography variant="h4" gutterBottom>
             Map
           </Typography>
-          <Button
+          {/* <Button
             variant="contained"
             component={RouterLink}
             to="#"
             startIcon={<Icon icon={plusFill} />}
           >
             New User
-          </Button>
+          </Button> */}
         </Stack>
         <MapComponent geoLocation={geoLocation} />
       </Container>

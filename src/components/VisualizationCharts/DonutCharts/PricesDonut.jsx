@@ -9,10 +9,11 @@ PricesDonut.propTypes = {
   labels: PropTypes.object,
 };
 
-export default function PricesDonut({ prices }) {
+export default function PricesDonut({ prices, labels }) {
+  console.log(labels.donutTitle);
   return (
     <Card sx={{ height: '100%' }}>
-      <CardHeader title="Histogram over bensinpriser representert i donutdiagram" />
+      <CardHeader title={labels.donutTitle} />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <Chart options={optionsDonut} series={prices} type="pie" width="80%" />
       </Box>
