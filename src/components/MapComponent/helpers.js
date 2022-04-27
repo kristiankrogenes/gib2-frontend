@@ -42,9 +42,9 @@ export const makeMarkerFromMapClick = (e) => ({
       longitude={e.lngLat.lng}
       latitude={e.lngLat.lat}
       anchor="bottom"
-      draggable={true}
+      // draggable={true}
     >
-      <MapPin onClick={() => null} />
+      <MapPin onClick={() => null} isNew={true} />
     </Marker>
   ),
   coordinates: e.lngLat,
