@@ -22,8 +22,6 @@ const TABLE_HEAD = [
   { id: 'company', label: 'Octane95 price', alignRight: false },
   { id: 'role', label: 'Diesel price', alignRight: false },
   { id: 'isVerified', label: 'Electric price', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
-  { id: '' },
 ];
 
 function GasStationList() {
