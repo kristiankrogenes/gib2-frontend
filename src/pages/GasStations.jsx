@@ -13,7 +13,7 @@ function GasStations() {
     async function fetchData() {
       await gasStationStore.fetchGasStations();
     }
-    fetchData();
+    if (gasStationStore.gasStations.length === 0) fetchData();
   }, [gasStationStore]);
 
   return (
@@ -23,7 +23,7 @@ function GasStations() {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          mb={5}
+          mb={1}
         >
           <Typography variant="h4" gutterBottom>
             Gas Stations

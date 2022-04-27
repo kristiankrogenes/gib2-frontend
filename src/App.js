@@ -8,18 +8,14 @@ import { useStore } from './stores/RootStore';
 
 export default function App() {
   const {
-    gasStationStore: { fetchGasStations },
-    priceStore: { fetchPrices },
     userStore: { fetchUsers },
   } = useStore();
   useEffect(() => {
     async function fetchData() {
-      await fetchGasStations();
-      fetchPrices();
       fetchUsers();
     }
     fetchData();
-  }, [fetchGasStations, fetchPrices, fetchUsers]);
+  }, [fetchUsers]);
   return (
     <ThemeConfig>
       <ScrollToTop />

@@ -2,9 +2,7 @@ import React from 'react';
 import { Marker } from 'react-map-gl';
 // import { Marker } from '@urbica/react-map-gl';
 import MapPin from './MapPin';
-import { lerka } from './constants';
 import axiosInstance from '../../utils/axios';
-import axios from 'axios';
 import { feature, featureCollection } from 'turf';
 
 export const createPointGeojson = (point) => ({
@@ -44,35 +42,36 @@ export const makeMarkerFromMapClick = (e) => ({
       longitude={e.lngLat.lng}
       latitude={e.lngLat.lat}
       anchor="bottom"
-      draggable={true}
+      // draggable={true}
     >
-      <MapPin onClick={() => null} />
+      <MapPin onClick={() => null} isNew={true} />
     </Marker>
   ),
   coordinates: e.lngLat,
 });
 
-export const getOptimizedRoutes = async () => {
-  const start = {
-    lon: lerka.lng,
-    lat: lerka.lat,
-  };
-
-  const response = await axiosInstance.get('api/stations-inside-radius', {
-    params: start,
+export const getOptimizedRoutesFuzzy = async (start, fuelType, weight) => {
+  // preventDefault();
+  const res = await axiosInstance.get('api/fuzzy/', {
+    params: {
+      start_lng: start.coordinates.lng,
+      start_lat: start.coordinates.lat,
+      price_weight: weight,
+      duration_weight: 1 - weight,
+      fuel_type: fuelType,
+    },
   });
-  const nearestStations = response.data.features;
-  const routes = [];
+  return featureCollection([feature(res.data.geometry)]);
+};
 
-  for (let i = 0; i < nearestStations.length; i++) {
-    const url = optimizedRouteURL(lerka, {
-      lng: nearestStations[i].geometry.coordinates[0],
-      lat: nearestStations[i].geometry.coordinates[1],
-    });
-    const route = await axios.get(url);
-    routes.push(feature(route.data.trips[0].geometry));
-  }
-  return featureCollection(routes);
+export const getOptimizedRoutesAirDistance = async (start) => {
+  const res = await axiosInstance.get('api/or-distance/', {
+    params: {
+      start_lng: start.coordinates.lng,
+      start_lat: start.coordinates.lat,
+    },
+  });
+  return featureCollection([feature(res.data.geometry)]);
 };
 
 // export const ClusterMarker = ({ longitude, latitude, pointCount }) => {

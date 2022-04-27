@@ -1,10 +1,10 @@
 import React from 'react';
-import { Stack, Avatar, TableRow, TableCell, Typography } from '@mui/material';
+import { Stack, TableRow, TableCell, Typography } from '@mui/material';
 import Label from '../../general/Label';
 import { UserMoreMenu } from '../../_dashboard/user';
-import { mockImgAvatar } from '../../../utils/mockImages';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
+import { fShortenNumber } from '../../../utils/formatNumber';
 
 GasStationItem.propTypes = {
   row: PropTypes.object,
@@ -14,6 +14,7 @@ GasStationItem.propTypes = {
 function GasStationItem({ row, selected }) {
   const { id, name } = row;
   const isItemSelected = selected.indexOf(name) !== -1;
+  const latestPrice = row.latestPrice ?? null;
 
   return (
     <TableRow
@@ -24,9 +25,8 @@ function GasStationItem({ row, selected }) {
       selected={isItemSelected}
       aria-checked={isItemSelected}
     >
-      <TableCell component="th" scope="row" padding="none">
+      <TableCell component="th" scope="row" padding="normal">
         <Stack direction="row" alignItems="center" spacing={2}>
-          <Avatar alt={name} src={mockImgAvatar(1)} />
           <Typography variant="subtitle2" noWrap>
             {name}
           </Typography>
@@ -34,22 +34,17 @@ function GasStationItem({ row, selected }) {
       </TableCell>
       <TableCell align="left">
         <Label variant="ghost" color={'error'}>
-          Lorem ipsum
+          {fShortenNumber(latestPrice.octane95)}
         </Label>
       </TableCell>
       <TableCell align="left">
         <Label variant="ghost" color={'info'}>
-          Lorem ipsum
+          {fShortenNumber(latestPrice.diesel)}
         </Label>
       </TableCell>
       <TableCell align="left">
         <Label variant="ghost" color={'success'}>
-          Lorem ipsum
-        </Label>
-      </TableCell>
-      <TableCell align="left">
-        <Label variant="ghost" color={'warning'}>
-          Lorem ipsum
+          {fShortenNumber(latestPrice.electric)}
         </Label>
       </TableCell>
       <TableCell align="right">

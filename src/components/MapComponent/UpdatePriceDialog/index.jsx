@@ -8,9 +8,9 @@ import {
   DialogTitle,
   DialogContentText,
   TextField,
-  Box,
 } from '@mui/material';
 import PropTypes from 'prop-types';
+import { initialNewStationInfo } from '../constants';
 
 UpdatePriceDialog.propTypes = {
   openUpdatePriceDialog: PropTypes.bool,
@@ -27,37 +27,31 @@ export default function UpdatePriceDialog({
   setNewStationInfo,
 }) {
   const {
-    gasStationStore: { selectedGasStation, addGasStation },
+    gasStationStore: { selectedGasStation },
     priceStore: { addPrice },
   } = useStore();
 
   const handleOnClick = async () => {
     await addPrice(newStationInfo.price, parseInt(selectedGasStation.id));
     setOpenUpdatePriceDialog(false);
-    setNewStationInfo({
-      name: '',
-      price: {
-        diesel: '',
-        octane95: '',
-        electric: '',
-      },
-    });
+    setNewStationInfo(initialNewStationInfo);
+  };
+
+  const handleClose = () => {
+    setNewStationInfo(initialNewStationInfo);
+    setOpenUpdatePriceDialog(false);
   };
 
   return (
-    <Dialog
-      open={openUpdatePriceDialog}
-      onClose={() => {
-        setOpenUpdatePriceDialog(false);
-      }}
-    >
+    <Dialog open={openUpdatePriceDialog} onClose={handleClose}>
       <DialogTitle>Update Price</DialogTitle>
       <DialogContent>
-        <DialogContentText sx={{ fontWeight: '', color: 'black' }}>
+        <DialogContentText sx={{ color: 'black', marginBottom: '10px' }}>
           Here you can add one or more prices.
         </DialogContentText>
         <TextField
-          placeholder="placeholder"
+          sx={{ marginBottom: '10px', marginRight: '10px' }}
+          placeholder="Enter price"
           label="Diesel Price"
           onChange={(e) =>
             setNewStationInfo({
@@ -73,7 +67,7 @@ export default function UpdatePriceDialog({
           Diesel Price
         </TextField>
         <TextField
-          placeholder="placeholder"
+          placeholder="Enter price"
           label="Octane95 Price"
           onChange={(e) =>
             setNewStationInfo({
@@ -89,7 +83,7 @@ export default function UpdatePriceDialog({
           Octane95 Price
         </TextField>
         <TextField
-          placeholder="placeholder"
+          placeholder="Enter price"
           label="Electric Price"
           onChange={(e) =>
             setNewStationInfo({

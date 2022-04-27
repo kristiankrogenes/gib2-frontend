@@ -1,7 +1,6 @@
 import { types, flow, getRoot } from 'mobx-state-tree';
 import axiosInstance from '../utils/axios';
 import { getGasStationFromAPI, getGasStationPOST } from './helpers';
-import { lerka } from '../components/MapComponent/constants';
 
 export const GasStationModel = types
   .model({
@@ -31,7 +30,7 @@ export const GasStationStore = types
     setSelectedGasStation(gasStation) {
       store.selectedGasStation = gasStation;
     },
-    fetchGasStations: flow(function* () {
+    fetchGasStations: flow(function* (geoLocation) {
       try {
         const response = yield axiosInstance.get('/api/gasstations/');
         const newGasStations = response.data.features.map((gasStation) => ({
@@ -42,7 +41,7 @@ export const GasStationStore = types
         store.setGasStations(newGasStations);
         const response2 = yield axiosInstance.get(
           '/api/stations-inside-radius/',
-          { params: { lon: lerka.lng, lat: lerka.lat } }
+          { params: { lon: geoLocation.lng, lat: geoLocation.lat } }
         );
         const nearGasStations = response2.data.features.map((gasStation) =>
           gasStation.id.toString()
@@ -52,12 +51,16 @@ export const GasStationStore = types
         console.log(e.stack);
       }
     }),
-    addGasStation: flow(function* (marker, name) {
+    addGasStation: flow(function* (marker, name, geoLocation) {
       try {
         const data = getGasStationPOST(marker, name);
         const response = yield axiosInstance.post('/api/gasstations/', data);
         const gasStation = getGasStationFromAPI(response.data);
         store.setGasStations([...store.gasStations, gasStation]);
+        store.setGasStationsInsideRadius([
+          ...store.gasStationsInsideRadius,
+          gasStation.id,
+        ]);
         return gasStation.id;
       } catch (e) {
         console.log(e.message);

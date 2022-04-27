@@ -2,7 +2,7 @@ import React from 'react';
 import ReactGlobe from 'react-globe.gl';
 import { renderToStaticMarkup } from 'react-dom/server';
 import pic from './Picture/picture.jpg';
-import './globe.css';
+// import './globe.css';
 
 const _renderPopup = (index) => {
   return (

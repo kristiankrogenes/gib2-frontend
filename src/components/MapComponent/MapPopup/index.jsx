@@ -28,19 +28,24 @@ function MapPopup({ handleClickOpenUpdatePrice }) {
         <div style={{ fontWeight: 'bold' }}>{selectedGasStation.name}</div>
         Last registered prices: <br />
         {`Diesel: ${
-          Math.round(selectedGasStation.latestPrice?.diesel * 100) / 100
+          selectedGasStation.latestPrice.diesel
+            ? Math.round(selectedGasStation.latestPrice?.diesel * 100) / 100
+            : 'Ingen pris'
         }`}{' '}
         <br />
         {`Octane95: ${
-          Math.round(selectedGasStation.latestPrice?.octane95 * 100) / 100
+          selectedGasStation.latestPrice.octane95
+            ? Math.round(selectedGasStation.latestPrice.octane95 * 100) / 100
+            : 'Ingen pris'
         }`}{' '}
         <br />
         {`Electric: ${
-          Math.round(selectedGasStation.latestPrice?.electric * 100) / 100
+          selectedGasStation.latestPrice.electric
+            ? Math.round(selectedGasStation.latestPrice.electric * 100) / 100
+            : 'Ingen pris'
         }`}{' '}
         <br /> {fDateTime(selectedGasStation.latestPrice?.createdAt)}
       </div>
-      {/* <Button>More Info</Button> */}
       <Button variant="outlined" onClick={handleClickOpenUpdatePrice}>
         Register Price
       </Button>
