@@ -53,7 +53,7 @@ function MapComponent({ geoLocation }) {
   const [marker, setMarker] = useState(null);
   const [optimizedRoutes, setOptimizedRoutes] = useState({});
   const [newStationInfo, setNewStationInfo] = useState(initialNewStationInfo);
-  const [showAll, setShowAll] = useState(true);
+  const [showAll, setShowAll] = useState(false);
 
   const {
     gasStationStore: {
