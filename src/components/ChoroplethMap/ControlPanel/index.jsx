@@ -87,17 +87,17 @@ export default function ControlPanel(props) {
               <FormControlLabel
                 value={county}
                 control={<Radio />}
-                label="Fylke"
+                label="County"
               />
               <FormControlLabel
                 value={municipality}
                 control={<Radio />}
-                label="Kommune"
+                label="Municipality"
               />
             </RadioGroup>
           </FormControl>
           <FormControl>
-            <FormLabel id="id2">Atributt</FormLabel>
+            <FormLabel id="id2">Attribute</FormLabel>
             <RadioGroup
               aria-labelledby="id2"
               value={compareValue}
@@ -106,12 +106,12 @@ export default function ControlPanel(props) {
               <FormControlLabel
                 value={total}
                 control={<Radio />}
-                label="Antall bensinstasjoner"
+                label="Number of gas stations"
               />
               <FormControlLabel
                 value={average}
                 control={<Radio />}
-                label="Gjennomsnittlig pris"
+                label="Average price"
               />
             </RadioGroup>
           </FormControl>
@@ -126,7 +126,7 @@ export default function ControlPanel(props) {
                 <FormControlLabel
                   value={octane95}
                   control={<Radio />}
-                  label="Bensin"
+                  label="Octane 95"
                 />
                 <FormControlLabel
                   value={diesel}
@@ -136,7 +136,7 @@ export default function ControlPanel(props) {
                 <FormControlLabel
                   value={electric}
                   control={<Radio />}
-                  label="Elektrisk"
+                  label="Electric"
                 />
               </RadioGroup>
             </FormControl>
