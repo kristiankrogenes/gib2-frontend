@@ -17,11 +17,12 @@ import {
   MAPBOX_TOKEN,
   mapStyle,
   lineLayerStyle,
-  initialNewStationInfo
+  initialNewStationInfo,
 } from './constants';
 import {
   makeMarkerFromMapClick,
-  getOptimizedRoutes,
+  getOptimizedRoutesFuzzy,
+  getOptimizedRoutesAirDistance,
   // ClusterMarker,
 } from './helpers';
 // import MapMarker from './MapMarker';
@@ -62,7 +63,7 @@ function MapComponent({ geoLocation }) {
       addGasStation,
       setSelectedGasStation,
       selectedGasStation,
-      gasStations
+      gasStations,
     },
     priceStore: { addPrice },
   } = useStore();
@@ -105,17 +106,24 @@ function MapComponent({ geoLocation }) {
     });
   };
 
-  const handleOptimizedRoute = async () => {
-    const fuelType = 'diesel';
-    const weight = 0.95
-    const optimizedRoutes = await getOptimizedRoutes(geoLocation, fuelType, weight);
+  const handleOptimizedRouteFuzzy = async (fuelType, weight) => {
+    const optimizedRoutes = await getOptimizedRoutesFuzzy(
+      geoLocation,
+      fuelType,
+      weight
+    );
+    setOptimizedRoutes(optimizedRoutes);
+  };
+
+  const handleOptimizedRouteAirDistance = async () => {
+    const optimizedRoutes = await getOptimizedRoutesAirDistance(geoLocation);
     setOptimizedRoutes(optimizedRoutes);
   };
 
   useEffect(() => {
     geoLocateRef.current?.trigger();
   }, [geoLocation]);
-  
+
   const onMapClick = (e) => {
     if (addGas) {
       const marker = makeMarkerFromMapClick(e);
@@ -129,7 +137,7 @@ function MapComponent({ geoLocation }) {
 
   const handleShowAll = () => {
     setShowAll(!showAll);
-  }
+  };
 
   const onFilterName = (newValue) => {
     if (newValue) {
@@ -144,11 +152,12 @@ function MapComponent({ geoLocation }) {
   return (
     <Card>
       <MapToolbar
-        handleOptimizedRoute={handleOptimizedRoute}
+        handleOptimizedRouteAirDistance={handleOptimizedRouteAirDistance}
         handleAddStation={handleAddStation}
         handleClickOpen={handleClickOpen}
         onFilterName={onFilterName}
         addGas={addGas}
+        handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy}
         handleShowAll={handleShowAll}
         showAll={showAll}
       />
@@ -199,23 +208,27 @@ function MapComponent({ geoLocation }) {
           )}
 
           {
-            (showAll ? (gasStations.length > 0) : (gasStationsInsideRadius.length > 0)) &&
+            (showAll
+              ? gasStations.length > 0
+              : gasStationsInsideRadius.length > 0) &&
               // <Cluster
               //   radius={80}
               //   extent={512}
               //   nodeSize={64}
               //   component={ClusterMarker}
               // >
-              (showAll ? gasStations : getGasStationsInsideRadius()).map((station) => (
-                <Marker
-                  key={station.id}
-                  longitude={station.point[0]}
-                  latitude={station.point[1]}
-                  anchor="bottom"
-                >
-                  <MapPin onClick={() => handleMapPinClick(station)} />
-                </Marker>
-              ))
+              (showAll ? gasStations : getGasStationsInsideRadius()).map(
+                (station) => (
+                  <Marker
+                    key={station.id}
+                    longitude={station.point[0]}
+                    latitude={station.point[1]}
+                    anchor="bottom"
+                  >
+                    <MapPin onClick={() => handleMapPinClick(station)} />
+                  </Marker>
+                )
+              )
             // </Cluster>
           }
           {marker?.marker}

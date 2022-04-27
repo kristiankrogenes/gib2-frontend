@@ -5,14 +5,17 @@ import plusFill from '@iconify/icons-eva/plus-fill';
 import { Button, Autocomplete, TextField, Typography } from '@mui/material';
 import { RootStyle } from './styles';
 import { useStore } from '../../../stores/RootStore';
+import OptionsButton from './OptionsButton';
 
 MapToolbar.propTypes = {
   onFilterName: PropTypes.func,
   handleAddStation: PropTypes.func,
   handleClickOpen: PropTypes.func,
   addGas: PropTypes.bool,
-  handleOptimizedRoute: PropTypes.func,
+  handleOptimizedRouteFuzzy: PropTypes.func,
   resetOptimizedRoutes: PropTypes.func,
+  handleOptimizedRoute: PropTypes.func,
+  handleOptimizedRouteAirDistance: PropTypes.func,
   handleShowAll: PropTypes.func,
   showAll: PropTypes.bool,
 };
@@ -23,6 +26,8 @@ export default function MapToolbar(props) {
     handleAddStation,
     handleClickOpen,
     addGas,
+    handleOptimizedRouteFuzzy,
+    handleOptimizedRouteAirDistance,
     handleOptimizedRoute,
     handleShowAll,
     showAll,
@@ -57,13 +62,13 @@ export default function MapToolbar(props) {
       />
       {!addGas ? (
         <>
-          <Button
+          {/* <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}
-            onClick={handleOptimizedRoute}
+            onClick={handleOptimizedRouteAirDistance}
           >
             Optimized Route
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}
@@ -85,6 +90,17 @@ export default function MapToolbar(props) {
       >
         {addGas ? 'Confirm position' : 'Add station'}
       </Button>
+      {/* <Button
+        variant="contained"
+        startIcon={<Icon icon={plusFill} />}
+        onClick={() => handleOptimizedRoute()}
+      >
+        Optimized Route
+      </Button> */}
+      <OptionsButton
+        handleOptimizedRouteFuzzy={handleOptimizedRouteFuzzy}
+        handleOptimizedRouteAirDistance={handleOptimizedRouteAirDistance}
+      />
     </RootStyle>
   );
 }

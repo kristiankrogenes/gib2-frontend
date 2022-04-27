@@ -6,7 +6,7 @@ import vem from './pictures/vemund.jpg';
 export const profiles = [
   {
     name: 'Vemund Thallaug Lund',
-    title: 'CEO',
+    title: 'Chief Executive Officer',
     pic: vem,
   },
   {
