@@ -14,6 +14,11 @@ function ConfirmInfo({ newStationInfo }) {
       <Typography>Diesel: {newStationInfo.price.diesel}</Typography>
       <Typography>Octane95: {newStationInfo.price.octane95}</Typography>
       <Typography>Electric: {newStationInfo.price.electric}</Typography>
+      <Typography sx={{ fontWeight: 'bold' }}>
+        After confirming the information you can add the location of the station
+        by clicking on the map and then press confirm position to finish the
+        process
+      </Typography>
     </DialogContentText>
   );
 }
