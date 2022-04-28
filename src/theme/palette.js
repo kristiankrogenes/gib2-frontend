@@ -70,8 +70,8 @@ const WARNING = {
 };
 const ERROR = {
   lighter: '#FFE7D9',
-  light: '#FFA48D',
-  main: '#FF4842',
+  light: '#FF5349',
+  main: '#FF5349',
   dark: '#B72136',
   darker: '#7A0C2E',
   contrastText: '#fff',
