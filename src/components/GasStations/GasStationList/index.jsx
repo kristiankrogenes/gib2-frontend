@@ -20,9 +20,9 @@ import ClusterMap from '../ClusterMap';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Octane95 price', alignRight: false },
-  { id: 'role', label: 'Diesel price', alignRight: false },
-  { id: 'isVerified', label: 'Electric price', alignRight: false },
+  { id: 'octane95', label: 'Octane95 price', alignRight: false },
+  { id: 'diesel', label: 'Diesel price', alignRight: false },
+  { id: 'electric', label: 'Electric price', alignRight: false },
 ];
 
 function GasStationList() {
@@ -103,6 +103,19 @@ function GasStationList() {
               <TableBody>
                 {gasStations
                   .filter((row) => row.name.includes(filterName))
+                  .sort((a, b) => {
+                    if (orderBy === 'name') {
+                      const compare = a[orderBy]
+                        .toLowerCase()
+                        .localeCompare(b[orderBy].toLowerCase());
+                      return (order === 'asc' ? 1 : -1) * compare;
+                    } else {
+                      if (!a || !b) return !a ? -1 : 1;
+                      const compare =
+                        a.latestPrice[orderBy] - b.latestPrice[orderBy];
+                      return (order === 'asc' ? 1 : -1) * compare;
+                    }
+                  })
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <GasStationItem

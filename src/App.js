@@ -20,7 +20,7 @@ export default function App() {
       fetchPrices();
       fetchUsers();
     }
-    if (geoLocation.loaded) fetchData();
+    if (geoLocation.loaded && localStorage.getItem('access_token')) fetchData();
   }, [fetchGasStations, fetchPrices, fetchUsers, geoLocation]);
   return (
     <ThemeConfig>
