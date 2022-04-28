@@ -7,7 +7,7 @@ import fileTextFill from '@iconify/icons-eva/file-text-fill';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 import globe2fill from '@iconify/icons-eva/globe-2-fill';
 // import lockFill from '@iconify/icons-eva/lock-fill';
-import personAddFill from '@iconify/icons-eva/person-add-fill';
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import infoFill from '@iconify/icons-eva/info-fill';
 // ----------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ const sidebarConfig = [
   {
     title: 'Gas Stations',
     path: '/dashboard/gasstations',
-    icon: getIcon(personAddFill),
+    icon: <LocalGasStationIcon />,
   },
   {
     title: 'About us',

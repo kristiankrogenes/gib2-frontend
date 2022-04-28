@@ -57,7 +57,9 @@ function ChoroplethMap() {
 
   return (
     <Card>
-      <Box sx={{ width: '100%', height: 600 }}>
+      <Box
+        sx={{ width: '100%', height: parseFloat(window.innerHeight) * 0.75 }}
+      >
         <Map
           initialViewState={initialViewState}
           mapStyle={mapStyle}

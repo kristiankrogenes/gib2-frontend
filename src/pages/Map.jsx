@@ -8,7 +8,7 @@ export default function Map() {
   const geoLocation = useGeoLocation();
   return (
     <Page title="Map | GIB2">
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Stack
           direction="row"
           alignItems="center"

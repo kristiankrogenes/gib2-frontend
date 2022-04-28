@@ -7,12 +7,12 @@ import GasStationList from '../components/GasStations/GasStationList';
 function GasStations() {
   return (
     <Page title="Gas Stations | Minimal-UI">
-      <Container>
+      <Container maxWidth="xl">
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          mb={1}
+          mb={0}
         >
           <Typography variant="h4" gutterBottom>
             Gas Stations
