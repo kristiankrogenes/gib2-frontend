@@ -110,63 +110,65 @@ function ChoroplethMap() {
         </Card>
       </Grid>
       <Grid item xs={12} sm={2} md={2}>
-        <Card>
-          <Box
-            sx={{
-              backgroundColor: 'white',
-              padding: '5px',
-            }}
-          >
-            {compareValue === total
-              ? 'Number of gas stations per square kilometer multiplied by 1000'
-              : 'Average price'}
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: 'success.lighter',
-              padding: '5px',
-              color: 'white',
-            }}
-          >
-            {`≤${percentiles[0]}`}
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: 'success.light',
-              padding: '5px',
-              color: 'white',
-            }}
-          >
-            {`${percentiles[0]}-${percentiles[1]}`}
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: 'success.main',
-              padding: '5px',
-              color: 'white',
-            }}
-          >
-            {`${percentiles[1]}-${percentiles[2]}`}
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: 'success.dark',
-              padding: '5px',
-              color: 'white',
-            }}
-          >
-            {`${percentiles[2]}-${percentiles[3]}`}
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: 'success.darker',
-              padding: '5px',
-              color: 'white',
-            }}
-          >
-            {`≥${percentiles[3]}`}
-          </Box>
-        </Card>
+        {munies && (
+          <Card>
+            <Box
+              sx={{
+                backgroundColor: 'white',
+                padding: '5px',
+              }}
+            >
+              {compareValue === total
+                ? 'Number of gas stations per square kilometer multiplied by 1000'
+                : 'Average price'}
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: 'success.lighter',
+                padding: '5px',
+                color: 'white',
+              }}
+            >
+              {`≤${percentiles[0]}`}
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: 'success.light',
+                padding: '5px',
+                color: 'white',
+              }}
+            >
+              {`${percentiles[0]}-${percentiles[1]}`}
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: 'success.main',
+                padding: '5px',
+                color: 'white',
+              }}
+            >
+              {`${percentiles[1]}-${percentiles[2]}`}
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: 'success.dark',
+                padding: '5px',
+                color: 'white',
+              }}
+            >
+              {`${percentiles[2]}-${percentiles[3]}`}
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: 'success.darker',
+                padding: '5px',
+                color: 'white',
+              }}
+            >
+              {`≥${percentiles[3]}`}
+            </Box>
+          </Card>
+        )}
       </Grid>
     </>
   );
