@@ -11,7 +11,8 @@ function StationPrice({ newStationInfo, setNewStationInfo }) {
   return (
     <DialogContentText component={'span'}>
       <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
-        Legg inn alle prisene til bensinstasjonen(må være et positivt tall)
+        Add inn all prices to the gas station (has to be a positive integer)
+        {/* Legg inn alle prisene til bensinstasjonen(må være et positivt tall) */}
       </Typography>
       <TextField
         sx={{ marginBottom: '10px', marginRight: '10px' }}

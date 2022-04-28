@@ -177,7 +177,7 @@ function MapComponent({ geoLocation }) {
       <Box
         sx={{
           width: '100%',
-          height: 600,
+          height: parseFloat(window.innerHeight) * 0.75,
         }}
       >
         <Map
