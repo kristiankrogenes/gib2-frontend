@@ -7,14 +7,20 @@ import { Grid } from '@mui/material';
 import axiosInstance from '../../utils/axios';
 import { useState, useEffect } from 'react';
 import { labels } from './constants';
+import { logOut } from '../../stores/helpers';
 
 export default function VisualizationCharts() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axiosInstance.get('/api/insights/');
-      setData(response.data);
+      try {
+        const response = await axiosInstance.get('/api/insights/');
+        setData(response.data);
+      } catch (e) {
+        console.log(e.message);
+        logOut();
+      }
     };
     fetchData();
   }, []);

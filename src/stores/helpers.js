@@ -11,3 +11,9 @@ export const getGasStationPOST = (marker, name) => ({
     coordinates: [marker.coordinates.lng, marker.coordinates.lat],
   },
 });
+
+export const logOut = () => {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
+  window.location.replace(process.env.REACT_APP_WEB_URL);
+};

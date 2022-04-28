@@ -1,5 +1,6 @@
 import { types, flow } from 'mobx-state-tree';
 import axiosInstance from '../utils/axios';
+import { logOut } from './helpers';
 
 export const UserModel = types.model({
   username: types.identifier,
@@ -44,6 +45,7 @@ export const UserStore = types
         }
       } catch (e) {
         console.log('ERROR:', e);
+        if (e.response.status === 401) logOut();
       }
     }),
     fetchUsers: flow(function* () {
@@ -59,6 +61,7 @@ export const UserStore = types
         store.setCurrentUser(store.getUserByUsername(userInfo.data.username));
       } catch (e) {
         console.log(e.message);
+        if (e.response.status === 401) logOut();
       }
     }),
     addUser(user) {
