@@ -1,6 +1,7 @@
 import { types, flow, getParent } from 'mobx-state-tree';
 import axiosInstance from '../utils/axios';
 import { GasStationModel } from './GasStationStore';
+import { logOut } from './helpers';
 
 export const PriceModel = types.model({
   id: types.number,
@@ -35,6 +36,7 @@ export const PriceStore = types
         store.setPrices(newPrices);
       } catch (e) {
         console.log(e.stack);
+        if (e.response.status === 401) logOut();
       }
     }),
     addPrice: flow(function* (price, gasStationId) {
@@ -59,6 +61,7 @@ export const PriceStore = types
         store.setPrices([...store.prices, newPrice]);
       } catch (e) {
         console.log(e.message);
+        if (e.response.status === 401) logOut();
       }
     }),
   }))

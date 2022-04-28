@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 
 // eslint-disable-next-line react/display-name
 const Page = forwardRef(({ children, title = '', ...other }, ref) => (
-  <Box ref={ref} {...other}>
+  <Box sx={{ paddingTop: '0px', margin: '0px' }} ref={ref} {...other}>
     <Helmet>
       <title>{title}</title>
     </Helmet>

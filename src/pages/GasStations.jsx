@@ -1,29 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Stack, Container, Typography } from '@mui/material';
-// components
 import Page from '../components/general/Page';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../stores/RootStore';
-import GasStationList from '../components/GasStationList';
+import GasStationList from '../components/GasStations/GasStationList';
 
 function GasStations() {
-  const { gasStationStore } = useStore();
-
-  useEffect(() => {
-    async function fetchData() {
-      await gasStationStore.fetchGasStations();
-    }
-    if (gasStationStore.gasStations.length === 0) fetchData();
-  }, [gasStationStore]);
-
   return (
     <Page title="Gas Stations | Minimal-UI">
-      <Container>
+      <Container maxWidth="xl">
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          mb={1}
+          mb={0}
         >
           <Typography variant="h4" gutterBottom>
             Gas Stations

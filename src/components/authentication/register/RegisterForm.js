@@ -16,6 +16,7 @@ import {
 import { LoadingButton } from '@mui/lab';
 import axiosInstance from '../../../utils/axios';
 import { useStore } from '../../../stores/RootStore';
+import { logOut } from '../../../stores/helpers';
 
 export default function RegisterForm() {
   // const navigate = useNavigate();
@@ -69,6 +70,7 @@ export default function RegisterForm() {
         })
         .catch((e) => {
           console.log(e);
+          logOut();
         });
       // navigate('/dashboard', { replace: true });
     },

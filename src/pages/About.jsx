@@ -6,7 +6,7 @@ import About from '../components/About';
 export default function AboutPage() {
   return (
     <Page title="About Us">
-      <Container>
+      <Container maxWidth="xl">
         <Typography variant="h4" gutterBottom>
           About
         </Typography>

@@ -1,19 +1,19 @@
 import React from 'react';
-import { Stack, TableRow, TableCell, Typography } from '@mui/material';
-import Label from '../../general/Label';
-import { UserMoreMenu } from '../../_dashboard/user';
+import { Stack, TableRow, TableCell, Link } from '@mui/material';
+import Label from '../../../general/Label';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
-import { fShortenNumber } from '../../../utils/formatNumber';
+import { fShortenNumber } from '../../../../utils/formatNumber';
 
 GasStationItem.propTypes = {
   row: PropTypes.object,
   selected: PropTypes.array,
+  handleClickStation: PropTypes.func,
 };
 
-function GasStationItem({ row, selected }) {
+function GasStationItem({ row, selected, handleClickStation }) {
   const { id, name } = row;
-  const isItemSelected = selected.indexOf(name) !== -1;
+  const isItemSelected = selected.indexOf(id) !== -1;
   const latestPrice = row.latestPrice ?? null;
 
   return (
@@ -27,9 +27,15 @@ function GasStationItem({ row, selected }) {
     >
       <TableCell component="th" scope="row" padding="normal">
         <Stack direction="row" alignItems="center" spacing={2}>
-          <Typography variant="subtitle2" noWrap>
+          <Link
+            component="button"
+            color="#000"
+            underline="hover"
+            variant="subtitle2"
+            onClick={() => handleClickStation(row)}
+          >
             {name}
-          </Typography>
+          </Link>
         </Stack>
       </TableCell>
       <TableCell align="left">
@@ -38,17 +44,14 @@ function GasStationItem({ row, selected }) {
         </Label>
       </TableCell>
       <TableCell align="left">
-        <Label variant="ghost" color={'info'}>
+        <Label variant="ghost" color={'error'}>
           {fShortenNumber(latestPrice.diesel)}
         </Label>
       </TableCell>
       <TableCell align="left">
-        <Label variant="ghost" color={'success'}>
+        <Label variant="ghost" color={'error'}>
           {fShortenNumber(latestPrice.electric)}
         </Label>
-      </TableCell>
-      <TableCell align="right">
-        <UserMoreMenu />
       </TableCell>
     </TableRow>
   );

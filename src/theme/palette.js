@@ -1,4 +1,5 @@
 import { alpha } from '@mui/material/styles';
+import { getGrayColor } from '../utils/formatColor';
 
 // ----------------------------------------------------------------------
 
@@ -53,12 +54,12 @@ const INFO = {
   contrastText: '#fff',
 };
 const SUCCESS = {
-  lighter: '#D6E4FF',
-  light: '#84A9FF',
-  main: '#3366FF',
-  dark: '#1939B7',
-  darker: '#091A7A',
-  contrastText: GREY[800],
+  lighter: '#CCCCCC',
+  light: '#999999',
+  main: '#666666',
+  dark: '#333333',
+  darker: '#000000',
+  contrastText: '#fff',
 };
 const WARNING = {
   lighter: '#FFF7CD',
@@ -70,8 +71,8 @@ const WARNING = {
 };
 const ERROR = {
   lighter: '#FFE7D9',
-  light: '#FFA48D',
-  main: '#FF4842',
+  light: '#FF5349',
+  main: '#FF5349',
   dark: '#B72136',
   darker: '#7A0C2E',
   contrastText: '#fff',

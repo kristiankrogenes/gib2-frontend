@@ -1,6 +1,6 @@
 import { types, flow, getRoot } from 'mobx-state-tree';
 import axiosInstance from '../utils/axios';
-import { getGasStationFromAPI, getGasStationPOST } from './helpers';
+import { getGasStationFromAPI, getGasStationPOST, logOut } from './helpers';
 
 export const GasStationModel = types
   .model({
@@ -49,6 +49,7 @@ export const GasStationStore = types
         store.setGasStationsInsideRadius(nearGasStations);
       } catch (e) {
         console.log(e.stack);
+        if (e.response.status === 401) logOut();
       }
     }),
     addGasStation: flow(function* (marker, name, geoLocation) {
@@ -64,6 +65,7 @@ export const GasStationStore = types
         return gasStation.id;
       } catch (e) {
         console.log(e.message);
+        if (e.response.status === 401) logOut();
       }
     }),
   }))
