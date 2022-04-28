@@ -1,6 +1,7 @@
 import { county, emptyInsight, municipalityURL, total } from './constants';
 import axiosInstance from '../../utils/axios';
 import axios from 'axios';
+import { area } from 'turf';
 
 export const getPolygons = async (value, insight) => {
   const response = await (value === county
@@ -20,5 +21,5 @@ export const getPolygons = async (value, insight) => {
 
 export const getValueFunction = (compareValue, fuel) =>
   compareValue === total
-    ? (f) => f.properties.insight.total
+    ? (f) => f.properties.insight.total / area(f)
     : (f) => f.properties.insight.prices[fuel].average;
