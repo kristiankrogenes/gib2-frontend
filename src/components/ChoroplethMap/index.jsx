@@ -2,7 +2,7 @@ import { Box, Card, Grid } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useEffect, useMemo, useState } from 'react';
 import Map, { Layer, Source } from 'react-map-gl';
-import { updatePercentiles } from '../../utils/updatePercentiles';
+// import { updatePercentiles } from '../../utils/updatePercentiles';
 import {
   county,
   initialViewState,
@@ -15,6 +15,9 @@ import {
 import { getPolygons, getValueFunction } from './helpers';
 import axiosInstance from '../../utils/axios';
 import ControlPanel from './ControlPanel';
+import { range } from 'd3-array';
+import { scaleQuantile } from 'd3-scale';
+import { fShortenNumber } from '../../utils/formatNumber';
 
 function ChoroplethMap() {
   const [munies, setMunies] = useState(null);
@@ -22,6 +25,27 @@ function ChoroplethMap() {
   const [value, setValue] = useState(county);
   const [compareValue, setCompareValue] = useState(total);
   const [fuel, setFuel] = useState('diesel');
+  const [percentiles, setPercentiles] = useState([]);
+
+  function updatePercentiles(featureCollection, accessor) {
+    const { features } = featureCollection;
+    const scale = scaleQuantile()
+      .domain(features.map(accessor))
+      .range(range(5));
+    setPercentiles(scale.quantiles().map((q) => fShortenNumber(q)));
+    return {
+      type: 'FeatureCollection',
+      features: features.map((f) => {
+        const value = accessor(f);
+        const properties = {
+          ...f.properties,
+          value,
+          percentile: scale(value),
+        };
+        return { ...f, properties };
+      }),
+    };
+  }
 
   const handleChangeType = (event) => {
     setValue(event.target.value);
@@ -57,7 +81,7 @@ function ChoroplethMap() {
 
   return (
     <>
-      <Grid item xs={12} sm={11} md={11}>
+      <Grid item xs={12} sm={10} md={10}>
         <Card>
           <Box
             sx={{
@@ -85,8 +109,18 @@ function ChoroplethMap() {
           </Box>
         </Card>
       </Grid>
-      <Grid item xs={12} sm={1} md={1}>
+      <Grid item xs={12} sm={2} md={2}>
         <Card>
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              padding: '5px',
+            }}
+          >
+            {compareValue === total
+              ? 'Number of gas stations per square kilometer multiplied by 1000'
+              : 'Average price'}
+          </Box>
           <Box
             sx={{
               backgroundColor: 'success.lighter',
@@ -94,7 +128,7 @@ function ChoroplethMap() {
               color: 'white',
             }}
           >
-            gggg
+            {`≤${percentiles[0]}`}
           </Box>
           <Box
             sx={{
@@ -103,7 +137,7 @@ function ChoroplethMap() {
               color: 'white',
             }}
           >
-            GGG
+            {`${percentiles[0]}-${percentiles[1]}`}
           </Box>
           <Box
             sx={{
@@ -112,7 +146,7 @@ function ChoroplethMap() {
               color: 'white',
             }}
           >
-            gg
+            {`${percentiles[1]}-${percentiles[2]}`}
           </Box>
           <Box
             sx={{
@@ -121,7 +155,7 @@ function ChoroplethMap() {
               color: 'white',
             }}
           >
-            gg
+            {`${percentiles[2]}-${percentiles[3]}`}
           </Box>
           <Box
             sx={{
@@ -130,7 +164,7 @@ function ChoroplethMap() {
               color: 'white',
             }}
           >
-            ggg
+            {`≥${percentiles[3]}`}
           </Box>
         </Card>
       </Grid>
