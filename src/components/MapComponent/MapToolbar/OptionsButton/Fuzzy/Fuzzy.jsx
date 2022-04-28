@@ -64,15 +64,15 @@ export default function Fuzzy({ handleOptimizedRouteFuzzy }) {
         open={open}
         onClose={handleClose}
       >
-        <Box sx={{ width: '240px', height: '400px' }}>
+        <Box sx={{ width: '266px', height: '400px' }}>
           <Box sx={{ padding: '5px' }}>
             Choose your prioritizinging. If you slide it more towards fuel price
             we will weight the fuel price more than nearest gas station and vice
             versa. This might take some time.
             <Stack
-              spacing={2}
+              spacing={5}
               direction="row"
-              sx={{ mb: 1 }}
+              sx={{ mb: 1, paddingTop: '25px' }}
               alignItems="center"
             >
               Fuel price
@@ -85,7 +85,7 @@ export default function Fuzzy({ handleOptimizedRouteFuzzy }) {
               Duration
             </Stack>
           </Box>
-          <FormControl>
+          <FormControl sx={{ padding: '10px' }}>
             <FormLabel id="demo-radio-buttons-group-label">
               Choose your fuel type
             </FormLabel>
