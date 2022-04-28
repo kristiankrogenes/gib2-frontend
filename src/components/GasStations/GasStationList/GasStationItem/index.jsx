@@ -44,12 +44,12 @@ function GasStationItem({ row, selected, handleClickStation }) {
         </Label>
       </TableCell>
       <TableCell align="left">
-        <Label variant="ghost" color={'info'}>
+        <Label variant="ghost" color={'error'}>
           {fShortenNumber(latestPrice.diesel)}
         </Label>
       </TableCell>
       <TableCell align="left">
-        <Label variant="ghost" color={'success'}>
+        <Label variant="ghost" color={'error'}>
           {fShortenNumber(latestPrice.electric)}
         </Label>
       </TableCell>

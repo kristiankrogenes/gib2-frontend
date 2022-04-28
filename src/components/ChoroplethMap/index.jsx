@@ -1,4 +1,4 @@
-import { Box, Card } from '@mui/material';
+import { Box, Card, Grid } from '@mui/material';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useEffect, useMemo, useState } from 'react';
 import Map, { Layer, Source } from 'react-map-gl';
@@ -56,29 +56,85 @@ function ChoroplethMap() {
   }, [compareValue, counties, munies, value, fuel]);
 
   return (
-    <Card>
-      <Box
-        sx={{ width: '100%', height: parseFloat(window.innerHeight) * 0.75 }}
-      >
-        <Map
-          initialViewState={initialViewState}
-          mapStyle={mapStyle}
-          mapboxApiAccessToken={MAPBOX_TOKEN}
-        >
-          <ControlPanel
-            fuel={fuel}
-            compareValue={compareValue}
-            value={value}
-            handleChangeCompare={handleChangeCompare}
-            handleChangeFuel={handleChangeFuel}
-            handleChangeType={handleChangeType}
-          />
-          <Source id="test" type="geojson" data={data}>
-            <Layer {...layerStyle} />
-          </Source>
-        </Map>
-      </Box>
-    </Card>
+    <>
+      <Grid item xs={12} sm={11} md={11}>
+        <Card>
+          <Box
+            sx={{
+              width: '100%',
+              height: parseFloat(window.innerHeight) * 0.75,
+            }}
+          >
+            <Map
+              initialViewState={initialViewState}
+              mapStyle={mapStyle}
+              mapboxApiAccessToken={MAPBOX_TOKEN}
+            >
+              <ControlPanel
+                fuel={fuel}
+                compareValue={compareValue}
+                value={value}
+                handleChangeCompare={handleChangeCompare}
+                handleChangeFuel={handleChangeFuel}
+                handleChangeType={handleChangeType}
+              />
+              <Source id="test" type="geojson" data={data}>
+                <Layer {...layerStyle} />
+              </Source>
+            </Map>
+          </Box>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={1} md={1}>
+        <Card>
+          <Box
+            sx={{
+              backgroundColor: 'success.lighter',
+              padding: '5px',
+              color: 'white',
+            }}
+          >
+            gggg
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: 'success.light',
+              padding: '5px',
+              color: 'white',
+            }}
+          >
+            GGG
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: 'success.main',
+              padding: '5px',
+              color: 'white',
+            }}
+          >
+            gg
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: 'success.dark',
+              padding: '5px',
+              color: 'white',
+            }}
+          >
+            gg
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: 'success.darker',
+              padding: '5px',
+              color: 'white',
+            }}
+          >
+            ggg
+          </Box>
+        </Card>
+      </Grid>
+    </>
   );
 }
 

@@ -21,5 +21,5 @@ export const getPolygons = async (value, insight) => {
 
 export const getValueFunction = (compareValue, fuel) =>
   compareValue === total
-    ? (f) => f.properties.insight.total / area(f)
+    ? (f) => (f.properties.insight.total / area(f)) * 10 ** 6
     : (f) => f.properties.insight.prices[fuel].average;
