@@ -48,7 +48,7 @@ function ClusterMap({ mapRef }) {
     });
   };
   return (
-    <Card>
+    <Card sx={{ width: '100%' }}>
       <Box sx={{ width: '100%', height: 600 }}>
         <Map
           initialViewState={initialViewState}

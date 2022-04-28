@@ -18,7 +18,7 @@ export const lerka = {
   lat: 63.4147798358434,
 };
 
-const percentile = 1 / 9;
+const percentile = 1 / 5;
 
 export const layerStyle = {
   id: 'data',
@@ -36,19 +36,21 @@ export const layerStyle = {
         // [6, '#fdae61'],
         // [7, '#f46d43'],
         // [8, '#d53e4f'],
-        // [0, '#ff0000'],
-        [0, getGrayColor(9 * percentile)],
-        [1, getGrayColor(8 * percentile)],
-        [2, getGrayColor(7 * percentile)],
-        [3, getGrayColor(6 * percentile)],
-        [4, getGrayColor(5 * percentile)],
-        [5, getGrayColor(4 * percentile)],
-        [6, getGrayColor(3 * percentile)],
-        [7, getGrayColor(2 * percentile)],
-        [8, getGrayColor(1 * percentile)],
+        // [9, '#ff0000'],
+        [0, getGrayColor(4 * percentile)],
+        [1, getGrayColor(3 * percentile)],
+        [2, getGrayColor(2 * percentile)],
+        [3, getGrayColor(1 * percentile)],
+        [4, getGrayColor(0 * percentile)],
+        // [5, getGrayColor(0.5 * percentile)],
+        // [6, getGrayColor(0 * percentile)],
+        // [7, getGrayColor(1.5 * percentile)],
+        // [8, getGrayColor(1 * percentile)],
+        // [9, getGrayColor(0.5 * percentile)],
+        // [10, getGrayColor(0 * percentile)],
       ],
     },
-    'fill-opacity': 0.8,
+    'fill-opacity': 0.9,
   },
 };
 
